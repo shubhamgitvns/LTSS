@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/next_page_1.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,36 +39,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
 
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const SizedBox(
-            height: 200,
-          ),
-           Row(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(text: 'Recharge', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.red.shade600)),
-                    const TextSpan(text: ' Setu',style: TextStyle(fontSize: 30,color: Colors.red)),
-                  ],
-                ),
-                         ),
-             ],
-           ),
-          const SizedBox(
-            height: 200,
-          ),
-
-           Row(
+      body: InkWell(
+        child: Container(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),),
+            children: <Widget>[
+              const SizedBox(
+                height: 200,
+              ),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: 'Recharge', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.red.shade600)),
+                        const TextSpan(text: ' Setu',style: TextStyle(fontSize: 30,color: Colors.red)),
+                      ],
+                    ),
+                             ),
+                 ],
+               ),
+              const SizedBox(
+                height: 200,
+              ),
+          
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),),
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
+        onTap: (){
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.rightToLeft,
+              isIos: true,
+              child: Next_one(),
+            ),
+          );
+        },
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
