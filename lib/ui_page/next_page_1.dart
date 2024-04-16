@@ -10,6 +10,7 @@ class Next_one extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             Padding(
@@ -48,14 +49,12 @@ class Next_one extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Container(
-              child: Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTnbOp_8E3MFdAg4M4X_nB87IqOYn0RHZkLXKr5dQONHboYmtdIwBxvPlFNmJBz1OjEE&usqp=CAU",
-                height: 200,
-              ),
+            Image.network(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTnbOp_8E3MFdAg4M4X_nB87IqOYn0RHZkLXKr5dQONHboYmtdIwBxvPlFNmJBz1OjEE&usqp=CAU",
+              height: 200,
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,43 +65,55 @@ class Next_one extends StatelessWidget {
                         "Lorem Ipsum is simply dummy text of the printing and typesetting industry."))
               ],
             ),
-            SizedBox(
-              height: 350,
+            const SizedBox(
+              height: 320,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Container(
+              child: Stack(
+                alignment: Alignment.bottomCenter,
                 children: [
-                  Text("data"),
-                  InkWell(
-                    child: Container(
-                        height: 40,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.orange),
-                        child: Center(
-                            child: Text(
-                          "Next ->",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
-                        ))),
-                    onTap: (){
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          isIos: true,
-                          child: Next_Two(),
-                        ),
-                      );
+                  Container(
+                    height: 100,
+                    color: Colors.white12,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("data"),
+                          InkWell(
+                            child: Container(
+                                height: 40,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.orange),
+                                child: const Center(
+                                    child: Text(
+                                      "Next ->",
+                                      style: TextStyle(fontSize: 15, color: Colors.white),
+                                    ))),
+                            onTap: (){
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  isIos: true,
+                                  child: Next_Two(),
+                                ),
+                              );
 
-                    },
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
+
           ],
         ),
       ),

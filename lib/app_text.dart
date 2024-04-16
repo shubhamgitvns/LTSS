@@ -28,11 +28,12 @@ class Input_Style{
 
     ),
     labelText: "Name",
-    // labelStyle: TextStyle(color: App_Theam.Teal),
+    labelStyle: TextStyle(color: Colors.red),
   );
 
 }
 class Text_Style{
   static  final TextStyle ts=TextStyle(color: Colors.black,fontWeight: FontWeight.bold);
   static  final TextStyle heder=TextStyle(color: Colors.red,fontSize: 25,fontWeight: FontWeight.w600);
+  // static  final TextStyle info=TextStyle(color: Colors.grey,fontSize: 15,);
 }
