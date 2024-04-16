@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/next_page_3.dart';
 import 'package:recharge_setu/ui_page/next_page_1.dart';
 import 'package:recharge_setu/ui_page/welcome_page.dart';
 
@@ -89,6 +90,14 @@ class Next_Two extends StatelessWidget {
                             ))),
                     onTap: () {
                       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Option_Page()));
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          isIos: true,
+                          child: Next_Three(),
+                        ),
+                      );
 
                     },
                   ),
