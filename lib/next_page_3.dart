@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/ui_page/next_page_2.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
-import 'package:recharge_setu/user_verification/signup_page.dart';
+import 'package:recharge_setu/user_verification/forgotpin_page.dart';
 
 class Next_Three extends StatelessWidget {
   const Next_Three({super.key});

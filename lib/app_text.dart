@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 class App_Text{
   static  TextEditingController username = TextEditingController();
+  static  TextEditingController email = TextEditingController();
+  static  TextEditingController conformpin = TextEditingController();
+  static  TextEditingController pincode = TextEditingController();
 
 }
 
 class Input_Style{
   static final  InputDecoration style= InputDecoration(
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(
         color: Colors.red,
         width: 1.5,
@@ -22,13 +25,7 @@ class Input_Style{
         borderSide: BorderSide(
           color: Colors.red,
         )),
-    prefix: Icon(
-      Icons.person,
-      color: Colors.teal,
 
-    ),
-    labelText: "Name",
-    labelStyle: TextStyle(color: Colors.red),
   );
 
 }
