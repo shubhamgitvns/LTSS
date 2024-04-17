@@ -11,110 +11,113 @@ class Next_one extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    child: Container(
-                        child: const Text(
-                      "X",
-                      style: TextStyle(fontSize: 25, color: Colors.red),
-                    )),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.leftToRight,
-                          isIos: true,
-                          child: MyApp(),
-                        ),
-                      );
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      child: Container(
+                          child: const Text(
+                        "X",
+                        style: TextStyle(fontSize: 25, color: Colors.red),
+                      )),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.leftToRight,
+                            isIos: true,
+                            child: MyApp(),
+                          ),
+                        );
 
-                    },
-                  ),
-                  InkWell(
-                    child: Container(
-                        child: const Text(
-                      "Skip",
-                      style: TextStyle(fontSize: 20, color: Colors.red),
-                    )),
-                    onTap: () {
-                      print("hii");
-                    },
-                  ),
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                          child: const Text(
+                        "Skip",
+                        style: TextStyle(fontSize: 20, color: Colors.red),
+                      )),
+                      onTap: () {
+                        print("hii");
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Image.network(
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTnbOp_8E3MFdAg4M4X_nB87IqOYn0RHZkLXKr5dQONHboYmtdIwBxvPlFNmJBz1OjEE&usqp=CAU",
+                height: 200,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      width: 250,
+                      child: Text(
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry."))
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTnbOp_8E3MFdAg4M4X_nB87IqOYn0RHZkLXKr5dQONHboYmtdIwBxvPlFNmJBz1OjEE&usqp=CAU",
-              height: 200,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                    width: 250,
-                    child: Text(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."))
-              ],
-            ),
-            const SizedBox(
-              height: 320,
-            ),
-            Container(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Container(
-                    height: 100,
-                    color: Colors.white12,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("data"),
-                          InkWell(
-                            child: Container(
-                                height: 40,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.orange),
-                                child: const Center(
-                                    child: Text(
-                                      "Next ->",
-                                      style: TextStyle(fontSize: 15, color: Colors.white),
-                                    ))),
-                            onTap: (){
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  isIos: true,
-                                  child: Next_Two(),
-                                ),
-                              );
+              const SizedBox(
+                height: 320,
+              ),
+              Container(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Container(
+                      height: 100,
+                      color: Colors.white12,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("data"),
+                            InkWell(
+                              child: Container(
+                                  height: 40,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.orange),
+                                  child: const Center(
+                                      child: Text(
+                                        "Next ->",
+                                        style: TextStyle(fontSize: 15, color: Colors.white),
+                                      ))),
+                              onTap: (){
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    isIos: true,
+                                    child: Next_Two(),
+                                  ),
+                                );
 
-                            },
-                          ),
-                        ],
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

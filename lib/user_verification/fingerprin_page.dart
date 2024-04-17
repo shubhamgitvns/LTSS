@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/home_page.dart';
 
 import '../app_text.dart';
+import '../ui_page/bottom_navigation.dart';
 import 'forgotpin_page.dart';
 class FingerPrint extends StatefulWidget {
   const FingerPrint({super.key});
@@ -116,20 +118,34 @@ class _FingerPrintState extends State<FingerPrint> {
                                           color: Colors.red,),
                                     )),
                               ),
-                              Container(
-                                height: 50,
-                                 width: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Colors.red,
-                                    border: Border.all(color: Colors.red)
+                              InkWell(
+                                child: Container(
+                                  height: 50,
+                                   width: 150,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Colors.red,
+                                      border: Border.all(color: Colors.red)
+                                  ),
+                                  child: const Center(
+                                      child: Text(
+                                        "Turn on Touch ID",
+                                        style: TextStyle(
+                                            color: Colors.white,),
+                                      )),
                                 ),
-                                child: const Center(
-                                    child: Text(
-                                      "Turn on Touch ID",
-                                      style: TextStyle(
-                                          color: Colors.white,),
-                                    )),
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.scale,
+                                      alignment: Alignment.topCenter,
+                                      duration: Duration(milliseconds: 500),
+                                      isIos: true,
+                                      child: BottomCollectionBoy(index: 0),
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),

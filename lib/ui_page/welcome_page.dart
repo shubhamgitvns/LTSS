@@ -50,14 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
                Row(
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: [
-                   RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(text: 'Recharge', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Colors.red.shade600)),
-                        const TextSpan(text: ' Setu',style: TextStyle(fontSize: 30,color: Colors.red)),
-                      ],
-                    ),
-                             ),
+                   Center(child: Image(
+                     image: AssetImage(
+                         "images/lts.png"),
+                   ),
+                   ),
                  ],
                ),
               const SizedBox(
