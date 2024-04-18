@@ -12,64 +12,101 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.red.shade100,
+          title: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(text: 'LTS', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red.shade600)),
+                const TextSpan(text: ' Solutions',style: TextStyle(color: Colors.red)),
+              ],
+            ),
+          ),
+          actions: const [
+            SizedBox(
+                child:Image(
+                  image: AssetImage(
+                      "images/red_bell.png"),
+                ),  ),
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: SizedBox(
+                  child:Image(
+                    image: AssetImage(
+                        "images/i.png"),
+                  ),  ),
+            ),
+          ],
+        ),
         body:  SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(text: 'LTS', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red.shade600)),
-                          const TextSpan(text: ' Solutions',style: TextStyle(color: Colors.red)),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                        child: Image.network("https://st2.depositphotos.com/25080024/50607/v/600/depositphotos_506071894-stock-video-animated-bell-rings-red-line.jpg"))
-                  ],
-                ),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                   Column(
-                     children: [
-                       const Text("sat, 11 Jun",style: TextStyle(color: Colors.red,fontSize: 20,),),
-                        Text("Name",style: TextStyle(fontSize: 20,color: Colors.grey.shade600),),
-                        const SizedBox(height: 10,),
-                       const SizedBox(
-                         height: 50,
-                         child: Image(
-                           image: AssetImage(
-                               "images/lts.png"),
-                         ),
+               const SizedBox(height: 10,),
+
+               Container(
+                 height: 200,
+                 decoration: BoxDecoration(
+                     // color: Colors.blue.shade50,
+                   borderRadius: BorderRadius.circular(10),
+                   boxShadow: const [
+                     BoxShadow(
+                       color: Colors.red,
+                       offset: Offset(
+                         2.0,
+                         2.0,
                        ),
-                       const SizedBox(height: 10,),
-                       Row(
+                       blurRadius: 5.0,
+                       spreadRadius: 1.0,
+                     ), //BoxShadow
+                     BoxShadow(
+                       color: Colors.white,
+                       offset: Offset(0.0, 0.0),
+                       blurRadius: 0.0,
+                       spreadRadius: 1.0,
+                     ), //BoxShadow
+                   ],
+                 ),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                      const Padding(
+                       padding: EdgeInsets.all(8.0),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.center,
                          children: [
-                           Text("₹ 350.50",style: TextStyle(color: Colors.grey.shade600),),
-      
+                           SizedBox(height: 10,),
+                           Row(
+                             children: [
+                               Text("₹ 350.50",style: TextStyle(color: Colors.red,fontSize: 35,fontWeight: FontWeight.bold),),
+                             ],
+                           ),
+                            Row(
+                             children: [
+                               Text("Available in account",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)
+                             ],
+                           )
                          ],
                        ),
-                     ],
-                   ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 200,
-                        width: 150,
-                        child: Image.network("https://i.pinimg.com/736x/b5/4f/e4/b54fe4b9bbc2bf46eb12e9e9244b62b6.jpg")),
-                  ],
-                )
-                 ],
+                     ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 20,),
+                      SizedBox(
+                        height:150,
+                          child: Image.network("https://cdn-icons-png.flaticon.com/256/1198/1198342.png")),
+                      // Text("Earning",style: TextStyle(color: Colors.red),)
+                    ],
+                  )
+                   ],
+                 ),
                ),
-                const SizedBox(height: 10,),
+                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -129,127 +166,297 @@ class _HomeState extends State<Home> {
                     )
                   ],
                 ),
-                const SizedBox(height: 10,),
-
-
-
-
+                const SizedBox(height: 20,),
+                const Row(
+                  children: [
+                    Text("Recharge Payments",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),)
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: SizedBox(
-                                height:50,
-                                child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
-                          ),
-
-                          const Text(
-                            "Recharge",
-                          ),
-                          const Text("Report")
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
-                      child: Column(
+                      height: 100,
+                      width: 100,
+                      color: Colors.grey.shade50,
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                               height:50,
-                              child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
+                              child:Image(
+                                image: AssetImage(
+                                    "images/mobile_th.png"),
+                              ), ),
 
-                          const Text(
-                            "DMT",
+                          Text(
+                            "Prepaid",
                           ),
-                          const Text("Report")
                         ],
                       ),
                     ),
                     Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                              height:50,
-                              child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
-
+                              height:32,
+                              child: Image.network("https://toppng.com/uploads/preview/ive-us-a-call-1-red-mobile-icon-115630449556td2h4qoum.png")),
+                          const SizedBox(height: 10,),
                           const Text(
-                            "Ledger",
+                            "Postpaid",
                           ),
-                          const Text("Report")
+
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/dth.png"),
+                            ), ),
+
+                          Text(
+                            "DTH",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/landline.png"),
+                            ), ),
+
+                          Text(
+                            "Landline",
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(height: 20,),
+                const Row(
+                  children: [
+                    Text("Bill Payments",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),)
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
-                      child: Column(
+                      height: 100,
+                      width: 100,
+                      color: Colors.grey.shade50,
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                              height:50,
-                              child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/ic_electricity.png"),
+                            ), ),
 
-                          const Text(
+                          Text(
+                            "Electricity",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/water.png"),
+                            ), ),
+
+                          Text(
+                            "Water",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/gasl.png"),
+                            ), ),
+
+                          Text(
+                            "Gas",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/Group .png"),
+                            ), ),
+
+                          Text(
+                            "Insurance",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
+                const Row(
+                  children: [
+                    Text("Other Payments",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),)
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/e.png"),
+                            ), ),
+
+                          Text(
                             "AEPS",
                           ),
-                          const Text("Report")
                         ],
                       ),
                     ),
                     Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
-                      child: Column(
+                      height: 100,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                              height:50,
-                              child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/dmt.png"),
+                            ), ),
 
-                          const Text(
-                            "Complete",
+                          Text(
+                            "DMT",
                           ),
-                          const Text("Report")
                         ],
                       ),
                     ),
                     Container(
-                      height: 150,
-                      width: 120,
-                      color: Colors.pink.shade50,
-                      child: Column(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                              height:50,
-                              child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfd3BNVJIiMVyFRCPmDwbKcFYj6akJEaPRkR2pIHbhD3D2heY8z3jYb22kWgNQu6mEWzw&usqp=CAU")),
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/payout.png"),
+                            ), ),
 
-                          const Text(
-                            "Payment",
+                          Text(
+                            "Payout",
                           ),
-                          const Text("Report")
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/upi.png"),
+                            ), ),
+
+                          Text(
+                            "UPI",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height:50,
+                            child:Image(
+                              image: AssetImage(
+                                  "images/card.png"),
+                            ), ),
+
+                          Text(
+                            "Card",
+                          ),
                         ],
                       ),
                     ),
@@ -259,8 +466,9 @@ class _HomeState extends State<Home> {
 
 
 
-      
-      
+
+
+
               ],
             ),
           ),

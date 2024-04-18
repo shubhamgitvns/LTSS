@@ -113,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                             const SizedBox(height: 10,),
                             const Row(
                               children: [
-                                Text("Enter OTP",style: TextStyle(color: Colors.red),)
+                                Text("Enter 6-Digit OTP",style: TextStyle(color: Colors.red),)
                               ],
                             ),
                             const SizedBox(height: 5,),

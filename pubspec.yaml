@@ -63,6 +63,23 @@ flutter:
 
   assets:
     - images/lts.png
+    - images/mobile_th.png
+    - images/dth.png
+    - images/gasl.png
+    - images/Group .png
+    - images/ic_electricity.png
+    - images/landline.png
+    - images/water.png
+    - images/card.png
+    - images/dmt.png
+    - images/upi.png
+    - images/payout.png
+    - images/e.png
+    - images/i.png
+    - images/red_bell.png
+    - images/report.png
+    - images/person.png
+    - images/home.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

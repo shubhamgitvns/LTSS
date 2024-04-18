@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recharge_setu/user_page/profile_page.dart';
 
 import 'home_page.dart';
 
@@ -18,7 +19,7 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Home()
+    const Profile()
   ];
 
   final bool _isBottomSheetOpen = false;
@@ -58,9 +59,11 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.home,
-                      color: _selectedIndex == 0 ?Colors.red: Colors.red.shade100,
+                    Image(
+                      image: const AssetImage(
+                          "images/home.png"),
+                      color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
+
                     ),
                     Text(
                       "Home",
@@ -82,12 +85,14 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.abc,
+                  Image(
+                    image: const AssetImage(
+                        "images/person.png"),
                     color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+
                   ),
                   Text(
-                    "Profile",
+                    "Person",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
@@ -104,15 +109,17 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.report,
-                    color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                   Image(
+                    image: const AssetImage(
+                        "images/report.png"),
+                    color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
+
                   ),
                   Text(
                     "Report",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],
@@ -128,14 +135,14 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 children: [
                   Icon(
                     Icons.design_services,
-                    color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                    color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
                     "Service",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],
@@ -151,13 +158,13 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
                   ),
                   Text(
                     "Support",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],
