@@ -27,8 +27,11 @@ class _LoginState extends State<Login> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              Image.network(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKPUNt3IfPBbWGtTKv4xDn0Cqw2mk730htcm8wAcizIkVJxYa-3LvtLyBfHatZ3daCCE&usqp=CAU"),
+              SizedBox(
+                height: 250,
+                child: Image.network(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKPUNt3IfPBbWGtTKv4xDn0Cqw2mk730htcm8wAcizIkVJxYa-3LvtLyBfHatZ3daCCE&usqp=CAU"),
+              ),
               const SizedBox(
                 height: 20,
               ),

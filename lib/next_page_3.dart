@@ -11,12 +11,13 @@ class Next_Three extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -32,10 +33,9 @@ class Next_Three extends StatelessWidget {
                           PageTransition(
                             type: PageTransitionType.leftToRight,
                             isIos: true,
-                            child: Next_Two(),
+                            child: const Next_Two(),
                           ),
                         );
-
                       },
                     ),
                     InkWell(
@@ -54,13 +54,11 @@ class Next_Three extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              SizedBox(
+              Image.network(
+                "https://thumbs.dreamstime.com/b/portrait-young-man-sitting-his-desk-using-laptop-flat-vector-illustration-red-monochrome-young-man-sitting-his-desk-using-170206984.jpg?w=768",
+
                 height: 200,
-                child: Image.network(
-                  "https://thumbs.dreamstime.com/b/portrait-young-man-sitting-his-desk-using-laptop-flat-vector-illustration-red-monochrome-young-man-sitting-his-desk-using-170206984.jpg?w=768",
-                ),
               ),
-              SizedBox(height: 20,),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -70,57 +68,55 @@ class Next_Three extends StatelessWidget {
                           "Lorem Ipsum is simply dummy text of the printing and typesetting industry."))
                 ],
               ),
+
               const SizedBox(
-                height: 320,
+                height: 300,
               ),
               Container(
-                child: Expanded(
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Container(
-                        color: Colors.white12,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("data"),
-                              InkWell(
-                                child: Container(
-                                    height: 40,
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.orange),
-                                    child: const Center(
-                                        child: Text(
-                                          "Next ->",
-                                          style: TextStyle(fontSize: 15, color: Colors.white),
-                                        ))),
-                                onTap: (){
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.topToBottom,
-                                      duration: Duration(milliseconds: 500),
-                                      isIos: true,
-                                      child: Login(),
-                                    ),
-                                  );
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Container(
+                      height: 100,
+                      color: Colors.white12,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("data"),
+                            InkWell(
+                              child: Container(
+                                  height: 40,
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.orange),
+                                  child: const Center(
+                                      child: Text(
+                                        "Next ->",
+                                        style: TextStyle(fontSize: 15, color: Colors.white),
+                                      ))),
+                              onTap: (){
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Next_Two()));
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    isIos: true,
+                                    child: Login(),
+                                  ),
+                                );
 
-                                },
-                              ),
-                            ],
-                          ),
+                              },
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-
             ],
           ),
         ),

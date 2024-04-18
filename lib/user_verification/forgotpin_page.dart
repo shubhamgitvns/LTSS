@@ -13,6 +13,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   bool isChecked = false;
   final pinController = TextEditingController();
+  final newpinControler = TextEditingController();
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
@@ -60,6 +61,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               SizedBox(
+                height: 250,
                 child: Image.network(
                   "https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7866.jpg",
                 ),
@@ -100,15 +102,23 @@ class _SignUpState extends State<SignUp> {
                               ],
                             ),
                             const SizedBox(height: 10,),
-                            const Row(
-                              children: [
-                                Text("All the personal information tobe fill",style: TextStyle(color: Colors.grey,fontSize: 15,),),
-                              ],
+                            const Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Row(
+                                children: [
+                                  Text("All the personal information tobe fill",style: TextStyle(color: Colors.grey,fontSize: 15,),),
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 10,),
-
+                            const Row(
+                              children: [
+                                Text("Enter OTP",style: TextStyle(color: Colors.red),)
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Form(
                                   key: formKey,
@@ -120,16 +130,16 @@ class _SignUpState extends State<SignUp> {
                                         textDirection: TextDirection.ltr,
                                         child: Pinput(
                                           //Boxes number
-                                          length: 4,
+                                          length: 6,
                                           controller: pinController,
                                           focusNode: focusNode,
                                           androidSmsAutofillMethod:
                                           AndroidSmsAutofillMethod.smsUserConsentApi,
                                           listenForMultipleSmsOnAndroid: true,
                                           defaultPinTheme: defaultPinTheme,
-                                          separatorBuilder: (index) => const SizedBox(width: 8),
+                                          separatorBuilder: (index) => const SizedBox(width: 3),
                                           validator: (value) {
-                                            return value == '2222' ? null : 'Pin is incorrect';
+                                            return value == '222222' ? null : 'Pin is incorrect';
                                           },
                                           // onClipboardFound: (value) {
                                           //   debugPrint('onClipboardFound: $value');
@@ -147,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                                             children: [
                                               Container(
                                                 margin: const EdgeInsets.only(bottom: 9),
-                                                width: 22,
+                                                width: 10,
                                                 height: 1,
                                                 color: Colors.indigo,
                                               ),
@@ -180,86 +190,44 @@ class _SignUpState extends State<SignUp> {
                             const SizedBox(
                               height: 20,
                             ),
-
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            const Row(
                               children: [
-                                SizedBox(
-                                  width: 350,
-                                  child: TextField(
-                                    autofocus: true,
-                                    keyboardType: TextInputType.emailAddress,
-                                    controller: App_Text.pincode,
-                                    style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                                    decoration:InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 1.5,
-                                        ),
-                                      ),
+                                Text("Enter New Pin",style: TextStyle(color: Colors.red)),
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
 
-                                      //********Focus border like hover******************8
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: Colors.red,
-                                          )),
-                                      labelText: "Enter Pin",
+                              ],
+                            ),
+                            const SizedBox(height: 20,),
 
-                                      labelStyle: const TextStyle(color: Colors.red),
-
-
-                                    ),
-
-                                  ),
-                                ),
+                            const Row(
+                              children: [
+                                Text("Enter Confirm Pin",style: TextStyle(color: Colors.red)),
                               ],
                             ),
 
-
-                            const SizedBox(height: 20,),
+                            const SizedBox(height: 5,),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                SizedBox(
-                                  width: 350,
-                                  child: TextField(
-                                    autofocus: true,
-                                    keyboardType: TextInputType.number,
-                                    controller: App_Text.conformpin,
-                                    style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                                    decoration:InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 1.5,
-                                        ),
-                                      ),
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
 
-                                      //********Focus border like hover******************8
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: Colors.red,
-                                          )),
-                                      labelText: " Conform Pin",
-
-                                      labelStyle: const TextStyle(color: Colors.red),
-
-
-                                    ),
-
-                                  ),
-                                ),
                               ],
                             ),
 
                             const SizedBox(
-                              height: 50,
+                              height: 60,
                             ),
                             InkWell(
                               child: Container(
@@ -289,6 +257,39 @@ class _SignUpState extends State<SignUp> {
               ),
 
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class TextBox extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.red,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(5), // Optional: Add border radius
+      ),
+      child: TextField(
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        maxLength: 1,
+        cursorColor: Colors.red,
+        decoration: InputDecoration(
+          counterText: "",
+          // border: Border.all(color: Colors.red),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red), // Red focus border
+            borderRadius: BorderRadius.circular(5), // Optional: Add border radius
           ),
         ),
       ),

@@ -23,7 +23,7 @@ class _FingerPrintState extends State<FingerPrint> {
           child: Column(
             children: [
               SizedBox(
-                height: 230,
+                height: 250,
                 child: Image.network(
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMn8XrLqYl_NUOFUkFtBZ0zQCLkX3kiDWTGQOcwpLEPx-rk1tWEkNSB-Xsa_0quNqPa7w&usqp=CAU"),
               ),

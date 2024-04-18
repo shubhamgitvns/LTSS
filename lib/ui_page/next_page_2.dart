@@ -68,7 +68,7 @@ class Next_Two extends StatelessWidget {
               ),
 
               const SizedBox(
-                height: 320,
+                height: 300,
               ),
               Container(
                 child: Stack(

@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(
                 height: 200,
               ),
-               Row(
+               const Row(
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: [
                    Center(child: Image(

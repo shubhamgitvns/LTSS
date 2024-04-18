@@ -83,11 +83,11 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.report_off,
+                    Icons.abc,
                     color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
                   ),
                   Text(
-                    "Report",
+                    "Profile",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
@@ -105,11 +105,11 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.person,
+                    Icons.report,
                     color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
                   ),
                   Text(
-                    "Profile",
+                    "Report",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
