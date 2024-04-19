@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_page/changepassword_page.dart';
 
 import '../app_text.dart';
-class Change_password extends StatefulWidget {
-  const Change_password({super.key});
+
+class Current_password extends StatefulWidget {
+  const Current_password({super.key});
 
   @override
-  State<Change_password> createState() => _Change_passwordState();
+  State<Current_password> createState() => _Current_passwordState();
 }
 
-class _Change_passwordState extends State<Change_password> {
+class _Current_passwordState extends State<Current_password> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return  SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -22,7 +24,7 @@ class _Change_passwordState extends State<Change_password> {
               SizedBox(
                 height: 250,
                 child: Image.network(
-                  "https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7866.jpg",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKPUNt3IfPBbWGtTKv4xDn0Cqw2mk730htcm8wAcizIkVJxYa-3LvtLyBfHatZ3daCCE&usqp=CAU",
                 ),
               ),
 
@@ -57,18 +59,10 @@ class _Change_passwordState extends State<Change_password> {
                             // const SizedBox(height: 10,),
                             Row(
                               children: [
-                                Text("Change Password",style: Text_Style.heder,),
+                                Text("Enter Current Password",style: Text_Style.heder,),
                               ],
                             ),
                             const SizedBox(height: 10,),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: Row(
-                                children: [
-                                  Text("All the personal information tobe fill",style: TextStyle(color: Colors.grey,fontSize: 15,),),
-                                ],
-                              ),
-                            ),
                             const SizedBox(
                               height: 50,
                             ),
@@ -77,25 +71,6 @@ class _Change_passwordState extends State<Change_password> {
                                 Text("Enter New Pin",style: TextStyle(color: Colors.red)),
                               ],
                             ),
-                            const SizedBox(height: 10,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-
-                              ],
-                            ),
-                            const SizedBox(height: 20,),
-
-                            const Row(
-                              children: [
-                                Text("Enter Confirm Pin",style: TextStyle(color: Colors.red)),
-                              ],
-                            ),
-
                             const SizedBox(height: 10,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -119,6 +94,14 @@ class _Change_passwordState extends State<Change_password> {
                                 child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                               ),
                               onTap: (){
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    isIos: true,
+                                    child: const Change_password(),
+                                  ),
+                                );
 
                               },
                             ),
@@ -138,7 +121,6 @@ class _Change_passwordState extends State<Change_password> {
     );
   }
 }
-
 
 class TextBox extends StatelessWidget {
   @override
@@ -162,7 +144,7 @@ class TextBox extends StatelessWidget {
           counterText: "",
           // border: Border.all(color: Colors.red),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red), // Red focus border
+            borderSide: const BorderSide(color: Colors.red), // Red focus border
             borderRadius: BorderRadius.circular(5), // Optional: Add border radius
           ),
         ),

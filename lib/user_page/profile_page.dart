@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/user_page/changepassword_page.dart';
+import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 
@@ -441,7 +442,7 @@ class _ProfileState extends State<Profile> {
                               PageTransition(
                                 type: PageTransitionType.topToBottom,
                                 isIos: true,
-                                child: const Change_password(),
+                                child: const Current_password(),
                               ),
                             );
                           },
