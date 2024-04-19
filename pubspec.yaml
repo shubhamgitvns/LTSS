@@ -80,6 +80,8 @@ flutter:
     - images/report.png
     - images/person.png
     - images/home.png
+    - images/i_wht.png
+    - images/white_bell.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

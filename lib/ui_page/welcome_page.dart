@@ -47,26 +47,19 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(
                 height: 200,
               ),
-               const Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Center(child: Image(
-                     image: AssetImage(
-                         "images/lts.png"),
-                   ),
-                   ),
-                 ],
+               const SizedBox(
+                 height: 100,
+                 child: Center(child: Image(
+                   image: AssetImage(
+                       "images/lts.png"),
+                 ),
+                 ),
                ),
               const SizedBox(
                 height: 200,
               ),
           
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),),
-                ],
-              )
+               Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),)
             ],
           ),
         ),

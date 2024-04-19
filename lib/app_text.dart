@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class App_Text{
-  static  TextEditingController username = TextEditingController();
-  static  TextEditingController email = TextEditingController();
-  static  TextEditingController conformpin = TextEditingController();
-  static  TextEditingController pincode = TextEditingController();
-
+class App_Text {
+  static TextEditingController username = TextEditingController();
+  static TextEditingController email = TextEditingController();
+  static TextEditingController conformpin = TextEditingController();
+  static TextEditingController pincode = TextEditingController();
 }
 
-class Input_Style{
-  static final  InputDecoration style= InputDecoration(
+class Input_Style {
+  static final InputDecoration style = InputDecoration(
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(
@@ -25,12 +24,37 @@ class Input_Style{
         borderSide: BorderSide(
           color: Colors.red,
         )),
-
   );
+}
+
+class Text_Style {
+  static final TextStyle view_head =
+      TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20);
+  static final TextStyle heder =
+      TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.w600);
 
 }
-class Text_Style{
-  static  final TextStyle ts=TextStyle(color: Colors.black,fontWeight: FontWeight.bold);
-  static  final TextStyle heder=TextStyle(color: Colors.red,fontSize: 25,fontWeight: FontWeight.w600);
-  // static  final TextStyle info=TextStyle(color: Colors.grey,fontSize: 15,);
+
+class View_container {
+  static final BoxDecoration box = BoxDecoration(
+      // border: Border.all(color: Colors.red),
+      borderRadius: BorderRadius.circular(5),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.shade200,
+        offset: const Offset(
+          2.0,
+          2.0,
+        ),
+        blurRadius: 5.0,
+        spreadRadius: 1.0,
+      ), //BoxShadow
+      const BoxShadow(
+        color: Colors.white,
+        offset: Offset(0.0, 0.0),
+        blurRadius: 0.0,
+        spreadRadius: 0.0,
+      ), //BoxShadow
+    ],
+  );
 }
