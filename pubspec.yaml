@@ -88,6 +88,7 @@ flutter:
     - images/mail.png
     - images/facebook.png
     - images/whasapp.png
+    - images/change_psw.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

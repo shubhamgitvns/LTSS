@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_page/changepassword_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 
@@ -429,10 +430,21 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(
                             width: 100,
                           ),
-                          const Text(
-                            ">",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                          InkWell(
+                            child: const Text(
+                              ">",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),onTap: (){
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.topToBottom,
+                                isIos: true,
+                                child: const Change_password(),
+                              ),
+                            );
+                          },
                           )
                         ],
                       ),
