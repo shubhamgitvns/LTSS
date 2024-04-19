@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/home_page.dart';
 import 'package:recharge_setu/user_page/changepassword_page.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/current_securitypin.dart';
@@ -73,47 +74,60 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                         Row(
+                        Row(
                           children: [
                             const Column(
                               children: [
-              //************ User image ********************************//                  
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: NetworkImage(
-                                      "https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"),
-                                ),
+                                //************ User image ********************************//
+                    SizedBox(height:80,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            height: 120,
+                              child: Image(image: AssetImage("images/avtar.png"))),
+                        )),
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  //************ User name ********************************//                  
+                                  //************ User name ********************************//
                                   Row(
                                     children: [
                                       const Text(
-                                        "Shubham singh",
+                                        "Name",
                                         style: TextStyle(
-                                            color: Colors.black,fontWeight: FontWeight.bold),
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       //************ view button ********************************//
-                                      const SizedBox(width: 50,),
+                                      const SizedBox(
+                                        width: 50,
+                                      ),
                                       InkWell(
                                         child: Container(
                                             height: 25,
                                             width: 50,
                                             decoration: BoxDecoration(
-                                              color: Colors.red.shade100,
-                                              borderRadius: BorderRadius.circular(30),
-                                            border: Border.all(color: Colors.red)),
-                                            child: const Text("View",style: TextStyle(fontSize: 15,color: Colors.red)
-                                              ,textAlign: TextAlign.center,)),
-                                        onTap: (){
+                                                color: Colors.red.shade100,
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                border: Border.all(
+                                                    color: Colors.red)),
+                                            child: const Text(
+                                              "View",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.red),
+                                              textAlign: TextAlign.center,
+                                            )),
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             PageTransition(
-                                              type: PageTransitionType.bottomToTop,
+                                              type: PageTransitionType
+                                                  .bottomToTop,
                                               isIos: true,
                                               child: const User_Detail(),
                                             ),
@@ -208,56 +222,7 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red),
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.red.shade50,
-                                image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaj-a-tulvrE2oOr5hOpUWC3FtQGKjFymgOe3pD2O-oUg_lTRBbMheR8BNA6MfbRhzc6c&usqp=CAU"),
-                                    fit: BoxFit.scaleDown)),
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
-                          const Text(
-                            'Support',
-                            style: TextStyle(color: Colors.red, fontSize: 15),
-                          ),
-                          const SizedBox(
-                            width: 170,
-                          ),
-                          InkWell(
-                            child: const Text(
-                              ">",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  isIos: true,
-                                  child: const Support(),
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -270,8 +235,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://i.pinimg.com/originals/23/a6/14/23a6145a8302314c230696b85f7d7829.png"),
+                                   image: AssetImage("images/faqs.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -307,8 +271,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtbXr0-6GigVh6NiYFc9IsWc91sV0ps12Gmg&usqp=CAU"),
+                                    image:AssetImage("images/privacy.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -344,8 +307,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://st3.depositphotos.com/1688079/17277/i/450/depositphotos_172774802-stock-photo-terms-and-conditions-pages-icon.jpg"),
+                                    image:AssetImage("images/terms.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -370,7 +332,7 @@ class _ProfileState extends State<Profile> {
                       height: 10,
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
                           Container(
@@ -381,8 +343,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://s.cafebazaar.ir/images/icons/com.macropinch.hydra.android-4a7b592b-d4a7-4cf3-beda-2dffa4d9ed25_512x512.png?x-img=v1/resize,h_256,w_256,lossless_false/optimize"),
+                                    image: AssetImage("images/rate.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -418,8 +379,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://cdn2.iconfinder.com/data/icons/mix-color-5/100/Mix_color_5__lock-16-512.png"),
+                                    image: AssetImage("images/lock.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -437,16 +397,17 @@ class _ProfileState extends State<Profile> {
                               ">",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
-                            ),onTap: (){
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.topToBottom,
-                                isIos: true,
-                                child: const Current_password(),
-                              ),
-                            );
-                          },
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.topToBottom,
+                                  isIos: true,
+                                  child: const Current_password(),
+                                ),
+                              );
+                            },
                           )
                         ],
                       ),
@@ -466,8 +427,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AmQKohd_5Y0wyyN0x5-l-U34vlqwsH3AJwFiNeX4S1hsrpiZGGj-j9HWvHD0k6k7a1w&usqp=CAU"),
+                                    image:AssetImage("images/logout.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const SizedBox(
@@ -480,12 +440,118 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(
                             width: 180,
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(right: 5),
-                            child: Text(
-                              ">",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: InkWell(
+                              child: const Text(
+                                ">",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () {
+                                showModalBottomSheet<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      height: 300,
+                                      color: Colors.red.shade100,
+                                      child: Center(
+                                        child: Column(
+                                          // mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            const Center(
+                                                child: Text(
+                                              "Log Out",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 25),
+                                            )),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            const Center(
+                                                child: Text(
+                                              " Do you really want to log out ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey),
+                                            )),
+                                            const SizedBox(
+                                              height: 50,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                InkWell(
+                                                  child: Container(
+                                                    width: 70,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.red)),
+                                                    child: const Center(
+                                                        child: Text(
+                                                      "No",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.red),
+                                                    )),
+                                                  ),
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .topToBottom,
+                                                        isIos: true,
+                                                        child: const Profile(),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                                InkWell(
+                                                  child: Container(
+                                                    width: 70,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        border: Border.all(
+                                                            color: Colors.red)),
+                                                    child: const Center(
+                                                        child: Text(
+                                                      "Yes",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    )),
+                                                  ),
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .leftToRight,
+                                                        isIos: true,
+                                                        child: const Home(),
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           )
                         ],
@@ -507,15 +573,14 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.red.shade50,
                                 image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://cdn.icon-icons.com/icons2/1880/PNG/512/iconfinder-key-4341299_120569.png"),
+                                    image:AssetImage("images/key.png"),
                                     fit: BoxFit.scaleDown)),
                           ),
                           const Text(
                             'Change Security Access Pin',
                             style: TextStyle(color: Colors.red, fontSize: 15),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.only(right: 5),
                             child: InkWell(
                               child: const Text(
@@ -523,7 +588,7 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   PageTransition(

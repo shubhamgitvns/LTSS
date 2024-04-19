@@ -88,7 +88,21 @@ flutter:
     - images/mail.png
     - images/facebook.png
     - images/whasapp.png
-    - images/change_psw.png
+    - images/change.png
+    - images/avtar.png
+    - images/next1.png
+    - images/next2.png
+    - images/next3.png
+    - images/login.png
+    - images/finger.png
+    - images/pocket.png
+    - images/terms.png
+    - images/rate.png
+    - images/privacy.png
+    - images/logout.png
+    - images/lock.png
+    - images/key.png
+    - images/faqs.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

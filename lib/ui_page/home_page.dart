@@ -71,10 +71,10 @@ class _HomeState extends State<Home> {
                      ), //BoxShadow
                    ],
                  ),
-                 child: Row(
+                 child: const Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                      const Padding(
+                      Padding(
                        padding: EdgeInsets.all(8.0),
                        child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,10 +96,10 @@ class _HomeState extends State<Home> {
                      ),
                   Column(
                     children: [
-                      const SizedBox(height: 20,),
+                      SizedBox(height: 20,),
                       SizedBox(
-                        height:150,
-                          child: Image.network("https://cdn-icons-png.flaticon.com/256/1198/1198342.png")),
+                          height: 150,
+                          child: Image(image: AssetImage('images/pocket.png'))),
                       // Text("Earning",style: TextStyle(color: Colors.red),)
                     ],
                   )

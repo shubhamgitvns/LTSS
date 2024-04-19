@@ -53,10 +53,9 @@ class Next_Two extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              Image.network(
-                "https://www.shutterstock.com/image-vector/cartoon-software-update-people-mobile-260nw-1903643518.jpg",
-                height: 200,
-              ),
+              const SizedBox(
+                  height: 200,
+                  child: Image(image: AssetImage('images/next2.png'))),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

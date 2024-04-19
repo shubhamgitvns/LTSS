@@ -60,12 +60,9 @@ class _SignUpState extends State<SignUp> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(
-                height: 250,
-                child: Image.network(
-                  "https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7866.jpg",
-                ),
-              ),
+              const SizedBox(
+                  height: 250,
+                  child: Image(image: AssetImage('images/change.png'))),
 
               Container(
                 child: Stack(

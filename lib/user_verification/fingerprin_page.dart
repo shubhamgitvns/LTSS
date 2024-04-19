@@ -22,11 +22,9 @@ class _FingerPrintState extends State<FingerPrint> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(
-                height: 250,
-                child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMn8XrLqYl_NUOFUkFtBZ0zQCLkX3kiDWTGQOcwpLEPx-rk1tWEkNSB-Xsa_0quNqPa7w&usqp=CAU"),
-              ),
+              const SizedBox(
+                  height: 250,
+                  child: Image(image: AssetImage('images/finger.png'))),
               const SizedBox(
                 height: 20,
               ),

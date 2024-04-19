@@ -54,11 +54,9 @@ class Next_Three extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              Image.network(
-                "https://thumbs.dreamstime.com/b/portrait-young-man-sitting-his-desk-using-laptop-flat-vector-illustration-red-monochrome-young-man-sitting-his-desk-using-170206984.jpg?w=768",
-
-                height: 200,
-              ),
+              const SizedBox(
+                  height: 200,
+                  child: Image(image: AssetImage('images/next3.png'))),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

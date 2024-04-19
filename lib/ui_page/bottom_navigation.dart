@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
+import 'package:recharge_setu/user_page/support_page.dart';
 
 import 'home_page.dart';
 
@@ -19,7 +20,8 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Profile()
+    const Profile(),
+    const Support()
   ];
 
   final bool _isBottomSheetOpen = false;
@@ -109,14 +111,14 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   Image(
+                  Image(
                     image: const AssetImage(
-                        "images/report.png"),
+                        "images/mobile_th.png"),
                     color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
-                    "Report",
+                    "Support",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
@@ -127,6 +129,7 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
             ),
             label: '',
           ),
+
           BottomNavigationBarItem(
             icon: Center(
               child: Column(
@@ -156,15 +159,39 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Image(
+                    image: const AssetImage(
+                        "images/report.png"),
+                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
+
+                  ),
+                  Text(
+                    "Report",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   Icon(
                     Icons.person,
-                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
+                    color: _selectedIndex == 5 ? Colors.red : Colors.red.shade100,
                   ),
                   Text(
                     "Support",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 5 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],

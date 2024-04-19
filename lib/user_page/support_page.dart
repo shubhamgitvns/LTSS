@@ -57,7 +57,10 @@ class _SupportState extends State<Support> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
                             child: Image(image: AssetImage("images/mobile_th.png")))
@@ -67,7 +70,10 @@ class _SupportState extends State<Support> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
                             child: Image(image: AssetImage("images/landline.png")))
@@ -77,7 +83,10 @@ class _SupportState extends State<Support> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
                             child: Image(image: AssetImage("images/whasapp.png")))
@@ -125,30 +134,48 @@ class _SupportState extends State<Support> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 70),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
-                            child: Image(image: AssetImage("images/mobile_th.png")))
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Image(image: AssetImage("images/mobile_th.png")),
+                            ))
                       ],
                     ),
                     const SizedBox(height: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 60),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
-                            child: Image(image: AssetImage("images/landline.png")))
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Image(image: AssetImage("images/landline.png")),
+                            ))
                       ],
                     ),
                     const SizedBox(height: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("707178345",style: Text_Style.Red,),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 60),
+                          child: Text("707178345",style: Text_Style.Red,),
+                        ),
                         const SizedBox(
                             height: 30,
-                            child: Image(image: AssetImage("images/whasapp.png")))
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Image(image: AssetImage("images/whasapp.png")),
+                            ))
                       ],
                     ),
                     const SizedBox(height: 10,),

@@ -54,10 +54,9 @@ class Next_one extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTnbOp_8E3MFdAg4M4X_nB87IqOYn0RHZkLXKr5dQONHboYmtdIwBxvPlFNmJBz1OjEE&usqp=CAU",
-                height: 200,
-              ),
+             const SizedBox(
+               height: 200,
+                 child: Image(image: AssetImage('images/next1.png'))),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

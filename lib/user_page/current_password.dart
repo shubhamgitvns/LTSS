@@ -21,12 +21,9 @@ class _Current_passwordState extends State<Current_password> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(
-                height: 250,
-                child: Image.network(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKPUNt3IfPBbWGtTKv4xDn0Cqw2mk730htcm8wAcizIkVJxYa-3LvtLyBfHatZ3daCCE&usqp=CAU",
-                ),
-              ),
+              const SizedBox(
+                  height: 250,
+                  child: Image(image: AssetImage('images/login.png'))),
 
               Container(
                 child: Stack(
