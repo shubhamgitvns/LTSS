@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/user_page/changepassword_page.dart';
+import 'package:recharge_setu/user_page/profile_page.dart';
 
 import '../app_text.dart';
-
-class Current_password extends StatefulWidget {
-  const Current_password({super.key});
+class Chandge_Security_Pin extends StatefulWidget {
+  const Chandge_Security_Pin({super.key});
 
   @override
-  State<Current_password> createState() => _Current_passwordState();
+  State<Chandge_Security_Pin> createState() => _Chandge_Security_PinState();
 }
 
-class _Current_passwordState extends State<Current_password> {
+class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -24,7 +23,7 @@ class _Current_passwordState extends State<Current_password> {
               SizedBox(
                 height: 250,
                 child: Image.network(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqKPUNt3IfPBbWGtTKv4xDn0Cqw2mk730htcm8wAcizIkVJxYa-3LvtLyBfHatZ3daCCE&usqp=CAU",
+                  "https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7866.jpg",
                 ),
               ),
 
@@ -59,18 +58,45 @@ class _Current_passwordState extends State<Current_password> {
                             // const SizedBox(height: 10,),
                             Row(
                               children: [
-                                Text("Enter Current Password",style: Text_Style.heder,),
+                                Text("Change Security Access PIN",style: Text_Style.heder,),
                               ],
                             ),
                             const SizedBox(height: 10,),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Row(
+                                children: [
+                                  Text("All the personal information tobe fill",style: TextStyle(color: Colors.grey,fontSize: 15,),),
+                                ],
+                              ),
+                            ),
                             const SizedBox(
                               height: 50,
                             ),
                             const Row(
                               children: [
-                                Text("Enter Current Password",style: TextStyle(color: Colors.red)),
+                                Text("Enter New Pin",style: TextStyle(color: Colors.red)),
                               ],
                             ),
+                            const SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
+                                TextBox(),
+
+                              ],
+                            ),
+                            const SizedBox(height: 20,),
+
+                            const Row(
+                              children: [
+                                Text("Enter Confirm Pin",style: TextStyle(color: Colors.red)),
+                              ],
+                            ),
+
                             const SizedBox(height: 10,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -97,9 +123,9 @@ class _Current_passwordState extends State<Current_password> {
                                 Navigator.push(
                                   context,
                                   PageTransition(
-                                    type: PageTransitionType.rightToLeft,
+                                    type: PageTransitionType.leftToRight,
                                     isIos: true,
-                                    child: const Change_password(),
+                                    child: const Profile(),
                                   ),
                                 );
 

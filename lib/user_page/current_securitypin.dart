@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/user_page/changepassword_page.dart';
+import 'package:recharge_setu/user_page/change_securitypin.dart';
 
 import '../app_text.dart';
-
-class Current_password extends StatefulWidget {
-  const Current_password({super.key});
+class Current_Security_Pin extends StatefulWidget {
+  const Current_Security_Pin({super.key});
 
   @override
-  State<Current_password> createState() => _Current_passwordState();
+  State<Current_Security_Pin> createState() => _Current_Security_PinState();
 }
 
-class _Current_passwordState extends State<Current_password> {
+class _Current_Security_PinState extends State<Current_Security_Pin> {
   @override
   Widget build(BuildContext context) {
     return  SafeArea(
@@ -59,7 +58,9 @@ class _Current_passwordState extends State<Current_password> {
                             // const SizedBox(height: 10,),
                             Row(
                               children: [
-                                Text("Enter Current Password",style: Text_Style.heder,),
+                                SizedBox(
+                                  width:300,
+                                    child: Text("Enter Current Security Access Pin",style: Text_Style.heder,)),
                               ],
                             ),
                             const SizedBox(height: 10,),
@@ -68,7 +69,7 @@ class _Current_passwordState extends State<Current_password> {
                             ),
                             const Row(
                               children: [
-                                Text("Enter Current Password",style: TextStyle(color: Colors.red)),
+                                Text("Enter Current Pin",style: TextStyle(color: Colors.red)),
                               ],
                             ),
                             const SizedBox(height: 10,),
@@ -99,7 +100,7 @@ class _Current_passwordState extends State<Current_password> {
                                   PageTransition(
                                     type: PageTransitionType.rightToLeft,
                                     isIos: true,
-                                    child: const Change_password(),
+                                    child: const Chandge_Security_Pin(),
                                   ),
                                 );
 
@@ -121,7 +122,6 @@ class _Current_passwordState extends State<Current_password> {
     );
   }
 }
-
 class TextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

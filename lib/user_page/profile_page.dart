@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/user_page/changepassword_page.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
+import 'package:recharge_setu/user_page/current_securitypin.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 
@@ -514,12 +515,24 @@ class _ProfileState extends State<Profile> {
                             'Change Security Access Pin',
                             style: TextStyle(color: Colors.red, fontSize: 15),
                           ),
-                          const Padding(
+                           Padding(
                             padding: EdgeInsets.only(right: 5),
-                            child: Text(
-                              ">",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            child: InkWell(
+                              child: const Text(
+                                ">",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    isIos: true,
+                                    child: const Current_Security_Pin(),
+                                  ),
+                                );
+                              },
                             ),
                           )
                         ],

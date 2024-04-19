@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_page/profile_page.dart';
 
 import '../app_text.dart';
 class Change_password extends StatefulWidget {
@@ -74,7 +75,7 @@ class _Change_passwordState extends State<Change_password> {
                             ),
                             const Row(
                               children: [
-                                Text("Enter New Pin",style: TextStyle(color: Colors.red)),
+                                Text("Enter New Password",style: TextStyle(color: Colors.red)),
                               ],
                             ),
                             const SizedBox(height: 10,),
@@ -92,7 +93,7 @@ class _Change_passwordState extends State<Change_password> {
 
                             const Row(
                               children: [
-                                Text("Enter Confirm Pin",style: TextStyle(color: Colors.red)),
+                                Text("Enter Confirm Password",style: TextStyle(color: Colors.red)),
                               ],
                             ),
 
@@ -119,6 +120,14 @@ class _Change_passwordState extends State<Change_password> {
                                 child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                               ),
                               onTap: (){
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.leftToRight,
+                                    isIos: true,
+                                    child: const Profile(),
+                                  ),
+                                );
 
                               },
                             ),
