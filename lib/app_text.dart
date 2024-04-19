@@ -32,12 +32,14 @@ class Text_Style {
       TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20);
   static final TextStyle heder =
       TextStyle(color: Colors.red, fontSize: 25, fontWeight: FontWeight.w600);
+  static final TextStyle Red =
+  TextStyle(color: Colors.red, fontSize: 17, fontWeight: FontWeight.w600);
 
 }
 
-class View_container {
+class Support_container {
   static final BoxDecoration box = BoxDecoration(
-      // border: Border.all(color: Colors.red),
+      border: Border.all(color: Colors.grey.shade50),
       borderRadius: BorderRadius.circular(5),
     boxShadow: [
       BoxShadow(

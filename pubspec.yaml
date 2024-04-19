@@ -82,6 +82,12 @@ flutter:
     - images/home.png
     - images/i_wht.png
     - images/white_bell.png
+    - images/contact.png
+    - images/customer.png
+    - images/insta.png
+    - images/mail.png
+    - images/facebook.png
+    - images/whasapp.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

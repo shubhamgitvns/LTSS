@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 
 class Profile extends StatefulWidget {
@@ -231,10 +232,22 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(
                             width: 170,
                           ),
-                          const Text(
-                            ">",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                          InkWell(
+                            child: const Text(
+                              ">",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  isIos: true,
+                                  child: const Support(),
+                                ),
+                              );
+                            },
                           )
                         ],
                       ),
