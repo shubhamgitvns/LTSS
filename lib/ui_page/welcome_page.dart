@@ -1,25 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Recharge Setu',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -33,6 +17,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    super.initState();
+    Timer(Duration(seconds: 2),(){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Login(),));
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(
                 height: 200,
               ),
-          
+
                Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),)
             ],
           ),
@@ -78,3 +73,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+

@@ -7,11 +7,17 @@ import '../app_text.dart';
 class Current_password extends StatefulWidget {
   const Current_password({super.key});
 
+
   @override
   State<Current_password> createState() => _Current_passwordState();
 }
 
 class _Current_passwordState extends State<Current_password> {
+  List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+  void dispose() {
+    controllers.forEach((controller) => controller.dispose());
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return  SafeArea(
@@ -72,11 +78,10 @@ class _Current_passwordState extends State<Current_password> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-
+                                TextBox(controller: controllers[0]),
+                                TextBox(controller: controllers[1]),
+                                TextBox(controller: controllers[2]),
+                                TextBox(controller: controllers[3]),
                               ],
                             ),
 
@@ -119,7 +124,13 @@ class _Current_passwordState extends State<Current_password> {
   }
 }
 
+
+
 class TextBox extends StatelessWidget {
+  final TextEditingController controller;
+
+  const TextBox({Key? key, required this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,13 +144,14 @@ class TextBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(5), // Optional: Add border radius
       ),
       child: TextField(
+        controller: controller,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
+        style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         maxLength: 1,
-        cursorColor: Colors.red,
         decoration: InputDecoration(
           counterText: "",
-          // border: Border.all(color: Colors.red),
+          border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.red), // Red focus border
             borderRadius: BorderRadius.circular(5), // Optional: Add border radius

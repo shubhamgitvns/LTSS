@@ -11,6 +11,14 @@ class Change_password extends StatefulWidget {
 }
 
 class _Change_passwordState extends State<Change_password> {
+  List<TextEditingController> controllers = List.generate(8, (index) => TextEditingController());
+
+  @override
+  void dispose() {
+    controllers.forEach((controller) => controller.dispose());
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -79,10 +87,10 @@ class _Change_passwordState extends State<Change_password> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
+                                TextBox(controller: controllers[0]),
+                                TextBox(controller: controllers[1]),
+                                TextBox(controller: controllers[2]),
+                                TextBox(controller: controllers[3]),
 
                               ],
                             ),
@@ -98,11 +106,10 @@ class _Change_passwordState extends State<Change_password> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-
+                                TextBox(controller: controllers[4]),
+                                TextBox(controller: controllers[5]),
+                                TextBox(controller: controllers[6]),
+                                TextBox(controller: controllers[7]),
                               ],
                             ),
 
@@ -146,7 +153,12 @@ class _Change_passwordState extends State<Change_password> {
 }
 
 
+
 class TextBox extends StatelessWidget {
+  final TextEditingController controller;
+
+  const TextBox({Key? key, required this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,15 +172,16 @@ class TextBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(5), // Optional: Add border radius
       ),
       child: TextField(
+        controller: controller,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
+        style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         maxLength: 1,
-        cursorColor: Colors.red,
         decoration: InputDecoration(
           counterText: "",
-          // border: Border.all(color: Colors.red),
+          border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red), // Red focus border
+            borderSide: const BorderSide(color: Colors.red), // Red focus border
             borderRadius: BorderRadius.circular(5), // Optional: Add border radius
           ),
         ),
