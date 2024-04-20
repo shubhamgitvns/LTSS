@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/user_verification/fingerprin_page.dart';
 import 'package:recharge_setu/user_verification/forgotpin_page.dart';
+import 'package:recharge_setu/user_verification/pin_page.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -137,42 +138,12 @@ class _LoginState extends State<Login> {
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
                                 isIos: true,
-                                child: const FingerPrint(),
+                                child: const Pin(),
                               ),
                             );
                           },
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Don't have account?",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            InkWell(
-                                child: const Text(
-                              " Forgot Pin",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.red),
-                            ),
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    isIos: true,
-                                    child: const SignUp(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        )
+
                       ],
                     ),
                   )

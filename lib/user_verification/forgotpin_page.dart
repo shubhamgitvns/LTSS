@@ -17,6 +17,7 @@ class _SignUpState extends State<SignUp> {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
+
   @override
   void dispose() {
     pinController.dispose();
@@ -196,10 +197,12 @@ class _SignUpState extends State<SignUp> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
+                                RowOfTextBoxes(controllers: [
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                ]),
 
                               ],
                             ),
@@ -213,13 +216,14 @@ class _SignUpState extends State<SignUp> {
 
                             const SizedBox(height: 5,),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-                                TextBox(),
-
+                                RowOfTextBoxes(controllers: [
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                  TextEditingController(),
+                                ]),
                               ],
                             ),
 
@@ -262,8 +266,45 @@ class _SignUpState extends State<SignUp> {
 }
 
 
+class RowOfTextBoxes extends StatefulWidget {
+  final List<TextEditingController> controllers;
+
+  const RowOfTextBoxes({Key? key, required this.controllers}) : super(key: key);
+
+  @override
+  _RowOfTextBoxesState createState() => _RowOfTextBoxesState();
+}
+
+class _RowOfTextBoxesState extends State<RowOfTextBoxes> {
+  @override
+  void dispose() {
+    widget.controllers.forEach((controller) => controller.dispose());
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextBox(controller: widget.controllers[0]),
+        const SizedBox(width: 50,),
+        TextBox(controller: widget.controllers[1]),
+        const SizedBox(width: 50,),
+        TextBox(controller: widget.controllers[2]),
+        const SizedBox(width: 50,),
+        TextBox(controller: widget.controllers[3]),
+      ],
+    );
+  }
+}
+
 
 class TextBox extends StatelessWidget {
+  final TextEditingController controller;
+
+  const TextBox({Key? key, required this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -277,15 +318,16 @@ class TextBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(5), // Optional: Add border radius
       ),
       child: TextField(
+        controller: controller,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
+        style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
         maxLength: 1,
-        cursorColor: Colors.red,
         decoration: InputDecoration(
           counterText: "",
-          // border: Border.all(color: Colors.red),
+          border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red), // Red focus border
+            borderSide: const BorderSide(color: Colors.red), // Red focus border
             borderRadius: BorderRadius.circular(5), // Optional: Add border radius
           ),
         ),
