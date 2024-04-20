@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/ui_page/next_page_1.dart';
+import 'package:recharge_setu/user_verification/login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             PageTransition(
               type: PageTransitionType.rightToLeft,
               isIos: true,
-              child: Next_one(),
+              child: const Login(),
             ),
           );
         },

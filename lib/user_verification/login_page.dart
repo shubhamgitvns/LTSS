@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               const SizedBox(
@@ -60,12 +60,13 @@ class _LoginState extends State<Login> {
                     child: Column(
                       children: [
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Text(
                           "Enter Your Mobile Number",
                           style: Text_Style.heder,
                         ),
+                        const SizedBox(height: 10,),
                         const Text(
                           "We will send you OTP on that number",
                           style: TextStyle(
@@ -74,53 +75,9 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 50,
                         ),
-                        //Phone input box code//
-                        SizedBox(
-                          width: 350,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 2, color: Colors.red)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InternationalPhoneNumberInput(
-                                inputDecoration: const InputDecoration(
-                                    filled: true,
-                                    border: InputBorder.none,
-                                    hintText: 'Phone Number',
-                                    fillColor: Colors.white),
-                                onInputChanged: (PhoneNumber number) {
-                                  print(number.phoneNumber);
-                                },
-                                onInputValidated: (bool value) {
-                                  print(value);
-                                },
-                                selectorConfig: const SelectorConfig(
-                                  selectorType:
-                                      PhoneInputSelectorType.BOTTOM_SHEET,
-                                ),
-                                ignoreBlank: false,
-                                autoValidateMode: AutovalidateMode.disabled,
-                                selectorTextStyle:
-                                    const TextStyle(color: Colors.black),
-                                initialValue: number,
-                                textFieldController: controller,
-                                formatInput: true,
-                                keyboardType: const TextInputType.numberWithOptions(
-                                    signed: true, decimal: true),
-                                onSaved: (PhoneNumber number) {
-                                  // print('On Saved: $number');
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        //Phone input box code//
-                        const SizedBox(
-                          height: 20,
-                        ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -132,6 +89,7 @@ class _LoginState extends State<Login> {
                                 controller: App_Text.pincode,
                                 style: const TextStyle(
                                     color: Colors.black,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -148,9 +106,10 @@ class _LoginState extends State<Login> {
                                       borderSide: const BorderSide(
                                         color: Colors.red,
                                       )),
-                                  labelText: "Enter Pin",
+                                  labelText: "Enter Phone Number",
 
                                   labelStyle: const TextStyle(color: Colors.red),
+                                  prefixIcon: const Icon(Icons.phone,color: Colors.red,),
                                 ),
                               ),
                             ),
@@ -167,7 +126,7 @@ class _LoginState extends State<Login> {
                             color: Colors.red,
                             child: const Center(
                                 child: Text(
-                              "Login ",
+                              "Continue",
                               style: TextStyle(
                                   color: Colors.white, fontSize: 20),
                             )),
@@ -190,7 +149,7 @@ class _LoginState extends State<Login> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Dont have account?",
+                              "Don't have account?",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             InkWell(
