@@ -84,7 +84,7 @@ class _FingerPrintState extends State<FingerPrint> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Image.network("https://media.istockphoto.com/id/1145032425/video/fingerprint-scan-icon-animation.jpg?s=640x640&k=20&c=cUPwdPxL1z_Q_uEStCLOy1QxNBIWtiR6oNXf-WUbg44="),
+                        const Image(image: AssetImage("images/fprint.png")),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

@@ -581,7 +581,7 @@ class _ProfileState extends State<Profile> {
                             style: TextStyle(color: Colors.red, fontSize: 15),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 5),
+                            padding: const EdgeInsets.only(right: 5),
                             child: InkWell(
                               child: const Text(
                                 ">",

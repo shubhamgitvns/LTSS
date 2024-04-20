@@ -103,6 +103,8 @@ flutter:
     - images/lock.png
     - images/key.png
     - images/faqs.png
+    - images/fprint.png
+    - images/mobile.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

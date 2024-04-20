@@ -52,7 +52,6 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            // backgroundColor: AppColors.buttoncolor,
             icon: Container(
               height: 60,
               width: 60,
@@ -105,6 +104,7 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
             ),
             label: '',
           ),
+
           BottomNavigationBarItem(
             icon: Center(
               child: Column(
@@ -136,13 +136,14 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.design_services,
+                  Image(
+                    image: const AssetImage(
+                        "images/report.png"),
                     color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
-                    "Service",
+                    "Report",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
@@ -153,30 +154,7 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
             ),
             label: '',
           ),
-          BottomNavigationBarItem(
-            icon: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/report.png"),
-                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
 
-                  ),
-                  Text(
-                    "Report",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            label: '',
-          ),
           BottomNavigationBarItem(
             icon: Center(
               child: Column(
@@ -184,14 +162,15 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.person,
-                    color: _selectedIndex == 5 ? Colors.red : Colors.red.shade100,
+                    Icons.design_services,
+                    color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
+
                   ),
                   Text(
-                    "Support",
+                    "Service",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 5 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],

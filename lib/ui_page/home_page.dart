@@ -199,14 +199,12 @@ class _HomeState extends State<Home> {
                       height: 120,
                       width: 90,
                       color: Colors.grey.shade50,
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                              height:32,
-                              child: Image.network("https://toppng.com/uploads/preview/ive-us-a-call-1-red-mobile-icon-115630449556td2h4qoum.png")),
-                          const SizedBox(height: 10,),
-                          const Text(
+                          Image(image: AssetImage("images/mobile.png")),
+                          SizedBox(height: 10,),
+                          Text(
                             "Postpaid",
                           ),
 
