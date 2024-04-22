@@ -33,6 +33,47 @@ class _Fund_TransferState extends State<Fund_Transfer> {
             const SizedBox(height: 20,),
             const Row(
               children: [
+                Text("Amount",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
+
+              ],
+            ),
+            const SizedBox(height: 5,),
+            Row(
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: SizedBox(
+                    width: 350,
+                    child: TextField(
+                      autofocus: true,
+                      cursorColor: Colors.red,
+                      style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Colors.red,
+                            //width: 1.5,
+                          ),
+                        ),
+
+                        //********Focus border like hover******************8
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: Colors.red)),
+                        hintText: "Amount",
+                        hintStyle: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20,),
+            const Row(
+              children: [
                 Text("Remark",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey),),
 
               ],
@@ -103,7 +144,7 @@ class _Fund_TransferState extends State<Fund_Transfer> {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(color: Colors.red)),
-                        hintText: "pin Password",
+                        hintText: "Pin Password",
                         hintStyle: const TextStyle(color: Colors.red),
                       ),
                     ),

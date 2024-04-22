@@ -107,6 +107,8 @@ flutter:
     - images/mobile.png
     - images/pin.png
     - images/inco.png
+    - images/fil.png
+    - images/wallet.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

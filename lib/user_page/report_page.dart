@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_page/wallet_summury.dart';
 class Report extends StatefulWidget {
   const Report({super.key});
 
@@ -132,6 +134,93 @@ class _ReportState extends State<Report> {
 
                     ],
                   ),
+                ),
+                Container(
+                  height: 120,
+                  width: 90,
+                  color: Colors.grey.shade50,
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(image: AssetImage("images/ic_electricity.png")),
+                      SizedBox(height: 10,),
+                      Text(
+                        "Complaint",
+                      ),
+                      Text(
+                        "Report",
+                      ),
+
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 120,
+                  width: 90,
+                  color: Colors.grey.shade50,
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height:50,
+                        child:Image(
+                          image: AssetImage(
+                              "images/gasl.png"),
+                        ), ),
+
+                      Text(
+                        "Use Daybook ",
+                      ),
+                      Text(
+                        "Report",
+                      ),
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+            const SizedBox(height: 20,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:30,
+                          child:Image(
+                            image: AssetImage(
+                                "images/wallet.png"),
+                          ), ),
+
+                        Text(
+                          "Wallet",
+                        ),
+                        Text(
+                          "Summary",
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+                  onTap: (){ Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      isIos: true,
+                      child: const Wallet_Summary(),
+                    ),
+                  );
+
+                  },
                 ),
                 Container(
                   height: 120,
