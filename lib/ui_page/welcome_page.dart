@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
     super.initState();
-    Timer(Duration(seconds: 2),(){
+    Timer(const Duration(seconds: 2),(){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Login(),));
     });
 
@@ -34,40 +34,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
 
-      body: InkWell(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(
-                height: 200,
-              ),
-               const SizedBox(
-                 height: 100,
-                 child: Center(child: Image(
-                   image: AssetImage(
-                       "images/lts.png"),
-                 ),
-                 ),
-               ),
-              const SizedBox(
-                height: 200,
-              ),
-
-               Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),)
-            ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(
+            height: 200,
           ),
-        ),
-        onTap: (){
-          Navigator.push(
-            context,
-            PageTransition(
-              type: PageTransitionType.rightToLeft,
-              isIos: true,
-              child: const Login(),
-            ),
-          );
-        },
+           const SizedBox(
+             height: 100,
+             child: Center(child: Image(
+               image: AssetImage(
+                   "images/lts.png"),
+             ),
+             ),
+           ),
+          const SizedBox(
+            height: 200,
+          ),
+
+           Text("Power by Sampurna",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),)
+        ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

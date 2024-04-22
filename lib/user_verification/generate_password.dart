@@ -4,21 +4,22 @@ import 'package:page_transition/page_transition.dart';
 import '../app_text.dart';
 import 'fingerprin_page.dart';
 import 'forgotpin_page.dart';
-class Pin extends StatefulWidget {
-  const Pin({super.key});
+class Generate_new_password extends StatefulWidget {
+  const Generate_new_password({super.key});
 
   @override
-  State<Pin> createState() => _PinState();
+  State<Generate_new_password> createState() => _Generate_new_passwordState();
 }
 
-class _PinState extends State<Pin> {
-  List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+class _Generate_new_passwordState extends State<Generate_new_password> {
+  List<TextEditingController> controllers = List.generate(8, (index) => TextEditingController());
 
   @override
   void dispose() {
     controllers.forEach((controller) => controller.dispose());
     super.dispose();
   }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -65,9 +66,18 @@ class _PinState extends State<Pin> {
                         child: Row(
                           children: [
                             Text(
-                              "Enter Your Pin",
+                              "Enter Your New Password",
                               style: Text_Style.heder,
                             ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10,),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 40),
+                        child: Row(
+                          children: [
+                            Text("All the personal information tobe fill",style: TextStyle(color: Colors.grey,fontSize: 15,),),
                           ],
                         ),
                       ),
@@ -75,6 +85,15 @@ class _PinState extends State<Pin> {
                       const SizedBox(
                         height: 50,
                       ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 40),
+                        child: Row(
+                          children: [
+                            Text("Enter New Password",style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -82,6 +101,26 @@ class _PinState extends State<Pin> {
                           TextBox(controller: controllers[1]),
                           TextBox(controller: controllers[2]),
                           TextBox(controller: controllers[3]),
+                        ],
+                      ),
+                      const SizedBox(height: 30,),
+
+                      const Padding(
+                        padding: EdgeInsets.only(left: 40),
+                        child: Row(
+                          children: [
+                            Text("Enter Confirm Password",style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextBox(controller: controllers[4]),
+                          TextBox(controller: controllers[5]),
+                          TextBox(controller: controllers[6]),
+                          TextBox(controller: controllers[7]),
                         ],
                       ),
 
@@ -95,7 +134,7 @@ class _PinState extends State<Pin> {
                           color: Colors.red,
                           child: const Center(
                               child: Text(
-                                "Login ",
+                                "Change ",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               )),
@@ -111,37 +150,7 @@ class _PinState extends State<Pin> {
                           );
                         },
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Don't have account?",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          InkWell(
-                            child: const Text(
-                              " Forgot Pin",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.red),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  isIos: true,
-                                  child: const SignUp(),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      )
+
                     ],
                   ),
                 )
@@ -177,8 +186,8 @@ class TextBox extends StatelessWidget {
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
+            fontSize: 20,
+            fontWeight: FontWeight.bold
         ),
         maxLength: 1,
         decoration: InputDecoration(

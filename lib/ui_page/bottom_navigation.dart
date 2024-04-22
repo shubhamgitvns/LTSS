@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
+import 'package:recharge_setu/user_page/report_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 
-import 'home_page.dart';
+import 'home_page/home_page.dart';
 
 
 class BottomCollectionBoy extends StatefulWidget {
@@ -21,7 +22,8 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
     const Profile(),
-    const Support()
+    const Support(),
+    const Report(),
   ];
 
   final bool _isBottomSheetOpen = false;
