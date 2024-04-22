@@ -211,7 +211,8 @@ class _ReportState extends State<Report> {
                       ],
                     ),
                   ),
-                  onTap: (){ Navigator.push(
+                  onTap: (){
+                    Navigator.push(
                     context,
                     PageTransition(
                       type: PageTransitionType.leftToRight,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
+import 'package:recharge_setu/user_page/filter.dart';
+import 'package:recharge_setu/user_page/support_page.dart';
 
 class Wallet_Summary extends StatefulWidget {
   const Wallet_Summary({super.key});
@@ -15,8 +18,25 @@ class _Wallet_SummaryState extends State<Wallet_Summary> {
       appBar: AppBar(
         // backgroundColor: Colors.red,
         title: const Text("Wallet Summary",style: TextStyle(color: Colors.red),),
-        actions: const [
-          Image(image: AssetImage("images/fil.png"))
+        actions:  [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Container(
+              child: InkWell(child: Image(image: AssetImage("images/fil.png")),
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.topToBottom,
+                      isIos: true,
+                      child: const Filter(),
+                    ),
+                  );
+                }
+
+              ),
+            ),
+          )
         ],
       ),
       body: SingleChildScrollView(
