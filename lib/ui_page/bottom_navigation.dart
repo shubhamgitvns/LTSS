@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
-import 'package:recharge_setu/user_page/report_page.dart';
+import 'package:recharge_setu/user_page/report_page/report_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 
 import 'home_page/home_page.dart';

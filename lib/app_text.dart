@@ -35,6 +35,9 @@ class Text_Style {
   static final TextStyle Red =
   TextStyle(color: Colors.red, fontSize: 17, fontWeight: FontWeight.w600);
 
+  static final TextStyle App =
+  TextStyle(color: Colors.white, fontWeight: FontWeight.w600);
+
 }
 
 class Support_container {

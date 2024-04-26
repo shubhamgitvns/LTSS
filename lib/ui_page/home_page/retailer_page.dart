@@ -41,21 +41,21 @@ class _RetailerState extends State<Retailer> {
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            //width: 1.5,
-                          ),
-                        ),
-
-                        //********Focus border like hover******************8
-                        focusedBorder: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             // borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: Colors.red)),
-                        hintText: "Search by user name",
-                        hintStyle: TextStyle(color: Colors.red),
-                        suffixIcon: Icon(Icons.search,color: Colors.red,size: 40,)
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              //width: 1.5,
+                            ),
+                          ),
+
+                          //********Focus border like hover******************8
+                          focusedBorder: OutlineInputBorder(
+                            // borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.red)),
+                          hintText: "Search by user name",
+                          hintStyle: TextStyle(color: Colors.red),
+                          suffixIcon: Icon(Icons.search,color: Colors.red,size: 40,)
 
                       ),
                     ),

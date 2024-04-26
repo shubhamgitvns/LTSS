@@ -8,19 +8,35 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-  DateTime _selectedDate = DateTime.now();
+  DateTime _selectedDate1 = DateTime.now();
+  DateTime _selectedDate2 = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _fromDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != _selectedDate)
+    if (picked != null && picked != _selectedDate1)
       setState(() {
-        _selectedDate = picked;
-      });
+        _selectedDate1 = picked;
+      }
+      );
+  }
+
+  Future<void> _ToDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != _selectedDate2)
+      setState(() {
+        _selectedDate2 = picked;
+      }
+      );
   }
 
   @override
@@ -68,7 +84,7 @@ class _FilterState extends State<Filter> {
                       SizedBox(
                         width: 170,
                         child: GestureDetector(
-                          onTap: () => _selectDate(context),
+                          onTap: () => _fromDate(context),
                           child: AbsorbPointer(
                             child: TextFormField(
                               decoration: InputDecoration(
@@ -80,7 +96,7 @@ class _FilterState extends State<Filter> {
                                   ),
                                 ),
                                 labelText:
-                                    _selectedDate.toString().substring(0, 10),
+                                    _selectedDate1.toString().substring(0, 10),
                                 prefixIcon: const Icon(
                                   Icons.calendar_month,
                                   color: Colors.red,
@@ -105,11 +121,11 @@ class _FilterState extends State<Filter> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       SizedBox(
                         width: 170,
                         child: GestureDetector(
-                          onTap: () => _selectDate(context),
+                          onTap: () => _ToDate(context),
                           child: AbsorbPointer(
                             child: TextFormField(
                               decoration: InputDecoration(
@@ -121,7 +137,7 @@ class _FilterState extends State<Filter> {
                                   ),
                                 ),
                                 labelText:
-                                    _selectedDate.toString().substring(0, 10),
+                                    _selectedDate2.toString().substring(0, 10),
                                 prefixIcon: const Icon(
                                   Icons.calendar_month,
                                   color: Colors.red,

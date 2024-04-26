@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/user_page/wallet_summury.dart';
+import 'package:recharge_setu/ui_page/home_page/fundtransfer.dart';
+import 'package:recharge_setu/user_page/report_page/fund_transfer_Report.dart';
+import 'package:recharge_setu/user_page/report_page/income_wallet_summary.dart';
+import 'package:recharge_setu/user_page/report_page/user_daybook_report.dart';
+import 'package:recharge_setu/user_page/report_page/wallet_summury.dart';
 class Report extends StatefulWidget {
   const Report({super.key});
 
@@ -154,28 +158,41 @@ class _ReportState extends State<Report> {
                     ],
                   ),
                 ),
-                Container(
-                  height: 120,
-                  width: 90,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:50,
-                        child:Image(
-                          image: AssetImage(
-                              "images/gasl.png"),
-                        ), ),
-
-                      Text(
-                        "Use Daybook ",
-                      ),
-                      Text(
-                        "Report",
-                      ),
-                    ],
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:50,
+                          child:Image(
+                            image: AssetImage(
+                                "images/gasl.png"),
+                          ), ),
+                  
+                        Text(
+                          "Use Daybook ",
+                        ),
+                        Text(
+                          "Report",
+                        ),
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const User_Daybook(),
+                      ),
+                    );
+
+                  },
                 ),
 
               ],
@@ -183,7 +200,7 @@ class _ReportState extends State<Report> {
             const SizedBox(height: 20,),
 
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
                   child: Container(
@@ -199,6 +216,7 @@ class _ReportState extends State<Report> {
                             image: AssetImage(
                                 "images/wallet.png"),
                           ), ),
+                        SizedBox(height: 5,),
 
                         Text(
                           "Wallet",
@@ -223,48 +241,91 @@ class _ReportState extends State<Report> {
 
                   },
                 ),
-                Container(
-                  height: 120,
-                  width: 90,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(image: AssetImage("images/ic_electricity.png")),
-                      SizedBox(height: 10,),
-                      Text(
-                        "Complaint",
-                      ),
-                      Text(
-                        "Report",
-                      ),
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:40,
+                          child:Image(
+                            image: AssetImage(
+                                "images/fund.png"),
+                          ), ),
+                        SizedBox(height: 5,),
+                        Text(
+                          "Fund",
+                        ),
 
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 120,
-                  width: 90,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:50,
-                        child:Image(
-                          image: AssetImage(
-                              "images/gasl.png"),
-                        ), ),
+                        Text(
+                          "Transfer",
+                        ),
+                        Text(
+                          "Report",
+                        ),
 
-                      Text(
-                        "Use Daybook ",
-                      ),
-                      Text(
-                        "Report",
-                      ),
-                    ],
+
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const Fund_Transfer_Report(),
+                      ),
+                    );
+
+                  },
                 ),
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:30,
+                          child:Image(
+                            image: AssetImage(
+                                "images/wallet.png"),
+                          ), ),
+                        SizedBox(height: 5,),
+                        Text(
+                          "Income",
+                        ),
+
+                        Text(
+                          "Wallet",
+                        ),
+                        Text(
+                          "Summary",
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const Income_wallet(),
+                      ),
+                    );
+
+                  },
+                )
+
 
               ],
             ),

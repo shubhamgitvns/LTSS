@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/user_page/filter.dart';
-import 'package:recharge_setu/user_page/support_page.dart';
 
-class Wallet_Summary extends StatefulWidget {
-  const Wallet_Summary({super.key});
+import '../../app_text.dart';
+import 'filter.dart';
+class Income_wallet extends StatefulWidget {
+  const Income_wallet({super.key});
 
   @override
-  State<Wallet_Summary> createState() => _Wallet_SummaryState();
+  State<Income_wallet> createState() => _Income_walletState();
 }
 
-class _Wallet_SummaryState extends State<Wallet_Summary> {
+class _Income_walletState extends State<Income_wallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.red,
-        title: const Text("Wallet Summary",style: TextStyle(color: Colors.red),),
+        title: const Text(" Income Wallet Summary",style: TextStyle(color: Colors.red),),
         actions:  [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: Container(
-              child: InkWell(child: Image(image: AssetImage("images/fil.png")),
+            child: InkWell(child: Image(image: AssetImage("images/fil.png")),
                 onTap: (){
                   Navigator.push(
                     context,
@@ -34,7 +32,6 @@ class _Wallet_SummaryState extends State<Wallet_Summary> {
                   );
                 }
 
-              ),
             ),
           )
         ],
@@ -55,7 +52,7 @@ class _Wallet_SummaryState extends State<Wallet_Summary> {
                       children: [
                         Text("Old Balance: ",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),),
                         Text("Debit: ",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),),
-                        Text("Cl Balnce: ",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),),
+                        Text("Cl Balance: ",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 18),),
 
                       ],
                     ),
