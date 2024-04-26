@@ -33,32 +33,83 @@ class _Select_ProviderState extends State<Select_Provider> {
           Container(
             padding: const EdgeInsets.all(8),
             color: Colors.grey.shade100,
-            child: const Text("Airtel Digital Tv"),
+            child: const Column(
+              children: [
+                SizedBox(
+                  height: 100,
+                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                 SizedBox(height: 10,),
+                 Text("Airtel Digital Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red),),
+              ],
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.grey.shade100,
+            child: const Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    child: Image(image: AssetImage("images/deshtv.png"))),
+                SizedBox(height: 10,),
+                Text("Dish Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+              ],
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.grey.shade100,
+            child: const Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    child: Image(image: AssetImage("images/mtnl.png"))),
+                SizedBox(height: 10,),
+                Text("MTNL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+              ],
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.all(8),
+            color: Colors.grey.shade100,
+            child: const Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    child: Image(image: AssetImage("images/sun.png"))),
+                SizedBox(height: 10,),
+                Text("Sun Direct",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+              ],
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(8),
-            color: Colors.teal[200],
-            child: const Text('Heed not the rabble'),
+            color: Colors.grey.shade100,
+            child: const Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    child: Image(image: AssetImage("images/tata.png"))),
+                SizedBox(height: 10,),
+                Text("TATA Play",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+              ],
+            ),
           ),
           Container(
             padding: const EdgeInsets.all(8),
-            color: Colors.teal[300],
-            child: const Text('Sound of screams but the'),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[400],
-            child: const Text('Who scream'),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[500],
-            child: const Text('Revolution is coming...'),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.teal[600],
-            child: const Text('Revolution, they...'),
+            color: Colors.grey.shade100,
+            child: const Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    child: Image(image: AssetImage("images/d2h.png"))),
+                SizedBox(height: 10,),
+                Text("Videocon D2h ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+              ],
+            ),
           ),
         ],
       ),
