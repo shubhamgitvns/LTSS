@@ -112,6 +112,12 @@ flutter:
     - images/fil.png
     - images/wallet.png
     - images/fund.png
+    - images/airtel_dth.png
+    - images/d2h.png
+    - images/deshtv.png
+    - images/mtnl.png
+    - images/sun.png
+    - images/tata.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
