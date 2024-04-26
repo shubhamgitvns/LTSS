@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/ui_page/home_page/dth/select_provider.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/dth.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_form.dart';
 import 'package:recharge_setu/ui_page/home_page/retailer_page.dart';
 
@@ -253,7 +253,7 @@ class _HomeState extends State<Home> {
                         PageTransition(
                           type: PageTransitionType.leftToRight,
                           isIos: true,
-                          child: const Select_Provider(),
+                          child: const DTH_Recharge(),
                         ),
                       );
                     },

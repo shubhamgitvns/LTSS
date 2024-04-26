@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/airtel_recharge.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/dish_tv.dart';
 
-class Select_Provider extends StatefulWidget {
-  const Select_Provider({super.key});
+class DTH_Recharge extends StatefulWidget {
+  const DTH_Recharge({super.key});
 
   @override
-  State<Select_Provider> createState() => _Select_ProviderState();
+  State<DTH_Recharge> createState() => _DTH_RechargeState();
 }
 
-class _Select_ProviderState extends State<Select_Provider> {
+class _DTH_RechargeState extends State<DTH_Recharge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
-        title: Text("Select Provider",style:Text_Style.App,),
+        title: Text("DTH",style:Text_Style.App,),
         actions: const [
           Padding(
             padding: EdgeInsets.all(15.0),
@@ -30,32 +33,56 @@ class _Select_ProviderState extends State<Select_Provider> {
         mainAxisSpacing: 10,
         crossAxisCount: 2,
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                  height: 100,
-                    child: Image(image: AssetImage("images/airtel_dth.png"))),
-                 SizedBox(height: 10,),
-                 Text("Airtel Digital Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red),),
-              ],
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: const Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                      child: Image(image: AssetImage("images/airtel_dth.png"))),
+                   SizedBox(height: 10,),
+                   Text("Airtel Digital Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red),),
+                ],
+              ),
             ),
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  isIos: true,
+                  child: const Airtel_Recharge(),
+                ),
+              );
+            },
           ),
 
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                    height: 100,
-                    child: Image(image: AssetImage("images/deshtv.png"))),
-                SizedBox(height: 10,),
-                Text("Dish Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
-              ],
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: const Column(
+                children: [
+                  SizedBox(
+                      height: 100,
+                      child: Image(image: AssetImage("images/deshtv.png"))),
+                  SizedBox(height: 10,),
+                  Text("Dish Tv",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+                ],
+              ),
             ),
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  isIos: true,
+                  child: const Dish_Tv_Recharge(),
+                ),
+              );
+            },
           ),
 
           Container(
