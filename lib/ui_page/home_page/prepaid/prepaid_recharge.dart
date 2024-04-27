@@ -324,6 +324,10 @@ class _Prepaid_RechargeState extends State<Prepaid_Recharge> {
                   decoration: Support_container.box,
                   child:  Column(
                     children: [
+                      const SizedBox(height: 20,),
+                      const SizedBox(
+                          height:50,
+                  child: Image(image: AssetImage("images/airtel_dth.png"))),
                       const Text(
                         "₹ 19",
                         style:

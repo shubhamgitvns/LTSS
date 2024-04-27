@@ -21,16 +21,17 @@ class _Dish_Tv_RechargeState extends State<Dish_Tv_Recharge> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         title:Text(
-            "Airtel Digital Tv",
+            "Dish Tv",
             style: Text_Style.App
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Stack(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              Stack(
                   alignment: Alignment.topCenter,
                   children: [
                     Column(
@@ -129,12 +130,77 @@ class _Dish_Tv_RechargeState extends State<Dish_Tv_Recharge> {
                           height: 20,
                         ),
 
+
                         const Row(
                           children: [
                             SizedBox(
                                 width:250,
                                 child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
                           ],
+                        ),
+                        const SizedBox(height: 20,),
+                        Container(
+                          width: 350,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade50,
+                              border: Border.all(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child:  Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Text("DTH Customer Information",style: Text_Style.Red,),
+                                const SizedBox(height: 10,),
+                                const Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                        width:150,
+                                        child: Text("Monthly Recharge:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
+                                    SizedBox(width: 70,),
+                                    Text("224",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+
+                                const SizedBox(height: 10,),
+                                const Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                        width:150,
+                                        child: Text("Balance:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
+                                    SizedBox(width: 70,),
+                                    Text("2.24",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+
+                                const SizedBox(height: 10,),
+                                const Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                        width:150,
+                                        child: Text("Customer Name:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
+                                    SizedBox(width: 70,),
+                                    Text("Name",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+
+                                const SizedBox(height: 10,),
+                                const Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                        width:150,
+                                        child: Text("Next Recharge Date:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
+                                    SizedBox(width: 70,),
+                                    Text("2022/01/01",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -286,7 +352,7 @@ class _Dish_Tv_RechargeState extends State<Dish_Tv_Recharge> {
                     if (recharge)
 
                       Padding(
-                        padding: const EdgeInsets.only(top: 60),
+                        padding: const EdgeInsets.only(top: 200),
                         child: Container(
                             width: 350,
                             height: 480,
@@ -373,8 +439,8 @@ class _Dish_Tv_RechargeState extends State<Dish_Tv_Recharge> {
                             )),
                       )
                   ]),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

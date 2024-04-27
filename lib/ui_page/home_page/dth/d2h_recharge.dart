@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
 
+import '../../../app_text.dart';
 import '../prepaid/best_offer.dart';
 import '../prepaid/view_plans.dart';
-
-class Airtel_Recharge extends StatefulWidget {
-  const Airtel_Recharge({super.key});
+class D2H extends StatefulWidget {
+  const D2H({super.key});
 
   @override
-  State<Airtel_Recharge> createState() => _Airtel_RechargeState();
+  State<D2H> createState() => _D2HState();
 }
 
-class _Airtel_RechargeState extends State<Airtel_Recharge> {
-  bool recharge =false;
+class _D2HState extends State<D2H> {
+  bool recharge=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +21,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         title:Text(
-          "Airtel Digital Tv",
-          style: Text_Style.App
+            "Videocon D2H",
+            style: Text_Style.App
         ),
       ),
       body: SingleChildScrollView(
@@ -76,8 +75,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           height: 20,
                         ),
                         const SizedBox(
-                          height: 100,
-                            child: Image(image: AssetImage("images/airtel_dth.png"))),
+                            height: 100,
+                            child: Image(image: AssetImage("images/d2h.png"))),
                         const Row(
                           children: [
                             Text(
@@ -131,13 +130,13 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           height: 20,
                         ),
 
-                       const Row(
-                         children: [
-                           SizedBox(
-                             width:250,
-                               child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
-                         ],
-                       ),
+                        const Row(
+                          children: [
+                            SizedBox(
+                                width:250,
+                                child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
+                          ],
+                        ),
                         const SizedBox(height: 20,),
                         Container(
                           width: 350,
@@ -343,7 +342,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           ),
                           onTap: () {
                             setState(() {
-                               recharge = true;
+                              recharge = true;
                             });
                           },
                         ),
@@ -361,8 +360,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                               children: [
                                 const SizedBox(height: 30,),
                                 const SizedBox(
-                                  height:100,
-                                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                                    height:100,
+                                    child: Image(image: AssetImage("images/d2h.png"))),
                                 const SizedBox(height: 10,),
                                 const Text(
                                   "₹ 19",
@@ -372,7 +371,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Text("Airtel"),
+                                const Text("Videocon D2H"),
                                 const SizedBox(
                                   height: 10,
                                 ),

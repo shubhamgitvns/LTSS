@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
 
+import '../../../app_text.dart';
 import '../prepaid/best_offer.dart';
 import '../prepaid/view_plans.dart';
-
-class Airtel_Recharge extends StatefulWidget {
-  const Airtel_Recharge({super.key});
+class MTNL_Rcharge extends StatefulWidget {
+  const MTNL_Rcharge({super.key});
 
   @override
-  State<Airtel_Recharge> createState() => _Airtel_RechargeState();
+  State<MTNL_Rcharge> createState() => _MTNL_RchargeState();
 }
 
-class _Airtel_RechargeState extends State<Airtel_Recharge> {
-  bool recharge =false;
+class _MTNL_RchargeState extends State<MTNL_Rcharge> {
+  bool recharge=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +21,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         title:Text(
-          "Airtel Digital Tv",
-          style: Text_Style.App
+            "MTNL TV",
+            style: Text_Style.App
         ),
       ),
       body: SingleChildScrollView(
@@ -76,8 +75,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           height: 20,
                         ),
                         const SizedBox(
-                          height: 100,
-                            child: Image(image: AssetImage("images/airtel_dth.png"))),
+                            height: 100,
+                            child: Image(image: AssetImage("images/mtnl.png"))),
                         const Row(
                           children: [
                             Text(
@@ -109,7 +108,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                           //width: 1.5,
                                         ),
                                       ),
-
+              
                                       //********Focus border like hover******************8
                                       focusedBorder: OutlineInputBorder(
                                         // borderRadius: BorderRadius.circular(10),
@@ -130,21 +129,21 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                         const SizedBox(
                           height: 20,
                         ),
-
-                       const Row(
-                         children: [
-                           SizedBox(
-                             width:250,
-                               child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
-                         ],
-                       ),
+              
+                        const Row(
+                          children: [
+                            SizedBox(
+                                width:250,
+                                child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
+                          ],
+                        ),
                         const SizedBox(height: 20,),
                         Container(
                           width: 350,
                           decoration: BoxDecoration(
-                              color: Colors.grey.shade50,
-                              border: Border.all(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10)
+                            color: Colors.grey.shade50,
+                            border: Border.all(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10)
                           ),
                           child:  Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -156,7 +155,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     SizedBox(
-                                        width:150,
+                                      width:150,
                                         child: Text("Monthly Recharge:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
                                     SizedBox(width: 70,),
                                     Text("224",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
@@ -168,7 +167,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     SizedBox(
-                                        width:150,
+                                      width:150,
                                         child: Text("Balance:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
                                     SizedBox(width: 70,),
                                     Text("2.24",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
@@ -236,7 +235,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                           //width: 1.5,
                                         ),
                                       ),
-
+              
                                       //********Focus border like hover******************8
                                       focusedBorder: OutlineInputBorder(
                                         // borderRadius: BorderRadius.circular(10),
@@ -321,7 +320,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                               "Note: kindly check once again all information before doing transactions.otherwise after transaction recharge amount will not recive",
                               style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),
                             )),
-
+              
                         const SizedBox(
                           height: 50,
                         ),
@@ -343,14 +342,14 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           ),
                           onTap: () {
                             setState(() {
-                               recharge = true;
+                              recharge = true;
                             });
                           },
                         ),
                       ],
                     ),
                     if (recharge)
-
+              
                       Padding(
                         padding: const EdgeInsets.only(top: 200),
                         child: Container(
@@ -361,8 +360,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                               children: [
                                 const SizedBox(height: 30,),
                                 const SizedBox(
-                                  height:100,
-                                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                                    height:100,
+                                    child: Image(image: AssetImage("images/mtnl.png"))),
                                 const SizedBox(height: 10,),
                                 const Text(
                                   "₹ 19",
@@ -372,7 +371,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Text("Airtel"),
+                                const Text("MTNL"),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -408,7 +407,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                         setState(() {
                                           recharge=false;
                                         });
-
+              
                                       },
                                     ),
                                     const Text(

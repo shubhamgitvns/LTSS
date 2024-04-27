@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
 
+import '../../../app_text.dart';
 import '../prepaid/best_offer.dart';
 import '../prepaid/view_plans.dart';
-
-class Airtel_Recharge extends StatefulWidget {
-  const Airtel_Recharge({super.key});
+class Tata_Play_Recharge extends StatefulWidget {
+  const Tata_Play_Recharge({super.key});
 
   @override
-  State<Airtel_Recharge> createState() => _Airtel_RechargeState();
+  State<Tata_Play_Recharge> createState() => _Tata_Play_RechargeState();
 }
 
-class _Airtel_RechargeState extends State<Airtel_Recharge> {
-  bool recharge =false;
+class _Tata_Play_RechargeState extends State<Tata_Play_Recharge> {
+  bool recharge=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +21,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         title:Text(
-          "Airtel Digital Tv",
-          style: Text_Style.App
+            "TATA Play",
+            style: Text_Style.App
         ),
       ),
       body: SingleChildScrollView(
@@ -76,8 +75,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           height: 20,
                         ),
                         const SizedBox(
-                          height: 100,
-                            child: Image(image: AssetImage("images/airtel_dth.png"))),
+                            height: 100,
+                            child: Image(image: AssetImage("images/tata.png"))),
                         const Row(
                           children: [
                             Text(
@@ -131,13 +130,13 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           height: 20,
                         ),
 
-                       const Row(
-                         children: [
-                           SizedBox(
-                             width:250,
-                               child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
-                         ],
-                       ),
+                        const Row(
+                          children: [
+                            SizedBox(
+                                width:250,
+                                child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
+                          ],
+                        ),
                         const SizedBox(height: 20,),
                         Container(
                           width: 350,
@@ -343,7 +342,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           ),
                           onTap: () {
                             setState(() {
-                               recharge = true;
+                              recharge = true;
                             });
                           },
                         ),
@@ -361,8 +360,8 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                               children: [
                                 const SizedBox(height: 30,),
                                 const SizedBox(
-                                  height:100,
-                                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                                    height:100,
+                                    child: Image(image: AssetImage("images/tata.png"))),
                                 const SizedBox(height: 10,),
                                 const Text(
                                   "₹ 19",
@@ -372,7 +371,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Text("Airtel"),
+                                const Text("TATA Play"),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -443,6 +442,6 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
           ),
         ),
       ),
-    );
+    );;
   }
 }

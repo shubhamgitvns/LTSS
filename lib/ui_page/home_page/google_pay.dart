@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
-
-import '../prepaid/best_offer.dart';
-import '../prepaid/view_plans.dart';
-
-class Airtel_Recharge extends StatefulWidget {
-  const Airtel_Recharge({super.key});
+import 'package:recharge_setu/ui_page/home_page/prepaid/best_offer.dart';
+import 'package:recharge_setu/ui_page/home_page/prepaid/view_plans.dart';
+class Google_Pay extends StatefulWidget {
+  const Google_Pay({super.key});
 
   @override
-  State<Airtel_Recharge> createState() => _Airtel_RechargeState();
+  State<Google_Pay> createState() => _Google_PayState();
 }
 
-class _Airtel_RechargeState extends State<Airtel_Recharge> {
-  bool recharge =false;
+class _Google_PayState extends State<Google_Pay> {
+  bool recharge=false;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
-        title:Text(
-          "Airtel Digital Tv",
-          style: Text_Style.App
-        ),
+        title: Text("Google_Pay",style: Text_Style.App,),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -37,47 +43,18 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                   children: [
                     Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                color: Colors.red,
-                                child: const Center(
-                                    child: Text(
-                                      "Recharge",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.red)),
-                                // color: Colors.red,
-                                child: const Center(
-                                    child: Text(
-                                      "History",
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                            ),
-                          ],
-                        ),
+
                         const SizedBox(
                           height: 20,
                         ),
-                        const SizedBox(
-                          height: 100,
-                            child: Image(image: AssetImage("images/airtel_dth.png"))),
+                        const Row(
+                         children: [
+                         Image(image: AssetImage("images/G-play.png")) ,
+                           SizedBox(width: 20,),
+                           Text("Google Play Recharge Code",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 20),)
+                         ],
+                       ),
+                        const SizedBox(height: 20,),
                         const Row(
                           children: [
                             Text(
@@ -127,81 +104,11 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                             ),
                           ],
                         ),
+
                         const SizedBox(
                           height: 20,
                         ),
 
-                       const Row(
-                         children: [
-                           SizedBox(
-                             width:250,
-                               child: Text("To get ID, SMS ID to 908362728 from your registration number",style: TextStyle(color: Colors.green),))
-                         ],
-                       ),
-                        const SizedBox(height: 20,),
-                        Container(
-                          width: 350,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade50,
-                              border: Border.all(color: Colors.red),
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child:  Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              children: [
-                                Text("DTH Customer Information",style: Text_Style.Red,),
-                                const SizedBox(height: 10,),
-                                const Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                        width:150,
-                                        child: Text("Monthly Recharge:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
-                                    SizedBox(width: 70,),
-                                    Text("224",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
-                                  ],
-                                ),
-
-                                const SizedBox(height: 10,),
-                                const Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                        width:150,
-                                        child: Text("Balance:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
-                                    SizedBox(width: 70,),
-                                    Text("2.24",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
-                                  ],
-                                ),
-
-                                const SizedBox(height: 10,),
-                                const Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                        width:150,
-                                        child: Text("Customer Name:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
-                                    SizedBox(width: 70,),
-                                    Text("Name",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
-                                  ],
-                                ),
-
-                                const SizedBox(height: 10,),
-                                const Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                        width:150,
-                                        child: Text("Next Recharge Date:",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)),
-                                    SizedBox(width: 70,),
-                                    Text("2022/01/01",style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.bold),)
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -252,66 +159,81 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 5,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            InkWell(
-                              child: Container(
-                                width: 120,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                    child: Text(
-                                      "View Plane",
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.leftToRight,
-                                    isIos: true,
-                                    child: const View_Plans(),
-                                  ),
-                                );
-                              },
-                            ),
-                            InkWell(
-                              child: Container(
-                                width: 120,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                    child: Text(
-                                      "DTH info",
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.leftToRight,
-                                    isIos: true,
-                                    child: const Best_Offer(),
-                                  ),
-                                );
-                              },
-                            ),
+                            Text("Min Rs. 10 and Rs. 5000",style: Text_Style.Red,)
+                          ],
+                        ),
+                        const SizedBox(height: 20,),
+                         Column(
+                           children: [
+                             Row(
+                              children: [
+                              Text("Recommended",style: Text_Style.Red,)
+                              ],
+                             ),
+                             const SizedBox(height: 5,),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                               children: [
+                                 Container(
+                                   height: 30,
+                                   width: 50,
+                                   decoration: BoxDecoration(
+                                     borderRadius: BorderRadius.circular(10),
+                                     border: Border.all(color: Colors.red.shade100)
+                                   ),
+                                   child: const Center(child: Text("₹30",style: TextStyle(color: Colors.red),)),
+                                 ),
+                                 Container(
+                                   height: 30,
+                                   width: 50,
+                                   decoration: BoxDecoration(
+                                       borderRadius: BorderRadius.circular(10),
+                                       border: Border.all(color: Colors.red.shade100)
+                                   ),
+                                   child: const Center(child: Text("₹50",style: TextStyle(color: Colors.red),)),
+                                 ),
+                                 Container(
+                                   height: 30,
+                                   width: 50,
+                                   decoration: BoxDecoration(
+                                       borderRadius: BorderRadius.circular(10),
+                                       border: Border.all(color: Colors.red.shade100)
+                                   ),
+                                   child: const Center(child: Text("₹100",style: TextStyle(color: Colors.red),)),
+                                 ),
+                                 Container(
+                                   height: 30,
+                                   width: 50,
+                                   decoration: BoxDecoration(
+                                       borderRadius: BorderRadius.circular(10),
+                                       border: Border.all(color: Colors.red.shade100)
+                                   ),
+                                   child: const Center(child: Text("₹800",style: TextStyle(color: Colors.red),)),
+                                 )
+
+                               ],
+                             )
+                           ],
+                         ),
+                        const SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          Checkbox(
+                          checkColor: Colors.white,
+                          fillColor: MaterialStateProperty.resolveWith(getColor),
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                        ),
+                            const Text("Terms & Condition",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),)
+
                           ],
                         ),
                         const SizedBox(height: 20,),
@@ -343,7 +265,7 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                           ),
                           onTap: () {
                             setState(() {
-                               recharge = true;
+                              recharge = true;
                             });
                           },
                         ),
@@ -352,17 +274,15 @@ class _Airtel_RechargeState extends State<Airtel_Recharge> {
                     if (recharge)
 
                       Padding(
-                        padding: const EdgeInsets.only(top: 200),
+                        padding: const EdgeInsets.only(top: 80),
                         child: Container(
                             width: 350,
-                            height: 480,
+                            height: 400,
                             decoration: Support_container.box,
                             child:  Column(
                               children: [
                                 const SizedBox(height: 30,),
-                                const SizedBox(
-                                  height:100,
-                                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                                const Image(image: AssetImage("images/G-play.png")),
                                 const SizedBox(height: 10,),
                                 const Text(
                                   "₹ 19",

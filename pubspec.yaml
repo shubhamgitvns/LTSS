@@ -118,6 +118,12 @@ flutter:
     - images/mtnl.png
     - images/sun.png
     - images/tata.png
+    - images/G-play.png
+    - images/adani.png
+    - images/best.png
+    - images/maedc.png
+    - images/tata_power.png
+    - images/torrent.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/airtel_recharge.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/d2h_recharge.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/dish_tv.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/mtnl_recharge.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/sun_recharge.dart';
+import 'package:recharge_setu/ui_page/home_page/dth/tata_play_recharge.dart';
 
 class DTH_Recharge extends StatefulWidget {
   const DTH_Recharge({super.key});
@@ -85,58 +89,80 @@ class _DTH_RechargeState extends State<DTH_Recharge> {
             },
           ),
 
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                    height: 100,
-                    child: Image(image: AssetImage("images/mtnl.png"))),
-                SizedBox(height: 10,),
-                Text("MTNL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
-              ],
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: const Column(
+                children: [
+                  SizedBox(
+                      height: 100,
+                      child: Image(image: AssetImage("images/sun.png"))),
+                  SizedBox(height: 10,),
+                  Text("Sun Direct",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+                ],
+              ),
             ),
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  isIos: true,
+                  child: const Sun_Recharge(),
+                ),
+              );
+            },
           ),
-
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                    height: 100,
-                    child: Image(image: AssetImage("images/sun.png"))),
-                SizedBox(height: 10,),
-                Text("Sun Direct",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
-              ],
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: const Column(
+                children: [
+                  SizedBox(
+                      height: 100,
+                      child: Image(image: AssetImage("images/tata.png"))),
+                  SizedBox(height: 10,),
+                  Text("TATA Play",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+                ],
+              ),
             ),
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  isIos: true,
+                  child: const Tata_Play_Recharge(),
+                ),
+              );
+            },
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                    height: 100,
-                    child: Image(image: AssetImage("images/tata.png"))),
-                SizedBox(height: 10,),
-                Text("TATA Play",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
-              ],
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade100,
+              child: const Column(
+                children: [
+                  SizedBox(
+                      height: 100,
+                      child: Image(image: AssetImage("images/d2h.png"))),
+                  SizedBox(height: 10,),
+                  Text("Videocon D2h ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
+                ],
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: Colors.grey.shade100,
-            child: const Column(
-              children: [
-                SizedBox(
-                    height: 100,
-                    child: Image(image: AssetImage("images/d2h.png"))),
-                SizedBox(height: 10,),
-                Text("Videocon D2h ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: Colors.red)),
-              ],
-            ),
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  isIos: true,
+                  child: const D2H(),
+                ),
+              );
+            },
           ),
         ],
       ),
