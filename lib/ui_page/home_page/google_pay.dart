@@ -229,6 +229,14 @@ class _Google_PayState extends State<Google_Pay> {
                           onChanged: (bool? value) {
                             setState(() {
                               isChecked = value!;
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.bottomToTop,
+                                  isIos: true,
+                                  child: const Terms_Condition(),
+                                ),
+                              );
                             });
                           },
                         ),
@@ -361,6 +369,41 @@ class _Google_PayState extends State<Google_Pay> {
                   ]),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class Terms_Condition extends StatefulWidget {
+  const Terms_Condition({super.key});
+
+  @override
+  State<Terms_Condition> createState() => _Terms_ConditionState();
+}
+
+class _Terms_ConditionState extends State<Terms_Condition> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.red,
+        title: Text("Google_Pay",style: Text_Style.App,),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+
+          children: [
+            SizedBox(
+              width: 350,
+
+                child: Text("Google Play recharge code purchases are non-refundable. Google Play recharge codes can only be used on the Google Play Store to purchase apps, games, digital content and in-app items available on the Store. See play.google.com/in-card-termsfor full terms. Issued by Google Payment Singapore Pte. Ltd. for purchases of eligible items on Google Play only. Users must be Indian residents aged 18+. Between the ages of 13 and 17, the consent of a parent or guardian is required prior to making a purchase. Requires a Google Payments account and Internet access to redeem. Not usable for hardware and certain subscriptions. Other limits may apply. No fees or expiration. Card not redeemable for cash or other cards, not reloadable or refundable and cannot be combined with non-Google Play balances, resold, exchanged or transferred for value. User is responsible for loss of card. For help, visit support.google.com/googleplay/go/ cardhelp. Only use this gift card's code on Google Play. Any other request for the code may be a scam. Visitplay.google.com/giftcardscam"
+                ,style: Text_Style.Red,)),
+          ],
         ),
       ),
     );

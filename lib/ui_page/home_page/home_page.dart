@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/dth.dart';
 import 'package:recharge_setu/ui_page/home_page/electricity/electicity.dart';
 import 'package:recharge_setu/ui_page/home_page/google_pay.dart';
@@ -471,24 +472,36 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 100,
-                    width: 90,
-                    color: Colors.grey.shade50,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: Image(
-                            image: AssetImage("images/dmt.png"),
+                  InkWell(
+                    child: Container(
+                      height: 100,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image(
+                              image: AssetImage("images/dmt.png"),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "DMT",
-                        ),
-                      ],
+                          Text(
+                            "DMT",
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          isIos: true,
+                          child: const DMT(),
+                        ),
+                      );
+                    },
                   ),
                   Container(
                     height: 120,

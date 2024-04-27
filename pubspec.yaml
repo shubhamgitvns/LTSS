@@ -124,6 +124,10 @@ flutter:
     - images/maedc.png
     - images/tata_power.png
     - images/torrent.png
+    - images/icon_wallet.png
+    - images/delete.png
+    - images/tick.png
+    - images/frame .png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -22,16 +22,50 @@ class _Electricity_OperatorState extends State<Electricity_Operator> {
           style: Text_Style.App,
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                child: Container(
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.red.shade50,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Column(
+                      children: [
+                        SizedBox(
+                            height: 60,
+                            child: Image(image: AssetImage("images/adani.png"))),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Adani Electricity",
+                            style: TextStyle(
+                                color: Colors.grey, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        isIos: true,
+                        child: const Electricity_form(),
+                      ),
+                    );
+                  },
+                ),
+                Container(
                   height: 100,
                   decoration: BoxDecoration(
                       color: Colors.red.shade50,
@@ -39,12 +73,14 @@ class _Electricity_OperatorState extends State<Electricity_Operator> {
                   child: const Column(
                     children: [
                       SizedBox(
+                          width: 120,
                           height: 60,
-                          child: Image(image: AssetImage("images/adani.png"))),
+                          child:
+                              Image(image: AssetImage("images/tata_power.png"))),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "Adani Electricity",
+                          "TATA Power",
                           style: TextStyle(
                               color: Colors.grey, fontWeight: FontWeight.bold),
                         ),
@@ -52,170 +88,179 @@ class _Electricity_OperatorState extends State<Electricity_Operator> {
                     ],
                   ),
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      isIos: true,
-                      child: const Electricity_form(),
-                    ),
-                  );
-                },
-              ),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                        width: 120,
-                        height: 60,
-                        child:
-                            Image(image: AssetImage("images/tata_power.png"))),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "TATA Power",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                        width: 120,
-                        height: 60,
-                        child: Image(image: AssetImage("images/best.png"))),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Best",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                        width: 120,
-                        height: 60,
-                        child: Image(image: AssetImage("images/maedc.png"))),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "MSEDC",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                        width: 120,
-                        height: 60,
-                        child: Image(image: AssetImage("images/torrent.png"))),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Torrent Power",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 100,
-                decoration: BoxDecoration(
-                    color: Colors.red.shade50,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Column(
-                  children: [
-                    SizedBox(
-                        width: 120,
-                        height: 60,
-                        child: Image(image: AssetImage("images/best.png"))),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Best",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                Text(
-                  " All Electricity Operator",
-                  style: Text_Style.Red,
+                Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Column(
+                    children: [
+                      SizedBox(
+                          width: 120,
+                          height: 60,
+                          child: Image(image: AssetImage("images/best.png"))),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Best",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Operator_List(),
-                Divider(),
-                Operator_List(),
-                Divider(),
-                Operator_List(),
-                Divider(),
-                Operator_List(),
-                Divider(),
-                Operator_List(),
-                Divider(),
+                Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Column(
+                    children: [
+                      SizedBox(
+                          width: 120,
+                          height: 60,
+                          child: Image(image: AssetImage("images/maedc.png"))),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "MSEDC",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Column(
+                    children: [
+                      SizedBox(
+                          width: 120,
+                          height: 60,
+                          child: Image(image: AssetImage("images/torrent.png"))),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Torrent Power",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Column(
+                    children: [
+                      SizedBox(
+                          width: 120,
+                          height: 60,
+                          child: Image(image: AssetImage("images/best.png"))),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Best",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          )
-        ],
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: const SizedBox(
+                      width: 350,
+                      child: TextField(
+                        autofocus: true,
+                        cursorColor: Colors.grey,
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                                //width: 1.5,
+                              ),
+                            ),
+
+                            //********Focus border like hover******************8
+                            focusedBorder: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.red)),
+                            hintText: "Search",
+                            hintStyle: TextStyle(color: Colors.red),
+                            suffixIcon: Icon(
+                              Icons.search,
+                              color: Colors.red,
+                              size: 30,
+                            )),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Text(
+                    " All Electricity Operator",
+                    style: Text_Style.Red,
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Operator_List(),
+                  Divider(),
+                  Operator_List(),
+                  Divider(),
+                  Operator_List(),
+                  Divider(),
+                  Operator_List(),
+                  Divider(),
+                  Operator_List(),
+                  Divider(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
