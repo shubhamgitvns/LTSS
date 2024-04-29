@@ -64,9 +64,11 @@ class _DMT_TransactionState extends State<DMT_Transaction> {
                           Text("Transaction Type",style: TextStyle(color: Colors.grey,fontSize: 18,fontWeight: FontWeight.bold),)
                         ],
                       ),
-                      const SizedBox(
-                          width:300,
-                          child: RadioExample()),
+                      const Row(
+                        children: [
+                          RadioExample(),
+                        ],
+                      ),
                       const SizedBox(height: 20,),
 
                       const Row(
@@ -244,33 +246,44 @@ class _RadioExampleState extends State<RadioExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          title: const Text('NEFT',style: TextStyle(color: Colors.grey),),
-          leading: Radio<SingingCharacter>(
-            value: SingingCharacter.lafayette,
-            groupValue: _character,
-            onChanged: (SingingCharacter? value) {
-              setState(() {
-                _character = value;
-              });
-            },
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            width: 160,
+            child: ListTile(
+                  title: const Text('NEFT',style: TextStyle(color: Colors.grey),),
+                  leading: Radio<SingingCharacter>(
+                    value: SingingCharacter.jefferson,
+                    groupValue: _character,
+                    onChanged: (SingingCharacter? value) {
+                      setState(() {
+                        _character = value;
+                      });
+                    },
+                  ),
+                ),
           ),
-        ),
-        ListTile(
-          title: const Text('IMPS',style: TextStyle(color: Colors.grey),),
-          leading: Radio<SingingCharacter>(
-            value: SingingCharacter.jefferson,
-            groupValue: _character,
-            onChanged: (SingingCharacter? value) {
-              setState(() {
-                _character = value;
-              });
-            },
+
+          SizedBox(
+            width: 160,
+            child: ListTile(
+              title: const Text('IMPS',style: TextStyle(color: Colors.grey),),
+              leading: Radio<SingingCharacter>(
+                value: SingingCharacter.lafayette,
+                groupValue: _character,
+                onChanged: (SingingCharacter? value) {
+                  setState(() {
+                    _character = value;
+                  });
+                },
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

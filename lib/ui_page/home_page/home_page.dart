@@ -4,6 +4,7 @@ import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/dth.dart';
 import 'package:recharge_setu/ui_page/home_page/electricity/electicity.dart';
 import 'package:recharge_setu/ui_page/home_page/google_pay.dart';
+import 'package:recharge_setu/ui_page/home_page/payout/payout.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_form.dart';
 import 'package:recharge_setu/ui_page/home_page/retailer_page.dart';
 
@@ -503,6 +504,38 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
+                  InkWell(
+                    child: Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child:  const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image(
+                              image: AssetImage("images/payout.png"),
+                            ),
+                          ),
+                          Text(
+                            "Payout",
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          isIos: true,
+                          child: const
+                          Payout(),
+                        ),
+                      );
+                    },
+                  ),
                   Container(
                     height: 120,
                     width: 90,
@@ -513,15 +546,19 @@ class _HomeState extends State<Home> {
                         SizedBox(
                           height: 50,
                           child: Image(
-                            image: AssetImage("images/payout.png"),
+                            image: AssetImage("images/dmt.png"),
                           ),
                         ),
                         Text(
-                          "Payout",
+                          "CSC",
                         ),
                       ],
                     ),
                   ),
+                ],
+              ),
+              Row(
+                children: [
                   Container(
                     height: 120,
                     width: 90,
@@ -541,10 +578,6 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                ],
-              ),
-              Row(
-                children: [
                   Container(
                     height: 120,
                     width: 90,

@@ -3,14 +3,14 @@ import 'package:pinput/pinput.dart';
 
 import '../../../app_text.dart';
 
-class OTP_Veryfication extends StatefulWidget {
-  const OTP_Veryfication({super.key});
+class Payout_OTP_Veryfication extends StatefulWidget {
+  const Payout_OTP_Veryfication({super.key});
 
   @override
-  State<OTP_Veryfication> createState() => _OTP_VeryficationState();
+  State<Payout_OTP_Veryfication> createState() => _Payout_OTP_VeryficationState();
 }
 
-class _OTP_VeryficationState extends State<OTP_Veryfication> {
+class _Payout_OTP_VeryficationState extends State<Payout_OTP_Veryfication> {
   bool isChecked = false;
   final pinController = TextEditingController();
   final newpinControler = TextEditingController();
@@ -98,7 +98,7 @@ class _OTP_VeryficationState extends State<OTP_Veryfication> {
                           ),
 
                           const SizedBox(height: 30,),
-                           Row(
+                          Row(
                             children: [
                               Text("Enter 6-Digit OTP send to +91xxxxxxx51",style: TextStyle(color: Colors.red.shade100),)
                             ],
