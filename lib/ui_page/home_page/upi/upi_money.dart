@@ -33,14 +33,14 @@ class _UPI_MoneyState extends State<UPI_Money> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.bottomRight,
-              children: [
-                Column(
+      body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Stack(
+            clipBehavior: Clip.antiAlias,
+            alignment: Alignment.bottomRight,
+            children: [
+              SingleChildScrollView(
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -199,7 +199,7 @@ class _UPI_MoneyState extends State<UPI_Money> {
                                       //width: 1.5,
                                     ),
                                   ),
-
+                      
                                   //********Focus border like hover******************8
                                   focusedBorder: OutlineInputBorder(
                                     // borderRadius: BorderRadius.circular(10),
@@ -246,7 +246,7 @@ class _UPI_MoneyState extends State<UPI_Money> {
                                     SizedBox(
                                       height: 10,
                                     ),
-
+                      
                                     SizedBox(
                                       height: 10,
                                     ),
@@ -266,8 +266,8 @@ class _UPI_MoneyState extends State<UPI_Money> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         )),
-
-
+                      
+                      
                                     SizedBox(
                                       height: 20,
                                     ),
@@ -313,7 +313,7 @@ class _UPI_MoneyState extends State<UPI_Money> {
                           ],
                         )
                     ),
-
+                      
                     const SizedBox(
                       height: 20,
                     ),
@@ -344,7 +344,7 @@ class _UPI_MoneyState extends State<UPI_Money> {
                                     SizedBox(
                                       height: 10,
                                     ),
-
+                      
                                     SizedBox(
                                       height: 10,
                                     ),
@@ -364,7 +364,101 @@ class _UPI_MoneyState extends State<UPI_Money> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         )),
-
+                      
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  child: const Image(image: AssetImage("images/tick.png")),
+                                  onTap: () {},
+                                ),
+                                InkWell(
+                                  child: Container(
+                                    height: 50,
+                                    width: 200,
+                                    color: Colors.red,
+                                    child: const Center(
+                                        child: Text(
+                                          "Transfer",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        )),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        isIos: true,
+                                        child: const UPI_Transaction(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const Image(image: AssetImage("images/delete.png")),
+                              ],
+                            ),
+                          ],
+                        )
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                        decoration: Support_container.box,
+                        child:  Column(
+                          children: [
+                            const Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          "Name",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontWeight: FontWeight.bold),
+                                        )),
+                                    SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          "Manni Devi",
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                      
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          "UPI ID",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontWeight: FontWeight.bold),
+                                        )),
+                                    SizedBox(
+                                        width: 200,
+                                        child: Text(
+                                          "1234 7687 23",
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                      
                                     SizedBox(
                                       height: 20,
                                     ),
@@ -412,25 +506,26 @@ class _UPI_MoneyState extends State<UPI_Money> {
                     ),
                   ],
                 ),
-                Positioned(
-                  bottom: -65,
-                  child: InkWell(child: const Image(image: AssetImage("images/frame .png")
-                  ),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.bottomToTop,
-                          isIos: true,
-                          child: const UPI_Beneficiary(),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            )
-        ),
+              ),
+              Positioned(
+               bottom: 20,
+                child: InkWell(child: const Image(image: AssetImage("images/frame .png")
+                ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        isIos: true,
+                        child: const UPI_Beneficiary(),
+                      ),
+                    );
+                  },
+                ),
+              )
+             
+            ],
+          )
       ),
     );
   }
