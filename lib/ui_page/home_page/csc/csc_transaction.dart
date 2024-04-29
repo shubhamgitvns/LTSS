@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_text.dart';
-class Payout_Transaction extends StatefulWidget {
-  const Payout_Transaction({super.key});
+
+
+class Csc_Transaction extends StatefulWidget {
+  const Csc_Transaction({super.key});
 
   @override
-  State<Payout_Transaction> createState() => _Payout_TransactionState();
+  State<Csc_Transaction> createState() => _Csc_TransactionState();
 }
 
-class _Payout_TransactionState extends State<Payout_Transaction> {
+class _Csc_TransactionState extends State<Csc_Transaction> {
   bool recharge=false;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class _Payout_TransactionState extends State<Payout_Transaction> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
-        title: Text("Payout Transaction Information",style: Text_Style.App,),
+        title: Text("CSC Transaction Information",style: Text_Style.App,),
         actions: const [
           Padding(
             padding: EdgeInsets.all(15.0),

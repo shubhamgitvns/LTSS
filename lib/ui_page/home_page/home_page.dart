@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/home_page/csc/csc.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/dth.dart';
 import 'package:recharge_setu/ui_page/home_page/electricity/electicity.dart';
@@ -7,6 +8,7 @@ import 'package:recharge_setu/ui_page/home_page/google_pay.dart';
 import 'package:recharge_setu/ui_page/home_page/payout/payout.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_form.dart';
 import 'package:recharge_setu/ui_page/home_page/retailer_page.dart';
+import 'package:recharge_setu/ui_page/home_page/upi/upi.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -536,47 +538,73 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
-                  Container(
-                    height: 120,
-                    width: 90,
-                    color: Colors.grey.shade50,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: Image(
-                            image: AssetImage("images/dmt.png"),
+                  InkWell(
+                    child: Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image(
+                              image: AssetImage("images/dmt.png"),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "CSC",
-                        ),
-                      ],
+                          Text(
+                            "CSC",
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          isIos: true,
+                          child: const
+                          Csc(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Container(
-                    height: 120,
-                    width: 90,
-                    color: Colors.grey.shade50,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: Image(
-                            image: AssetImage("images/upi.png"),
+                  InkWell(
+                    child: Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image(
+                              image: AssetImage("images/upi.png"),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "UPI",
-                        ),
-                      ],
+                          Text(
+                            "UPI",
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          isIos: true,
+                          child: const
+                          UPI(),
+                        ),
+                      );
+                    },
                   ),
                   Container(
                     height: 120,

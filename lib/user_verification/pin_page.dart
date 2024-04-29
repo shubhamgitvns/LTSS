@@ -20,135 +20,133 @@ class _PinState extends State<Pin> {
     super.dispose();
   }
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            const SizedBox(
-                height: 250,
-                child: Image(image: AssetImage('images/pin.png'))),
-            const SizedBox(
-              height: 20,
-            ),
-            Stack(
-              children: [
-                Container(
-                  height: 530,
-                  width: 400,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(30),
-                          topLeft: Radius.circular(30)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.red,
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 10,
-                          spreadRadius: 1.0,
-                        ),
-                        BoxShadow(
-                          color: Colors.red,
-                          offset: Offset(-2.0, -2.0),
-                          blurRadius: 10,
-                          spreadRadius: 1.0,
-                        ),
-                      ]),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        children: [
+          const SizedBox(
+              height: 290,
+              child: Image(image: AssetImage('images/pin.png'))),
+          const SizedBox(
+            height: 20,
+          ),
+          Stack(
+            children: [
+              Container(
+                height: 530,
+                width: 400,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(30)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.red,
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 10,
+                        spreadRadius: 1.0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Enter Your Pin",
-                              style: Text_Style.heder,
-                            ),
-                          ],
-                        ),
+                      BoxShadow(
+                        color: Colors.red,
+                        offset: Offset(-2.0, -2.0),
+                        blurRadius: 10,
+                        spreadRadius: 1.0,
                       ),
+                    ]),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Enter Your Pin",
+                            style: Text_Style.heder,
+                          ),
+                        ],
+                      ),
+                    ),
 
-                      const SizedBox(
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextBox(controller: controllers[0]),
+                        TextBox(controller: controllers[1]),
+                        TextBox(controller: controllers[2]),
+                        TextBox(controller: controllers[3]),
+                      ],
+                    ),
+
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    InkWell(
+                      child: Container(
                         height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          TextBox(controller: controllers[0]),
-                          TextBox(controller: controllers[1]),
-                          TextBox(controller: controllers[2]),
-                          TextBox(controller: controllers[3]),
-                        ],
-                      ),
-
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      InkWell(
-                        child: Container(
-                          height: 50,
-                          width: 300,
-                          color: Colors.red,
-                          child: const Center(
-                              child: Text(
-                                "Login ",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              )),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.rightToLeft,
-                              isIos: true,
-                              child: const FingerPrint(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Don't have account?",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          InkWell(
-                            child: const Text(
-                              " Forgot Pin",
+                        width: 300,
+                        color: Colors.red,
+                        child: const Center(
+                            child: Text(
+                              "Login ",
                               style: TextStyle(
-                                  color: Colors.red,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.red),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  isIos: true,
-                                  child: const SignUp(),
-                                ),
-                              );
-                            },
+                                  color: Colors.white, fontSize: 20),
+                            )),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            isIos: true,
+                            child: const FingerPrint(),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Don't have account?",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        InkWell(
+                          child: const Text(
+                            " Forgot Pin",
+                            style: TextStyle(
+                                color: Colors.red,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.red),
+                          ),
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.bottomToTop,
+                                isIos: true,
+                                child: const SignUp(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

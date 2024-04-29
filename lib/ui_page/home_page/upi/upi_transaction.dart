@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../app_text.dart';
-class Payout_Transaction extends StatefulWidget {
-  const Payout_Transaction({super.key});
+
+
+class UPI_Transaction extends StatefulWidget {
+  const UPI_Transaction({super.key});
 
   @override
-  State<Payout_Transaction> createState() => _Payout_TransactionState();
+  State<UPI_Transaction> createState() => _UPI_TransactionState();
 }
 
-class _Payout_TransactionState extends State<Payout_Transaction> {
+class _UPI_TransactionState extends State<UPI_Transaction> {
   bool recharge=false;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class _Payout_TransactionState extends State<Payout_Transaction> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
-        title: Text("Payout Transaction Information",style: Text_Style.App,),
+        title: Text("UPI Transaction Information",style: Text_Style.App,),
         actions: const [
           Padding(
             padding: EdgeInsets.all(15.0),
@@ -48,23 +50,7 @@ class _Payout_TransactionState extends State<Payout_Transaction> {
                             Text("12334 7876 0987",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize:20),),
                           ],
                         ),
-                        const SizedBox(height: 20,),
-                        const Row(
-                          children: [
-                            Text("Customer Name",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 20),),
-                          ],
-                        ),
 
-
-                        const SizedBox(height: 20,),
-                        const Row(
-                          children: [
-                            Text("Transaction Type",style: TextStyle(color: Colors.grey,fontSize: 18,fontWeight: FontWeight.bold),)
-                          ],
-                        ),
-                        const SizedBox(
-                            width:300,
-                            child: RadioExample()),
                         const SizedBox(height: 20,),
 
                         const Row(
@@ -228,60 +214,3 @@ class _Payout_TransactionState extends State<Payout_Transaction> {
   }
 }
 
-enum SingingCharacter { lafayette, jefferson }
-
-class RadioExample extends StatefulWidget {
-  const RadioExample({super.key});
-
-  @override
-  State<RadioExample> createState() => _RadioExampleState();
-}
-
-class _RadioExampleState extends State<RadioExample> {
-  SingingCharacter? _character = SingingCharacter.lafayette;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: 150,
-            child: ListTile(
-              title: const Text('NEFT',style: TextStyle(color: Colors.grey),),
-              leading: Radio<SingingCharacter>(
-                value: SingingCharacter.jefferson,
-                groupValue: _character,
-                onChanged: (SingingCharacter? value) {
-                  setState(() {
-                    _character = value;
-                  });
-                },
-              ),
-            ),
-          ),
-
-          SizedBox(
-            width: 150,
-            child: ListTile(
-              title: const Text('IMPS',style: TextStyle(color: Colors.grey),),
-              leading: Radio<SingingCharacter>(
-                value: SingingCharacter.lafayette,
-                groupValue: _character,
-                onChanged: (SingingCharacter? value) {
-                  setState(() {
-                    _character = value;
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-
-
-  }
-}
