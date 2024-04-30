@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/home_page/card/card.dart';
 import 'package:recharge_setu/ui_page/home_page/csc/csc.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
 import 'package:recharge_setu/ui_page/home_page/dth/dth.dart';
@@ -606,24 +607,37 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
-                  Container(
-                    height: 120,
-                    width: 90,
-                    color: Colors.grey.shade50,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: Image(
-                            image: AssetImage("images/card.png"),
+                  InkWell(
+                    child: Container(
+                      height: 120,
+                      width: 90,
+                      color: Colors.grey.shade50,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image(
+                              image: AssetImage("images/card.png"),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Card",
-                        ),
-                      ],
+                          Text(
+                            "Card",
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          isIos: true,
+                          child: const
+                          Card_Page(),
+                        ),
+                      );
+                    },
                   ),
                   InkWell(
                     child: Container(

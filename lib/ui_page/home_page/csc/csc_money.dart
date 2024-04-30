@@ -33,13 +33,14 @@ class _Csc_MoneyState extends State<Csc_Money> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Column(
+      body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomRight,
+            children: [
+              SingleChildScrollView(
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -198,7 +199,7 @@ class _Csc_MoneyState extends State<Csc_Money> {
                                       //width: 1.5,
                                     ),
                                   ),
-
+                      
                                   //********Focus border like hover******************8
                                   focusedBorder: OutlineInputBorder(
                                     // borderRadius: BorderRadius.circular(10),
@@ -344,7 +345,7 @@ class _Csc_MoneyState extends State<Csc_Money> {
                           ],
                         )
                     ),
-
+                      
                     const SizedBox(
                       height: 20,
                     ),
@@ -476,25 +477,26 @@ class _Csc_MoneyState extends State<Csc_Money> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 100),
-                  child: InkWell(child: const Image(image: AssetImage("images/frame .png")
-                  ),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.bottomToTop,
-                          isIos: true,
-                          child: const Csc_Beneficiary(),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            )
-        ),
+              ),
+              Positioned(
+                bottom: -10,
+                child: InkWell(child: const Image(image: AssetImage("images/frame .png")
+                ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        isIos: true,
+                        child: const Csc_Beneficiary(),
+                      ),
+                    );
+                  },
+                ),
+              )
+             
+            ],
+          )
       ),
     );
   }

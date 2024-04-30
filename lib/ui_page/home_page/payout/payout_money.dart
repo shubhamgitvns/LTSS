@@ -32,13 +32,14 @@ class _Payout_MoneyState extends State<Payout_Money> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Column(
+      body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomRight,
+            children: [
+              SingleChildScrollView(
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -475,25 +476,25 @@ class _Payout_MoneyState extends State<Payout_Money> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 100),
-                  child: InkWell(child: const Image(image: AssetImage("images/frame .png")
-                  ),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.bottomToTop,
-                          isIos: true,
-                          child: const Payout_Beneficiary(),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            )
-        ),
+              ),
+              Positioned(
+                bottom: -10,
+                child: InkWell(child: const Image(image: AssetImage("images/frame .png")
+                ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        isIos: true,
+                        child: const Payout_Beneficiary(),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          )
       ),
     );
   }

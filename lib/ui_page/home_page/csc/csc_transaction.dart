@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../../../app_text.dart';
@@ -132,91 +134,96 @@ class _Csc_TransactionState extends State<Csc_Transaction> {
                     if (recharge)
 
                       Padding(
-                        padding: const EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 55),
                         child: Container(
                             width: 350,
                             height: 480,
                             decoration: Support_container.box,
-                            child:  Column(
-                              children: [
-                                const SizedBox(height: 30,),
-                                const SizedBox(
-                                    height:100,
-                                    child: Image(image: AssetImage("images/airtel_dth.png"))),
-                                const SizedBox(height: 10,),
-                                const Text(
-                                  "₹ 19",
-                                  style:
-                                  TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text("HDFC"),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text("823456819",
-                                    style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold)),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                const SizedBox(
-                                    width: 200,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Pin Code",
-                                        hintStyle: TextStyle(color: Colors.red),
+                            child:  BackdropFilter(
+
+                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY:10.0),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 30,),
+                                  const SizedBox(
+                                      height:100,
+                                      child: Image(image: AssetImage("images/airtel_dth.png"))),
+                                  const SizedBox(height: 10,),
+                                  const Text(
+                                    "₹ 19",
+                                    style:
+                                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text("HDFC"),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text("823456819",
+                                      style: TextStyle(
+                                          fontSize: 20, fontWeight: FontWeight.bold)),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const SizedBox(
+                                      width: 200,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: "Pin Code",
+                                          hintStyle: TextStyle(color: Colors.red),
+                                        ),
+                                      )),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      InkWell(
+                                        child: const Text(
+                                          "Cancel",
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        onTap: (){
+                                          setState(() {
+                                            recharge=false;
+                                          });
+
+                                        },
                                       ),
-                                    )),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    InkWell(
-                                      child: const Text(
-                                        "Cancel",
+                                      const Text(
+                                        "Continue",
                                         style: TextStyle(
-                                            color: Colors.red,
+                                            color: Colors.green,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),
-                                      onTap: (){
-                                        setState(() {
-                                          recharge=false;
-                                        });
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const SizedBox(
+                                      width: 250,
+                                      child: Text(
+                                        "Note: kindly check once again all information before doing transactions.",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
+                                  const SizedBox(
+                                      width: 250,
+                                      child: Text(
+                                        "otherwise after transaction recharge amount will not recive",
+                                        style: TextStyle(color: Colors.red),
+                                      )),
 
-                                      },
-                                    ),
-                                    const Text(
-                                      "Continue",
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                const SizedBox(
-                                    width: 250,
-                                    child: Text(
-                                      "Note: kindly check once again all information before doing transactions.",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
-                                const SizedBox(
-                                    width: 250,
-                                    child: Text(
-                                      "otherwise after transaction recharge amount will not recive",
-                                      style: TextStyle(color: Colors.red),
-                                    )),
 
-                              ],
+                                ],
+                              ),
                             )
                         ),
                       )
