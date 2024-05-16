@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/ui_page/bottom_navigation.dart';
+import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 
 import '../app_text.dart';
 import 'fingerprin_page.dart';
@@ -105,7 +107,7 @@ class _PinState extends State<Pin> {
                           PageTransition(
                             type: PageTransitionType.rightToLeft,
                             isIos: true,
-                            child: const FingerPrint(),
+                            child: BottomCollectionBoy(index: 0),
                           ),
                         );
                       },

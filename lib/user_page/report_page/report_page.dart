@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/ui_page/home_page/fundtransfer.dart';
+import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_recharge.dart';
+import 'package:recharge_setu/user_page/report_page/complaint_Report/complaint_report.dart';
+import 'package:recharge_setu/user_page/report_page/dth_report/dth_report.dart';
 import 'package:recharge_setu/user_page/report_page/fund_transfer_Report.dart';
 import 'package:recharge_setu/user_page/report_page/income_wallet_summary.dart';
+import 'package:recharge_setu/user_page/report_page/prepaid_report/prepaid_report.dart';
 import 'package:recharge_setu/user_page/report_page/user_daybook_report.dart';
 import 'package:recharge_setu/user_page/report_page/wallet_summury.dart';
 class Report extends StatefulWidget {
@@ -44,28 +47,40 @@ class _ReportState extends State<Report> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:50,
-                        child:Image(
-                          image: AssetImage(
-                              "images/mobile_th.png"),
-                        ), ),
+                InkWell(
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:50,
+                          child:Image(
+                            image: AssetImage(
+                                "images/mobile_th.png"),
+                          ), ),
 
-                      Text(
-                        "Prepaid",
-                      ),
-                      Text(
-                        "Report",
-                      ),
-                    ],
+                        Text(
+                          "Prepaid",
+                        ),
+                        Text(
+                          "Report",
+                        ),
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const prepaid_Report(),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   height: 120,
@@ -86,25 +101,38 @@ class _ReportState extends State<Report> {
                     ],
                   ),
                 ),
-                Container(
-                  height: 120,
-                  width: 90,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:50,
-                        child:Image(
-                          image: AssetImage(
-                              "images/dth.png"),
-                        ), ),
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height:50,
+                          child:Image(
+                            image: AssetImage(
+                                "images/dth.png"),
+                          ), ),
 
-                      Text(
-                        "DTH",
-                      ),
-                    ],
+                        Text(
+                          "DTH",
+                        ),
+                        Text("Report")
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const DTH_Report(),
+                      ),
+                    );
+                  },
                 ),
 
               ],
@@ -139,24 +167,36 @@ class _ReportState extends State<Report> {
                     ],
                   ),
                 ),
-                Container(
-                  height: 120,
-                  width: 90,
-                  color: Colors.grey.shade50,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(image: AssetImage("images/ic_electricity.png")),
-                      SizedBox(height: 10,),
-                      Text(
-                        "Complaint",
-                      ),
-                      Text(
-                        "Report",
-                      ),
+                InkWell(
+                  child: Container(
+                    height: 120,
+                    width: 90,
+                    color: Colors.grey.shade50,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(image: AssetImage("images/ic_electricity.png")),
+                        SizedBox(height: 10,),
+                        Text(
+                          "Complaint",
+                        ),
+                        Text(
+                          "Report",
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        isIos: true,
+                        child: const Complent_Report(),
+                      ),
+                    );
+                  },
                 ),
                 InkWell(
                   child: Container(

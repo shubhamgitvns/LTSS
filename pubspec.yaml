@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  http:
+  syncfusion_flutter_sliders: ^25.2.3
   pinput: ^3.0.1
   page_transition: "^2.1.0"
   intl_phone_number_input: ^0.7.3+1
@@ -43,6 +45,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   table_calendar: ^3.0.9
+  url_launcher: ^6.2.6
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

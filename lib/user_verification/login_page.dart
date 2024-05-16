@@ -3,6 +3,12 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'dart:io';
+
+
+import '../Utilities.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -84,7 +90,6 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 50,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -93,7 +98,7 @@ class _LoginState extends State<Login> {
                           child: TextField(
                             autofocus: true,
                             keyboardType: TextInputType.number,
-                            controller: App_Text.pincode,
+                            controller: App_Text.number,
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -155,7 +160,7 @@ class _LoginState extends State<Login> {
                               color: Colors.white, fontSize: 20),
                         )),
                       ),
-                      onTap: () {
+                      onTap: (){
                         Navigator.push(
                           context,
                           PageTransition(
