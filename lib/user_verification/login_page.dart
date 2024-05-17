@@ -17,7 +17,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   bool isChecked = false;
-  bool terms = false;
+  String turms= " ";
 
   @override
   Widget build(BuildContext context) {
@@ -86,18 +86,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
-                    ),
-                    if (terms == true)
-                      const Text(
-                        "Please Tick The Terms & Condition?",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    const SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
                     Form(
                       key: _formKey,
@@ -163,15 +152,23 @@ class _LoginState extends State<Login> {
                               MaterialStateProperty.resolveWith(getColor),
                           value: isChecked,
                           onChanged: (bool? value) {
-                            terms = false;
+
                             setState(() {
                               isChecked = value!;
                               print(value);
+                              turms = " ";
                             });
                           },
                         ),
                         const Text("I agree all the terms and conditions")
                       ],
+                    ),
+                    Text(
+                      turms,
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 50,
@@ -190,6 +187,7 @@ class _LoginState extends State<Login> {
                       onTap: () {
                         if (_formKey.currentState!.validate() && isChecked) {
                           print("success");
+                          turms="";
                           Navigator.push(
                             context,
                             PageTransition(
@@ -198,8 +196,14 @@ class _LoginState extends State<Login> {
                               child: const Pin(),
                             ),
                           );
+                          return null;
                         }
-                        print(isChecked);
+                        else{
+                          setState(() {
+                            turms="Please tick the terms & Condition Box";
+                          });
+                        }
+
 
                       },
                     ),
