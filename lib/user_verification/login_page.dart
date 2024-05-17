@@ -3,9 +3,6 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
-
-
-
 import '../Utilities.dart';
 
 class Login extends StatefulWidget {
@@ -17,10 +14,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
   bool isChecked = false;
+  bool terms = false;
+
   @override
   Widget build(BuildContext context) {
-
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -33,14 +33,12 @@ class _LoginState extends State<Login> {
       return Colors.red;
     }
 
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           const SizedBox(
-              height: 290,
-              child: Image(image: AssetImage('images/login.png'))),
+              height: 290, child: Image(image: AssetImage('images/login.png'))),
           const SizedBox(
             height: 20,
           ),
@@ -77,7 +75,9 @@ class _LoginState extends State<Login> {
                       "Enter Your Mobile Number",
                       style: Text_Style.heder,
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     const Text(
                       "We will send you OTP on that number",
                       style: TextStyle(
@@ -86,63 +86,93 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 350,
-                          child: TextField(
-                            autofocus: true,
-                            keyboardType: TextInputType.number,
-                            controller: App_Text.number,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                  width: 1.5,
-                                ),
-                              ),
-
-                              //********Focus border like hover******************8
-                              focusedBorder: OutlineInputBorder(
+                    if (terms == true)
+                      const Text(
+                        "Please Tick The Terms & Condition?",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Form(
+                      key: _formKey,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 350,
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    !RegExp(r'^(?:[+0][1-9])?[0-9]{10}$')
+                                        .hasMatch(value!)) {
+                                  return 'Please enter Correct number';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              autofocus: true,
+                              keyboardType: TextInputType.number,
+                              controller: App_Text.number,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(
                                     color: Colors.red,
-                                  )),
-                              labelText: "Enter Phone Number",
+                                    width: 1.5,
+                                  ),
+                                ),
 
-                              labelStyle: const TextStyle(color: Colors.red),
-                              prefixIcon: const Icon(Icons.phone,color: Colors.red,),
+                                //********Focus border like hover******************8
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                    )),
+                                labelText: "Enter Phone Number",
+
+                                labelStyle: const TextStyle(color: Colors.red),
+                                prefixIcon: const Icon(
+                                  Icons.phone,
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Checkbox(
                           checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
+                          fillColor:
+                              MaterialStateProperty.resolveWith(getColor),
                           value: isChecked,
                           onChanged: (bool? value) {
+                            terms = false;
                             setState(() {
                               isChecked = value!;
+                              print(value);
                             });
                           },
                         ),
                         const Text("I agree all the terms and conditions")
                       ],
                     ),
-
                     const SizedBox(
                       height: 50,
                     ),
@@ -154,23 +184,25 @@ class _LoginState extends State<Login> {
                         child: const Center(
                             child: Text(
                           "Continue",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         )),
                       ),
-                      onTap: (){
+                      onTap: () {
+                        if (_formKey.currentState!.validate() && isChecked) {
+                          print("success");
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              isIos: true,
+                              child: const Pin(),
+                            ),
+                          );
+                        }
+                        print(isChecked);
 
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            isIos: true,
-                            child: const Pin(),
-                          ),
-                        );
                       },
                     ),
-
                   ],
                 ),
               )
