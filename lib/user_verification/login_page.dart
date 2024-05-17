@@ -3,9 +3,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
-import 'dart:io';
+
 
 
 import '../Utilities.dart';
@@ -161,6 +159,7 @@ class _LoginState extends State<Login> {
                         )),
                       ),
                       onTap: (){
+
                         Navigator.push(
                           context,
                           PageTransition(

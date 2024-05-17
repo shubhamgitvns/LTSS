@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/ui_page/bottom_navigation.dart';
-import 'package:recharge_setu/ui_page/home_page/home_page.dart';
-
+import '../Utilities.dart';
 import '../app_text.dart';
-import 'fingerprin_page.dart';
 import 'forgotpin_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 class Pin extends StatefulWidget {
   const Pin({super.key});
 
@@ -14,14 +15,41 @@ class Pin extends StatefulWidget {
 }
 
 class _PinState extends State<Pin> {
-  List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+  //List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+
+    super.initState();
+    myFocusNode = FocusNode();
+  }
 
   @override
   void dispose() {
-    controllers.forEach((controller) => controller.dispose());
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+
     super.dispose();
   }
+
+  @override
   Widget build(BuildContext context) {
+    final defaltPinTheme = PinTheme(
+        width: 50,
+        height: 60,
+        textStyle: TextStyle (
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 18
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.red)
+        )
+    );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -79,10 +107,24 @@ class _PinState extends State<Pin> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        TextBox(controller: controllers[0]),
-                        TextBox(controller: controllers[1]),
-                        TextBox(controller: controllers[2]),
-                        TextBox(controller: controllers[3]),
+                        Container(
+                          child: Pinput(
+                            length: 6,
+                            defaultPinTheme: defaltPinTheme,
+                            focusedPinTheme: defaltPinTheme.copyWith(
+                                decoration: defaltPinTheme.decoration!.copyWith(
+                                    border: Border.all(color: Colors.red)
+                                )
+                            ),
+
+                            onCompleted: (pin) {
+                              App_Text.Mpin=pin;
+                              print("pin===>" + App_Text.Mpin);
+
+                            }
+
+                          ),
+                        ),
                       ],
                     ),
 
@@ -101,15 +143,27 @@ class _PinState extends State<Pin> {
                                   color: Colors.white, fontSize: 20),
                             )),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            isIos: true,
-                            child: BottomCollectionBoy(index: 0),
-                          ),
-                        );
+                      onTap: () async {
+                        try {
+                          dynamic text = await Utilities.Downloaddata("/Users/Login");
+                          App_Text.distributer_username=("${text["username"]}" );
+                          App_Text.distributer_role=("${text["role"]}" );
+                          App_Text.distributer_message=("${text["message"]}" );
+
+                        } catch (ex) {
+
+                          print(ex);
+                        }
+                        if(App_Text.distributer_role == "DISTRIBUTOR") {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              isIos: true,
+                              child: BottomCollectionBoy(index: 0),
+                            ),
+                          );
+                        }
                       },
                     ),
                     const SizedBox(
@@ -131,7 +185,7 @@ class _PinState extends State<Pin> {
                                 decorationColor: Colors.red),
                           ),
                           onTap: (){
-                            Navigator.push(
+                          Navigator.push(
                               context,
                               PageTransition(
                                 type: PageTransitionType.bottomToTop,
@@ -155,43 +209,3 @@ class _PinState extends State<Pin> {
 }
 
 
-class TextBox extends StatelessWidget {
-  final TextEditingController controller;
-
-  const TextBox({Key? key, required this.controller}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(5), // Optional: Add border radius
-      ),
-      child: TextField(
-        controller: controller,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ),
-        maxLength: 1,
-        decoration: InputDecoration(
-          counterText: "",
-          border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red), // Red focus border
-            borderRadius: BorderRadius.circular(5),
-
-            // Optional: Add border radius
-          ),
-        ),
-      ),
-    );
-  }
-}

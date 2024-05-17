@@ -20,10 +20,10 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
   int _previousIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const Home(),
+    const Report(),
     const Profile(),
     const Support(),
-    const Report(),
+
   ];
 
   final bool _isBottomSheetOpen = false;
@@ -54,29 +54,25 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Container(
-              height: 60,
-              width: 60,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image(
-                      image: const AssetImage(
-                          "images/home.png"),
-                      color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
+            icon: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image(
+                    image: const AssetImage(
+                        "images/report.png"),
+                    color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
 
+                  ),
+                  Text(
+                    "Report",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
                     ),
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             label: '',
@@ -132,30 +128,6 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
             label: '',
           ),
 
-          BottomNavigationBarItem(
-            icon: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/report.png"),
-                    color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
-
-                  ),
-                  Text(
-                    "Report",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            label: '',
-          ),
 
           BottomNavigationBarItem(
             icon: Center(

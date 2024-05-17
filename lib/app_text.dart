@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 bool create =false;
 class App_Text {
-
   static TextEditingController username = TextEditingController();
   static TextEditingController email = TextEditingController();
   static TextEditingController conformpin = TextEditingController();
-  static TextEditingController pincode = TextEditingController();
+ // static TextEditingController Mpin = TextEditingController();
   static TextEditingController number = TextEditingController();
+  static String Mpin="";
+  static String distributer_username="";
+  static String distributer_role="";
+  static String distributer_message="";
 }
 
 class Input_Style {

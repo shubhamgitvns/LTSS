@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 import 'package:recharge_setu/user_page/changepassword_page.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
@@ -94,12 +95,16 @@ class _ProfileState extends State<Profile> {
                                 //************ User name ********************************//
                                 Row(
                                   children: [
-                                    const Text(
-                                      "Name",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                     SizedBox(
+                                       width: 130,
+                                       child: Text(
+                                        App_Text.distributer_username,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                                                           ),
+                                     ),
                                     //************ view button ********************************//
                                     const SizedBox(
                                       width: 50,
@@ -136,13 +141,13 @@ class _ProfileState extends State<Profile> {
                                   ],
                                 ),
 
-                                const Row(
+                                 Row(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 120),
+                                      padding: const EdgeInsets.only(right: 120),
                                       child: Text(
-                                        "Data",
-                                        style: TextStyle(
+                                        App_Text.distributer_role,
+                                        style: const TextStyle(
                                             color: Colors.red, fontSize: 15),
                                       ),
                                     ),
