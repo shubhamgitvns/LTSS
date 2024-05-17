@@ -8,9 +8,9 @@ class App_Text {
  // static TextEditingController Mpin = TextEditingController();
   static TextEditingController number = TextEditingController();
   static String Mpin="";
-  static String distributer_username="";
-  static String distributer_role="";
-  static String distributer_message="";
+  static String name="";
+  static String role="";
+  static String message="";
 }
 
 class Input_Style {

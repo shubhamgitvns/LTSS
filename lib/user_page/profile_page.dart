@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
@@ -95,10 +96,11 @@ class _ProfileState extends State<Profile> {
                                 //************ User name ********************************//
                                 Row(
                                   children: [
+                             //       if(App_Text.distributer_role == "DISTRIBUTER")
                                      SizedBox(
                                        width: 130,
                                        child: Text(
-                                        App_Text.distributer_username,
+                                        App_Text.name,
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 17,
@@ -146,7 +148,7 @@ class _ProfileState extends State<Profile> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 120),
                                       child: Text(
-                                        App_Text.distributer_role,
+                                        App_Text.role,
                                         style: const TextStyle(
                                             color: Colors.red, fontSize: 15),
                                       ),

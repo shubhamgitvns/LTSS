@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/ui_page/bottom_navigation.dart';
+import '../Retailer/retailer_bottomnavigation.dart';
 import '../Utilities.dart';
 import '../app_text.dart';
 import 'forgotpin_page.dart';
@@ -146,21 +147,31 @@ class _PinState extends State<Pin> {
                       onTap: () async {
                         try {
                           dynamic text = await Utilities.Downloaddata("/Users/Login");
-                          App_Text.distributer_username=("${text["username"]}" );
-                          App_Text.distributer_role=("${text["role"]}" );
-                          App_Text.distributer_message=("${text["message"]}" );
+                          App_Text.name=("${text["username"]}" );
+                          App_Text.role=("${text["role"]}" );
+                          App_Text.message=("${text["message"]}" );
 
                         } catch (ex) {
 
                           print(ex);
                         }
-                        if(App_Text.distributer_role == "DISTRIBUTOR") {
+                        if(App_Text.role == "DISTRIBUTOR") {
                           Navigator.push(
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
                               isIos: true,
                               child: BottomCollectionBoy(index: 0),
+                            ),
+                          );
+                        }
+                        if(App_Text.role == "RETAILER"){
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              isIos: true,
+                              child: Retailer_Bottomnavigation(index: 0,),
                             ),
                           );
                         }
