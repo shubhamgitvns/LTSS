@@ -19,6 +19,7 @@ class _PinState extends State<Pin> {
   //List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
 
   late FocusNode myFocusNode;
+  bool message = false;
 
   @override
   void initState() {
@@ -128,7 +129,17 @@ class _PinState extends State<Pin> {
                         ),
                       ],
                     ),
-
+                    const SizedBox(height: 5,),
+                    if(message)
+                        const Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Row(
+                            children: [
+                              Text("Please Enter Correct Pin",
+                                style: TextStyle(color: Colors.red),)
+                            ],
+                          ),
+                        ),
                     const SizedBox(
                       height: 100,
                     ),
@@ -154,6 +165,17 @@ class _PinState extends State<Pin> {
                         } catch (ex) {
 
                           print(ex);
+                        }
+                        if(App_Text.Mpin != "123456"){
+                          setState(() {
+                            message = true;
+                          });
+                        }
+
+                        if(App_Text.Mpin == "123456"){
+                          setState(() {
+                            message = false;
+                          });
                         }
                         if(App_Text.role == "DISTRIBUTOR") {
                           Navigator.push(

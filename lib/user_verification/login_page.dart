@@ -17,7 +17,8 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   bool isChecked = false;
-  String turms= " ";
+  bool terms = false;
+  String label= "Enter Phone Number";
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +98,27 @@ class _LoginState extends State<Login> {
                             width: 350,
                             child: TextFormField(
                               validator: (value) {
-                                if (value!.isEmpty ||
-                                    !RegExp(r'^(?:[+0][1-9])?[0-9]{10}$')
-                                        .hasMatch(value!)) {
-                                  return 'Please enter Correct number';
-                                } else {
+                                if (value!.isEmpty ) {
+                                  setState(() {
+                                    label="";
+                                    terms = false;
+                                    print(terms);
+                                  });
+                                  print(terms);
+                                  return '!Please enter the number';
+                                }
+
+                                if(
+                                !RegExp(r'^(?:[+0][1-9])?[0-9]{10}$')
+                                .hasMatch(value!)){
+                                  setState(() {
+                                    label="";
+                                    terms=false;
+                                    print(terms);
+                                  });
+                                  return '!Please enter the correct number';
+                                }
+                                else {
                                   return null;
                                 }
                               },
@@ -127,7 +144,7 @@ class _LoginState extends State<Login> {
                                     borderSide: const BorderSide(
                                       color: Colors.red,
                                     )),
-                                labelText: "Enter Phone Number",
+                                labelText: label,
 
                                 labelStyle: const TextStyle(color: Colors.red),
                                 prefixIcon: const Icon(
@@ -156,16 +173,17 @@ class _LoginState extends State<Login> {
                             setState(() {
                               isChecked = value!;
                               print(value);
-                              turms = " ";
+                              terms=false;
                             });
                           },
                         ),
                         const Text("I agree all the terms and conditions")
                       ],
                     ),
+                    if(terms)
                     Text(
-                      turms,
-                      style: TextStyle(
+                      "Please tick the terms & Condition Box",
+                      style: const TextStyle(
                           color: Colors.red,
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
@@ -185,9 +203,9 @@ class _LoginState extends State<Login> {
                         )),
                       ),
                       onTap: () {
-                        if (_formKey.currentState!.validate() && isChecked) {
+
+                        if (_formKey.currentState!.validate() && isChecked && App_Text.number.text.isNotEmpty) {
                           print("success");
-                          turms="";
                           Navigator.push(
                             context,
                             PageTransition(
@@ -198,11 +216,14 @@ class _LoginState extends State<Login> {
                           );
                           return null;
                         }
-                        else{
+                        if(App_Text.number.text.length >=10 && isChecked==false){
                           setState(() {
-                            turms="Please tick the terms & Condition Box";
+                            print(App_Text.number.text.length);
+                            print(isChecked);
+                            terms=true;
                           });
                         }
+
 
 
                       },
