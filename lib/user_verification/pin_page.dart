@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/ui_page/bottom_navigation.dart';
+import 'package:recharge_setu/ui_page/login_success.dart';
 import '../Retailer/retailer_bottomnavigation.dart';
 import '../Utilities.dart';
 import '../app_text.dart';
@@ -183,7 +184,7 @@ class _PinState extends State<Pin> {
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
                               isIos: true,
-                              child: BottomCollectionBoy(index: 0),
+                              child: Login_Success(),
                             ),
                           );
                         }

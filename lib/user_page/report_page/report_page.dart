@@ -24,21 +24,34 @@ class _ReportState extends State<Report> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.red,
-        title: const Text("Report",style: TextStyle(color: Colors.white,fontSize: 25),),
+        backgroundColor: Colors.red.shade100,
+        title: RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                  text: 'LTS',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red.shade600)),
+              const TextSpan(
+                  text: ' Solutions', style: TextStyle(color: Colors.red)),
+            ],
+          ),
+        ),
         actions: const [
           SizedBox(
-            child:Image(
-              image: AssetImage(
-                  "images/white_bell.png"),
-            ),  ),
+            child: Image(
+              image: AssetImage("images/red_bell.png"),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.all(15.0),
             child: SizedBox(
-              child:Image(
-                image: AssetImage(
-                    "images/i_wht.png"),
-              ),  ),
+              child: Image(
+                image: AssetImage("images/i.png"),
+              ),
+            ),
           ),
         ],
       ),
@@ -46,10 +59,6 @@ class _ReportState extends State<Report> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            if(App_Text.role != "RETAILER")
-            const SizedBox(height: 10,),
-            Text("nbhdbfuhf"),
-            Text(App_Text.message,style: const TextStyle(color: Colors.green,fontWeight: FontWeight.w500,fontSize: 17),),
             const SizedBox(height: 10,),
             Container(
               height: 200,

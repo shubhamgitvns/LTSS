@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  loading_animation_widget:
   http:
   syncfusion_flutter_sliders: ^25.2.3
   pinput: ^3.0.1
@@ -130,10 +131,10 @@ flutter:
     - images/torrent.png
     - images/icon_wallet.png
     - images/delete.png
-    - images/tick.png
     - images/frame .png
     - images/RuPay.png
     - images/chip.png
+    - images/check.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
