@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  sqflite: ^2.3.2
   loading_animation_widget:
   http:
   syncfusion_flutter_sliders: ^25.2.3

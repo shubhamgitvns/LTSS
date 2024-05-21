@@ -206,8 +206,7 @@ class _ReportState extends State<Report> {
                 )
               ],
             ),
-            if(App_Text.role == "RETAILER")
-              Text("data"),
+
             const SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

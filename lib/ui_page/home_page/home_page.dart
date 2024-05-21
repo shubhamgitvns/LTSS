@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/card/card.dart';
 import 'package:recharge_setu/ui_page/home_page/csc/csc.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
@@ -223,9 +224,11 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   InkWell(
                     child: Container(
                       height: 100,

@@ -61,12 +61,12 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 children: [
                   Image(
                     image: const AssetImage(
-                        "images/report.png"),
+                        "images/home.png"),
                     color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
-                    "Report",
+                    "Home",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,

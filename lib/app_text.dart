@@ -5,12 +5,22 @@ class App_Text {
   static TextEditingController username = TextEditingController();
   static TextEditingController email = TextEditingController();
   static TextEditingController conformpin = TextEditingController();
- // static TextEditingController Mpin = TextEditingController();
+  static TextEditingController idcontroler = TextEditingController();
   static TextEditingController number = TextEditingController();
   static String Mpin="";
   static String name="";
   static String role="";
   static String message="";
+  static String status="";
+
+  static String dbname="myname";
+  static String dbrole="role";
+  static String dbstatus="status";
+  static String dbmessage="message";
+  static String dbmobile="mobile";
+  static int id= 1;
+
+  static bool login = false;
 }
 
 class Input_Style {

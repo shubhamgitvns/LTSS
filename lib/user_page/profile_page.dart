@@ -424,147 +424,140 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.red),
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.red.shade50,
-                              image: const DecorationImage(
-                                  image:AssetImage("images/logout.png"),
-                                  fit: BoxFit.scaleDown)),
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        const Text(
-                          'Logout',
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        ),
-                        const SizedBox(
-                          width: 180,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: InkWell(
-                            child: const Text(
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red),
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.red.shade50,
+                                image: const DecorationImage(
+                                    image:AssetImage("images/logout.png"),
+                                    fit: BoxFit.scaleDown)),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                          const Text(
+                            'Logout',
+                            style: TextStyle(color: Colors.red, fontSize: 15),
+                          ),
+                          const SizedBox(
+                            width: 180,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(right: 5),
+                            child: Text(
                               ">",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              showModalBottomSheet<void>(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    height: 300,
-                                    color: Colors.red.shade100,
-                                    child: Center(
-                                      child: Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          const Center(
-                                              child: Text(
-                                            "Log Out",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25),
-                                          )),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          const Center(
-                                              child: Text(
-                                            " Do you really want to log out ",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey),
-                                          )),
-                                          const SizedBox(
-                                            height: 50,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              InkWell(
-                                                child: Container(
-                                                  width: 70,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.red)),
-                                                  child: const Center(
-                                                      child: Text(
-                                                    "No",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.red),
-                                                  )),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    PageTransition(
-                                                      type: PageTransitionType
-                                                          .topToBottom,
-                                                      isIos: true,
-                                                      child: const Profile(),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                              InkWell(
-                                                child: Container(
-                                                  width: 70,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      border: Border.all(
-                                                          color: Colors.red)),
-                                                  child: const Center(
-                                                      child: Text(
-                                                    "Yes",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.white),
-                                                  )),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    PageTransition(
-                                                      type: PageTransitionType
-                                                          .leftToRight,
-                                                      isIos: true,
-                                                      child: const Home(),
-                                                    ),
-                                                  );
-                                                },
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 300,
+                            color: Colors.red.shade100,
+                            child: Center(
+                              child: Column(
+                                // mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const Center(
+                                      child: Text(
+                                        "Log Out",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25),
+                                      )),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const Center(
+                                      child: Text(
+                                        " Do you really want to log out ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey),
+                                      )),
+                                  const SizedBox(
+                                    height: 50,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        child: Container(
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.red)),
+                                          child: const Center(
+                                              child: Text(
+                                                "No",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                    color: Colors.red),
+                                              )),
+                                        ),
+                                        onTap: () {
+                                         Navigator.pop(context);
+                                        },
+                                      ),
+                                      InkWell(
+                                        child: Container(
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              border: Border.all(
+                                                  color: Colors.red)),
+                                          child: const Center(
+                                              child: Text(
+                                                "Yes",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                    FontWeight.bold,
+                                                    color: Colors.white),
+                                              )),
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(context).popUntil((route) => route.isFirst);
+                                          // Navigator.push(
+                                          //   context,
+                                          //   PageTransition(
+                                          //     type: PageTransitionType
+                                          //         .leftToRight,
+                                          //     isIos: true,
+                                          //     child: const Home(),
+                                          //   ),
+                                          // );
+                                        },
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 10,

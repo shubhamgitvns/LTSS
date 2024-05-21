@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
 import '../Utilities.dart';
+import '../jsonclass.dart';
+import '../localdatabase.dart';
+import '../ui_page/home_page/csc/csc_beneficiary.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -181,9 +185,9 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                     if(terms)
-                    Text(
+                    const Text(
                       "Please tick the terms & Condition Box",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.red,
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
@@ -202,7 +206,32 @@ class _LoginState extends State<Login> {
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         )),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        App_Text.dbmobile= App_Text.number.text;
+                          print("new number======================="+App_Text.dbmobile);
+
+                          // var javabook = Json(
+                          //     App_Text.id, App_Text.dbname, App_Text.dbrole,
+                          //     App_Text.dbstatus,
+                          //     App_Text.dbmessage);
+                          // await DatabaseHandler.insertJson(javabook);
+                          // print(await DatabaseHandler.jsons());
+                          // print("ADD");
+
+                          //  javabook = Json(App_Text.id,App_Text.dbname, App_Text.dbrole, App_Text.dbstatus,App_Text.dbmessage);
+                          // await DatabaseHandler.updateJson(javabook);
+                          // print(await DatabaseHandler.jsons());
+                          // print("Update");
+
+                        // print("search");
+                        // var list= await DatabaseHandler.jsons();
+                        // List<Json> lst=list;
+                        // print(list);
+                        // setState(() {
+                        //   App_Text.login=true;
+                        // });
+                        //
+                        // print(App_Text.id);
 
                         if (_formKey.currentState!.validate() && isChecked && App_Text.number.text.isNotEmpty) {
                           print("success");
@@ -228,9 +257,12 @@ class _LoginState extends State<Login> {
 
                       },
                     ),
+
+
                   ],
                 ),
-              )
+              ),
+
             ],
           ),
         ],
