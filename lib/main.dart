@@ -36,8 +36,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Recharge Setu',
+        debugShowCheckedModeBanner: false,
+        title: 'Recharge Setu',
+        initialRoute: '/',
+        routes: <String, WidgetBuilder>{
+        // '/home': (BuildContext context) => const _HomePage(),
+        // '/two': (BuildContext context) => const _PageTwo(),
+        },
       theme: ThemeData(
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

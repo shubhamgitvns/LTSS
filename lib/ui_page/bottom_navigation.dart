@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
 import 'package:recharge_setu/user_page/report_page/report_page.dart';
+import 'package:recharge_setu/user_page/service_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 
 import 'home_page/home_page.dart';
@@ -21,8 +22,9 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Report(),
-    const Profile(),
+    const Service_Page(),
     const Support(),
+    const Profile(),
 
   ];
 
@@ -84,14 +86,12 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/person.png"),
-                    color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
+                 Icon(Icons.design_services,
+                   color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
 
-                  ),
+                 ),
                   Text(
-                    "Person",
+                    "Service",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
@@ -135,13 +135,19 @@ class _BottomCollectionBoyState extends State<BottomCollectionBoy> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.design_services,
+                  Image(
+                    image: const AssetImage(
+                        "images/person.png"),
                     color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
 
                   ),
+                  // Icon(
+                  //   Icons.design_services,
+                  //   color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
+                  //
+                  // ),
                   Text(
-                    "Service",
+                    "Person",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,

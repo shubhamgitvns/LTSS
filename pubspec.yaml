@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   sqflite: ^2.3.2
+  flutter_loader: ^0.2.6
   loading_animation_widget:
   http:
   syncfusion_flutter_sliders: ^25.2.3

@@ -1,5 +1,7 @@
 
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/home_page.dart';
@@ -8,6 +10,14 @@ import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/current_securitypin.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
+import 'package:recharge_setu/user_verification/login_page.dart';
+
+import '../localdatabase.dart';
+import '../user_verification/login_page.dart';
+import '../user_verification/login_page.dart';
+import '../user_verification/login_page.dart';
+import '../user_verification/login_page.dart';
+import '../user_verification/pin_page.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -537,16 +547,15 @@ class _ProfileState extends State<Profile> {
                                               )),
                                         ),
                                         onTap: () {
-                                          Navigator.of(context).popUntil((route) => route.isFirst);
-                                          // Navigator.push(
-                                          //   context,
-                                          //   PageTransition(
-                                          //     type: PageTransitionType
-                                          //         .leftToRight,
-                                          //     isIos: true,
-                                          //     child: const Home(),
-                                          //   ),
-                                          // );
+                                          DatabaseHandler.deleteJson(int.parse(App_Text.id.toString()));
+                                          print(App_Text.id);
+                                          print("Del");
+                                          if(Platform.isAndroid){
+                                            SystemNavigator.pop();
+                                          }else{
+                                            exit(0);
+                                          }
+                                      
                                         },
                                       )
                                     ],

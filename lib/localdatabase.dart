@@ -92,7 +92,7 @@ class DatabaseHandler {
 
     // Remove the book from the database.
     await db.delete(
-      'books',
+      'jsons',
       // Use a `where` clause to delete a specific book.
       where: 'id = ?',
       // Pass the book's id as a whereArg to prevent SQL injection.

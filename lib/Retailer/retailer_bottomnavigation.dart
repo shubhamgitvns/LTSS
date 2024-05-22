@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:recharge_setu/Retailer/retailer_report.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
+import 'package:recharge_setu/user_page/service_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
 import '../ui_page/home_page/home_page.dart';
 
@@ -20,9 +22,10 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Profile(),
+    const Service_Page(),
     const Support(),
     const Retailer_Report(),
+    const Profile(),
   ];
 
   final bool _isBottomSheetOpen = false;
@@ -87,14 +90,13 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/person.png"),
+                  Icon(
+                    Icons.design_services,
                     color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
-                    "Person",
+                    "Service",
                     style: TextStyle(
                       fontSize: 10,
                       color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
@@ -162,16 +164,17 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.design_services,
-                    color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
+                  Image(
+                    image: const AssetImage(
+                        "images/person.png"),
+                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
 
                   ),
                   Text(
-                    "Service",
+                    "Profile",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
                     ),
                   ),
                 ],
