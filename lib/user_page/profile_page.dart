@@ -4,20 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/ui_page/home_page/home_page.dart';
-import 'package:recharge_setu/user_page/changepassword_page.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/current_securitypin.dart';
-import 'package:recharge_setu/user_page/support_page.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
-
 import '../localdatabase.dart';
-import '../user_verification/login_page.dart';
-import '../user_verification/login_page.dart';
-import '../user_verification/login_page.dart';
-import '../user_verification/login_page.dart';
-import '../user_verification/pin_page.dart';
+
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -30,13 +22,14 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+    appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         title: const Text(
           "Profile",
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
+
         actions: const [
           Image(
             image: AssetImage("images/white_bell.png"),
@@ -50,12 +43,14 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       body: SingleChildScrollView(
+
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(
               height: 20,
             ),
+            if(App_Text.dbstatus == "success")
             Center(
               child: Container(
                 height: 200,
@@ -550,12 +545,21 @@ class _ProfileState extends State<Profile> {
                                           DatabaseHandler.deleteJson(int.parse(App_Text.id.toString()));
                                           print(App_Text.id);
                                           print("Del");
-                                          if(Platform.isAndroid){
-                                            SystemNavigator.pop();
-                                          }else{
-                                            exit(0);
-                                          }
-                                      
+                                          Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              type: PageTransitionType.leftToRight,
+                                              isIos: true,
+                                              child: const Login(),
+                                            ),
+                                          );
+                                          // if(Platform.isAndroid){
+                                          //   SystemNavigator.pop();
+                                          // }else{
+                                          //   exit(0);
+                                          // }
+
+
                                         },
                                       )
                                     ],
