@@ -4,8 +4,10 @@ import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/ui_page/bottom_navigation.dart';
 import 'package:recharge_setu/ui_page/login_success.dart';
+import 'package:recharge_setu/user_verification/fingerprin_page.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
 import '../Retailer/retailer_bottomnavigation.dart';
+import '../Retailer/retailer_fingerprint.dart';
 import '../Retailer/retailer_login_success.dart';
 import '../Utilities.dart';
 import '../app_text.dart';
@@ -15,6 +17,9 @@ import 'forgotpin_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:flutter_loader/flutter_loader.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class Pin extends StatefulWidget {
   const Pin({super.key});
@@ -55,6 +60,151 @@ class _PinState extends State<Pin> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.red)));
+    //*************** Finger print function code**********************//
+    final LocalAuthentication auth = LocalAuthentication();
+    _SupportState _supportState = _SupportState.unknown;
+    bool? _canCheckBiometrics;
+    List<BiometricType>? _availableBiometrics;
+    String _authorized = 'Not Authorized';
+    bool _isAuthenticating = false;
+    bool fingerprint = false;
+    String user="";
+
+    @override
+    void initState() {
+      super.initState();
+      auth.isDeviceSupported().then(
+            (bool isSupported) => setState(() => _supportState = isSupported
+            ? _SupportState.supported
+            : _SupportState.unsupported),
+      );
+    }
+
+    Future<void> _checkBiometrics() async {
+      late bool canCheckBiometrics;
+      try {
+        canCheckBiometrics = await auth.canCheckBiometrics;
+      } on PlatformException catch (e) {
+        canCheckBiometrics = false;
+        print(e);
+      }
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        _canCheckBiometrics = canCheckBiometrics;
+      });
+    }
+
+    Future<void> _getAvailableBiometrics() async {
+      late List<BiometricType> availableBiometrics;
+      try {
+        availableBiometrics = await auth.getAvailableBiometrics();
+      } on PlatformException catch (e) {
+        availableBiometrics = <BiometricType>[];
+        print(e);
+      }
+      if (!mounted) {
+        return;
+      }
+
+      // setState(() {
+      //   _availableBiometrics = availableBiometrics;
+      // });
+    }
+
+    Future<void> _authenticate() async {
+      bool authenticated = false;
+      try {
+        setState(() {
+          print("step1");
+          _isAuthenticating = true;
+          _authorized = 'Authenticating';
+        });
+        authenticated = await auth.authenticate(
+
+          localizedReason: 'Let OS determine authentication method',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+          ),
+        );
+        setState(() {
+          fingerprint = true;
+          _isAuthenticating = false;
+          user ="step2";
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.scale,
+              alignment: Alignment.topCenter,
+              duration: Duration(milliseconds: 500),
+              isIos: true,
+              child: Pin(),
+            ),
+          );
+
+
+        });
+      } on PlatformException catch (e) {
+        print(e);
+        setState(() {
+          print("step3");
+          _isAuthenticating = false;
+          _authorized = 'Error - ${e.message}';
+        });
+        return;
+      }
+      if (!mounted) {
+        return;
+      }
+
+      setState(
+              () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+    }
+
+    Future<void> _authenticateWithBiometrics() async {
+      bool authenticated = false;
+      try {
+        setState(() {
+          _isAuthenticating = true;
+          _authorized = 'Authenticating';
+        });
+        authenticated = await auth.authenticate(
+          localizedReason:
+          'Scan your fingerprint (or face or whatever) to authenticate',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: true,
+          ),
+        );
+        setState(() {
+          _isAuthenticating = false;
+          _authorized = 'Authenticating';
+        });
+      } on PlatformException catch (e) {
+        print(e);
+        setState(() {
+          _isAuthenticating = false;
+          _authorized = 'Error - ${e.message}';
+        });
+        return;
+      }
+      if (!mounted) {
+        return;
+      }
+
+      final String message = authenticated ? 'Authorized' : 'Not Authorized';
+      setState(() {
+        _authorized = message;
+      });
+    }
+
+    Future<void> _cancelAuthentication() async {
+      await auth.stopAuthentication();
+      setState(() => _isAuthenticating = false);
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: DefaultLoaderBuilder(
@@ -66,9 +216,12 @@ class _PinState extends State<Pin> {
         loader: () => Future.delayed(
          Duration(seconds: 3),
              () => 'Hello World',
+
+
         ),
         loadedBuilder: (context) {
           final controller = LoaderController.of(context)!;
+          _authenticate;
           return Center(
             child:Column(
               children: [
@@ -219,7 +372,7 @@ class _PinState extends State<Pin> {
                                 var list = await DatabaseHandler.jsons();
                                 List<Json> lst = list;
                                 print(list);
-                                print(list[0].id);
+
                                 //list[0].id = App_Text.id;
                                 print(App_Text.id);
                               }
@@ -240,7 +393,7 @@ class _PinState extends State<Pin> {
                                   PageTransition(
                                     type: PageTransitionType.rightToLeft,
                                     isIos: true,
-                                    child: BottomCollectionBoy(index: 0,),
+                                    child:FingerPrint(),
                                     // BottomCollectionBoy(index: 0),
                                   ),
                                 );
@@ -251,7 +404,9 @@ class _PinState extends State<Pin> {
                                   PageTransition(
                                     type: PageTransitionType.rightToLeft,
                                     isIos: true,
-                                    child:Retailer_Bottomnavigation(index: 0),
+                                    child:
+                                    Retailer_FingerPrint()
+                                    //Retailer_Bottomnavigation(index: 0),
                                   ),
                                 );
                               }
@@ -359,4 +514,10 @@ class _PinState extends State<Pin> {
       ),
     );
   }
+}
+
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }

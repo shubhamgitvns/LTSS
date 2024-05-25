@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
 import '../app_text.dart';
 import '../ui_page/bottom_navigation.dart';
@@ -8,14 +9,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-class FingerPrint extends StatefulWidget {
-  const FingerPrint({super.key});
+
+class Retailer_FingerPrint extends StatefulWidget {
+  const Retailer_FingerPrint({super.key});
 
   @override
-  State<FingerPrint> createState() => _FingerPrintState();
+  State<Retailer_FingerPrint> createState() => _Retailer_FingerPrintState();
 }
 
-class _FingerPrintState extends State<FingerPrint> {
+class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
   final LocalAuthentication auth = LocalAuthentication();
   _SupportState _supportState = _SupportState.unknown;
   bool? _canCheckBiometrics;
@@ -85,7 +87,7 @@ class _FingerPrintState extends State<FingerPrint> {
         ),
       );
       setState(() {
-       fingerprint = true;
+        fingerprint = true;
         _isAuthenticating = false;
         user ="step2";
         Navigator.push(
@@ -95,7 +97,7 @@ class _FingerPrintState extends State<FingerPrint> {
             alignment: Alignment.topCenter,
             duration: Duration(milliseconds: 500),
             isIos: true,
-            child: BottomCollectionBoy(index: 0,),
+            child: Retailer_Bottomnavigation(index: 0),
           ),
         );
 
@@ -231,12 +233,12 @@ class _FingerPrintState extends State<FingerPrint> {
                           height: 20,
                         ),
 
-                         const Image(image: AssetImage("images/fprint.png")),
+                        const Image(image: AssetImage("images/fprint.png")),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width:350,
+                                width:350,
                                 child: Text("All of the Touch ID fingerprints stored on this device can be used to log inot your account")),
                           ],
                         ),
@@ -253,16 +255,16 @@ class _FingerPrintState extends State<FingerPrint> {
                                 height: 50,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.red)
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.red)
                                 ),
 
                                 child: const Center(
                                     child: Text(
                                       "Skip this step",
                                       style: TextStyle(
-                                          color: Colors.red,),
+                                        color: Colors.red,),
                                     )),
                               ),
                               onTap: (){
@@ -281,7 +283,7 @@ class _FingerPrintState extends State<FingerPrint> {
                             InkWell(
                               child: Container(
                                 height: 50,
-                                 width: 150,
+                                width: 150,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Colors.red,
@@ -291,7 +293,7 @@ class _FingerPrintState extends State<FingerPrint> {
                                     child: Text(
                                       "Turn on Touch ID",
                                       style: TextStyle(
-                                          color: Colors.white,),
+                                        color: Colors.white,),
                                     )),
                               ),
                               onTap: (){
@@ -308,7 +310,7 @@ class _FingerPrintState extends State<FingerPrint> {
                                 _authenticate();
                                 if(user == "step2"){
 
-                                    print("========================object");
+                                  print("========================object");
 
 
                                 }
