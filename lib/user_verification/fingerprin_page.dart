@@ -1,13 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
 import '../app_text.dart';
+import '../jsonclass.dart';
+import '../localdatabase.dart';
 import '../ui_page/bottom_navigation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+
 class FingerPrint extends StatefulWidget {
   const FingerPrint({super.key});
 
@@ -23,16 +25,16 @@ class _FingerPrintState extends State<FingerPrint> {
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
   bool fingerprint = false;
-  String user="";
+  String user = "";
 
   @override
   void initState() {
     super.initState();
     auth.isDeviceSupported().then(
           (bool isSupported) => setState(() => _supportState = isSupported
-          ? _SupportState.supported
-          : _SupportState.unsupported),
-    );
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
   }
 
   Future<void> _checkBiometrics() async {
@@ -78,16 +80,15 @@ class _FingerPrintState extends State<FingerPrint> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-
         localizedReason: 'Let OS determine authentication method',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
       );
       setState(() {
-       fingerprint = true;
+        fingerprint = true;
         _isAuthenticating = false;
-        user ="step2";
+        user = "step2";
         Navigator.push(
           context,
           PageTransition(
@@ -95,11 +96,11 @@ class _FingerPrintState extends State<FingerPrint> {
             alignment: Alignment.topCenter,
             duration: Duration(milliseconds: 500),
             isIos: true,
-            child: BottomCollectionBoy(index: 0,),
+            child: BottomCollectionBoy(
+              index: 0,
+            ),
           ),
         );
-
-
       });
     } on PlatformException catch (e) {
       print(e);
@@ -115,7 +116,7 @@ class _FingerPrintState extends State<FingerPrint> {
     }
 
     setState(
-            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   Future<void> _authenticateWithBiometrics() async {
@@ -127,7 +128,7 @@ class _FingerPrintState extends State<FingerPrint> {
       });
       authenticated = await auth.authenticate(
         localizedReason:
-        'Scan your fingerprint (or face or whatever) to authenticate',
+            'Scan your fingerprint (or face or whatever) to authenticate',
         options: const AuthenticationOptions(
           stickyAuth: true,
           biometricOnly: true,
@@ -162,7 +163,7 @@ class _FingerPrintState extends State<FingerPrint> {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
@@ -216,7 +217,7 @@ class _FingerPrintState extends State<FingerPrint> {
                         const Row(
                           children: [
                             SizedBox(
-                              width:350,
+                              width: 350,
                               child: Text(
                                 "Use your Touch ID for the faster, easier access to your payment or transaction",
                                 style: TextStyle(
@@ -230,21 +231,19 @@ class _FingerPrintState extends State<FingerPrint> {
                         const SizedBox(
                           height: 20,
                         ),
-
-                         const Image(image: AssetImage("images/fprint.png")),
+                        const Image(image: AssetImage("images/fprint.png")),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width:350,
-                                child: Text("All of the Touch ID fingerprints stored on this device can be used to log inot your account")),
+                                width: 350,
+                                child: Text(
+                                    "All of the Touch ID fingerprints stored on this device can be used to log inot your account")),
                           ],
                         ),
-
                         const SizedBox(
                           height: 50,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -253,19 +252,18 @@ class _FingerPrintState extends State<FingerPrint> {
                                 height: 50,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.red)
-                                ),
-
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.red)),
                                 child: const Center(
                                     child: Text(
-                                      "Skip this step",
-                                      style: TextStyle(
-                                          color: Colors.red,),
-                                    )),
+                                  "Skip this step",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                )),
                               ),
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   PageTransition(
@@ -273,7 +271,9 @@ class _FingerPrintState extends State<FingerPrint> {
                                     alignment: Alignment.topCenter,
                                     duration: Duration(milliseconds: 500),
                                     isIos: true,
-                                    child: Pin(),
+                                    child: BottomCollectionBoy(
+                                      index: 0,
+                                    ),
                                   ),
                                 );
                               },
@@ -281,46 +281,48 @@ class _FingerPrintState extends State<FingerPrint> {
                             InkWell(
                               child: Container(
                                 height: 50,
-                                 width: 150,
+                                width: 150,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Colors.red,
-                                    border: Border.all(color: Colors.red)
-                                ),
+                                    border: Border.all(color: Colors.red)),
                                 child: const Center(
                                     child: Text(
-                                      "Turn on Touch ID",
-                                      style: TextStyle(
-                                          color: Colors.white,),
-                                    )),
+                                  "Turn on Touch ID",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                )),
                               ),
-                              onTap: (){
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     type: PageTransitionType.scale,
-                                //     alignment: Alignment.topCenter,
-                                //     duration: Duration(milliseconds: 500),
-                                //     isIos: true,
-                                //     child: BottomCollectionBoy(index: 0),
-                                //   ),
-                                // );
+                              onTap: () async {
                                 _authenticate();
-                                if(user == "step2"){
+                                fingerprint = true;
 
-                                    print("========================object");
-
-
+                                print("Finger print=======$fingerprint");
+                                if (App_Text.dbfinger == "false") {
+                                  App_Text.dbfinger = "true";
                                 }
 
-                                if(_isAuthenticating == false){
-                                  setState(() {
-                                    print("========================false");
-                                  });
+                                var javabook = Json(
+                                    App_Text.id,
+                                    App_Text.dbname,
+                                    App_Text.dbrole,
+                                    App_Text.dbstatus,
+                                    App_Text.dbmessage,
+                                    App_Text.dbmobile,
+                                    App_Text.dbfinger);
+                                await DatabaseHandler.updateJson(javabook);
+                                print(await DatabaseHandler.jsons());
+                                print(App_Text.dbname);
+                                print("Update Again");
 
-                                }
+                                print("search");
+                                var list = await DatabaseHandler.jsons();
+                                List<Json> lst = list;
+                                print(list);
 
-
+                                //list[0].id = App_Text.id;
+                                print(App_Text.id);
                               },
                             ),
                           ],
@@ -328,7 +330,6 @@ class _FingerPrintState extends State<FingerPrint> {
                         const SizedBox(
                           height: 20,
                         ),
-
                       ],
                     ),
                   ),
@@ -341,17 +342,15 @@ class _FingerPrintState extends State<FingerPrint> {
     );
   }
 }
+
 enum _SupportState {
   unknown,
   supported,
   unsupported,
 }
 
-
-
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
 // ignore_for_file: public_member_api_docs, avoid_print
-

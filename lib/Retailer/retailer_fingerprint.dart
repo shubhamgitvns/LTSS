@@ -275,7 +275,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                                     alignment: Alignment.topCenter,
                                     duration: Duration(milliseconds: 500),
                                     isIos: true,
-                                    child: Pin(),
+                                    child: Retailer_Bottomnavigation(index: 0,),
                                   ),
                                 );
                               },
@@ -297,23 +297,9 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                                     )),
                               ),
                               onTap: (){
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     type: PageTransitionType.scale,
-                                //     alignment: Alignment.topCenter,
-                                //     duration: Duration(milliseconds: 500),
-                                //     isIos: true,
-                                //     child: BottomCollectionBoy(index: 0),
-                                //   ),
-                                // );
+                               
                                 _authenticate();
-                                if(user == "step2"){
-
-                                  print("========================object");
-
-
-                                }
+                                
 
                                 if(_isAuthenticating == false){
                                   setState(() {

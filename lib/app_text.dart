@@ -18,6 +18,7 @@ class App_Text {
   static String dbstatus="status";
   static String dbmessage="message";
   static String dbmobile="mobile";
+  static String dbfinger="false";
   static int id= 1;
 
   static bool login = false;

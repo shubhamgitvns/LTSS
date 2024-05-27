@@ -13,6 +13,7 @@ import '../Utilities.dart';
 import '../app_text.dart';
 import '../jsonclass.dart';
 import '../localdatabase.dart';
+import '../ui_page/home_page/home_page.dart';
 import 'forgotpin_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -39,6 +40,19 @@ class _PinState extends State<Pin> {
   void initState() {
     super.initState();
     myFocusNode = FocusNode();
+    auth.isDeviceSupported().then(
+          (bool isSupported) {
+        if (mounted) {
+          print("enter the code");
+          setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported);
+
+        }
+      },
+    );
+    // _authenticate();
+
   }
 
   @override
@@ -47,6 +61,133 @@ class _PinState extends State<Pin> {
     myFocusNode.dispose();
 
     super.dispose();
+  }
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+  bool fingerprint = false;
+  String user = "";
+
+  Future<void> _checkBiometrics() async {
+    late bool canCheckBiometrics;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      canCheckBiometrics = false;
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _canCheckBiometrics = canCheckBiometrics;
+    });
+  }
+
+  Future<void> _getAvailableBiometrics() async {
+    late List<BiometricType> availableBiometrics;
+    try {
+      availableBiometrics = await auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      availableBiometrics = <BiometricType>[];
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+  }
+
+  Future<void> _authenticate() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+      if (!mounted) return;
+      setState(() {
+        fingerprint = true;
+        _isAuthenticating = false;
+        user = "step2";
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.topCenter,
+            duration: Duration(milliseconds: 500),
+            isIos: true,
+            child: Home(),
+          ),
+        );
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      if (!mounted) return;
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
+  Future<void> _authenticateWithBiometrics() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+      if (!mounted) return;
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Authenticating';
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      if (!mounted) return;
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    final String message = authenticated ? 'Authorized' : 'Not Authorized';
+    setState(() {
+      _authorized = message;
+    });
+  }
+
+  Future<void> _cancelAuthentication() async {
+    await auth.stopAuthentication();
+    setState(() => _isAuthenticating = false);
   }
 
   @override
@@ -61,149 +202,6 @@ class _PinState extends State<Pin> {
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.red)));
     //*************** Finger print function code**********************//
-    final LocalAuthentication auth = LocalAuthentication();
-    _SupportState _supportState = _SupportState.unknown;
-    bool? _canCheckBiometrics;
-    List<BiometricType>? _availableBiometrics;
-    String _authorized = 'Not Authorized';
-    bool _isAuthenticating = false;
-    bool fingerprint = false;
-    String user="";
-
-    @override
-    void initState() {
-      super.initState();
-      auth.isDeviceSupported().then(
-            (bool isSupported) => setState(() => _supportState = isSupported
-            ? _SupportState.supported
-            : _SupportState.unsupported),
-      );
-    }
-
-    Future<void> _checkBiometrics() async {
-      late bool canCheckBiometrics;
-      try {
-        canCheckBiometrics = await auth.canCheckBiometrics;
-      } on PlatformException catch (e) {
-        canCheckBiometrics = false;
-        print(e);
-      }
-      if (!mounted) {
-        return;
-      }
-
-      setState(() {
-        _canCheckBiometrics = canCheckBiometrics;
-      });
-    }
-
-    Future<void> _getAvailableBiometrics() async {
-      late List<BiometricType> availableBiometrics;
-      try {
-        availableBiometrics = await auth.getAvailableBiometrics();
-      } on PlatformException catch (e) {
-        availableBiometrics = <BiometricType>[];
-        print(e);
-      }
-      if (!mounted) {
-        return;
-      }
-
-      // setState(() {
-      //   _availableBiometrics = availableBiometrics;
-      // });
-    }
-
-    Future<void> _authenticate() async {
-      bool authenticated = false;
-      try {
-        setState(() {
-          print("step1");
-          _isAuthenticating = true;
-          _authorized = 'Authenticating';
-        });
-        authenticated = await auth.authenticate(
-
-          localizedReason: 'Let OS determine authentication method',
-          options: const AuthenticationOptions(
-            stickyAuth: true,
-          ),
-        );
-        setState(() {
-          fingerprint = true;
-          _isAuthenticating = false;
-          user ="step2";
-          Navigator.push(
-            context,
-            PageTransition(
-              type: PageTransitionType.scale,
-              alignment: Alignment.topCenter,
-              duration: Duration(milliseconds: 500),
-              isIos: true,
-              child: Pin(),
-            ),
-          );
-
-
-        });
-      } on PlatformException catch (e) {
-        print(e);
-        setState(() {
-          print("step3");
-          _isAuthenticating = false;
-          _authorized = 'Error - ${e.message}';
-        });
-        return;
-      }
-      if (!mounted) {
-        return;
-      }
-
-      setState(
-              () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-    }
-
-    Future<void> _authenticateWithBiometrics() async {
-      bool authenticated = false;
-      try {
-        setState(() {
-          _isAuthenticating = true;
-          _authorized = 'Authenticating';
-        });
-        authenticated = await auth.authenticate(
-          localizedReason:
-          'Scan your fingerprint (or face or whatever) to authenticate',
-          options: const AuthenticationOptions(
-            stickyAuth: true,
-            biometricOnly: true,
-          ),
-        );
-        setState(() {
-          _isAuthenticating = false;
-          _authorized = 'Authenticating';
-        });
-      } on PlatformException catch (e) {
-        print(e);
-        setState(() {
-          _isAuthenticating = false;
-          _authorized = 'Error - ${e.message}';
-        });
-        return;
-      }
-      if (!mounted) {
-        return;
-      }
-
-      final String message = authenticated ? 'Authorized' : 'Not Authorized';
-      setState(() {
-        _authorized = message;
-      });
-    }
-
-    Future<void> _cancelAuthentication() async {
-      await auth.stopAuthentication();
-      setState(() => _isAuthenticating = false);
-    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -214,8 +212,8 @@ class _PinState extends State<Pin> {
         ),
 
         loader: () => Future.delayed(
-         Duration(seconds: 3),
-             () => 'Hello World',
+         Duration(seconds: 1),
+             () => "Hello world",
 
 
         ),
@@ -296,14 +294,7 @@ class _PinState extends State<Pin> {
                           const SizedBox(
                             height: 10,
                           ),
-                          //************* LOder Code **********************************//
-                          // if (loder)
-                          //   Center(
-                          //     child: LoadingAnimationWidget.threeArchedCircle(
-                          //       color: Colors.red,
-                          //       size: 50,
-                          //     ),
-                          //   ),
+
                           const SizedBox(
                             height: 80,
                           ),
@@ -344,29 +335,16 @@ class _PinState extends State<Pin> {
                               if(App_Text.status == "success") {
                                 print("Come");
 
-                                // var javabook = Json(
-                                //     App_Text.id, App_Text.dbname, App_Text.dbrole,
-                                //     App_Text.dbstatus,
-                                //     App_Text.dbmessage);
-                                // await DatabaseHandler.insertJson(javabook);
-                                // print(await DatabaseHandler.jsons());
-                                // print("ADD");
+
 
                                 var javabook = Json(
                                     App_Text.id, App_Text.dbname, App_Text.dbrole,
-                                    App_Text.dbstatus, App_Text.dbmessage,App_Text.dbmobile);
+                                    App_Text.dbstatus, App_Text.dbmessage,App_Text.dbmobile,App_Text.dbfinger);
                                 await DatabaseHandler.updateJson(javabook);
                                 print(await DatabaseHandler.jsons());
                                 print(App_Text.dbname);
                                 print("Update");
 
-                                //   javabook = Json(
-                                //     App_Text.id, App_Text.dbname, App_Text.dbrole,
-                                //     App_Text.dbstatus,
-                                //     App_Text.dbmessage);
-                                // await DatabaseHandler.insertJson(javabook);
-                                // print(await DatabaseHandler.jsons());
-                                // print("ADD");
 
                                 print("search");
                                 var list = await DatabaseHandler.jsons();
@@ -460,14 +438,16 @@ class _PinState extends State<Pin> {
                                   );
                                 },
                               ),
-                              SizedBox(width: 20,),
-                              Text("Go To Back",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+                              const SizedBox(width: 20,),
+                              const Text("Go To Back",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
                             ],
                           ),
 
                         ],
                       ),
                     ),
+                // _authenticate();
+
                     if(message_s)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 150),

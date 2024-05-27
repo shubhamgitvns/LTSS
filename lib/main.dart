@@ -20,7 +20,9 @@ if(list.isEmpty){
       App_Text.id, App_Text.dbname, App_Text.dbrole,
       App_Text.dbstatus,
       App_Text.dbmessage,
-  App_Text.dbmobile);
+  App_Text.dbmobile,
+  App_Text.dbfinger,
+  );
   await DatabaseHandler.insertJson(javabook);
   print(await DatabaseHandler.jsons());
   print("ADD");

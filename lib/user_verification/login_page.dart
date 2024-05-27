@@ -236,7 +236,7 @@ class _LoginState extends State<Login> {
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
                                 isIos: true,
-                                child: const Pin(),
+                                child:  Pin(),
                               ),
                             );
                             return null;
