@@ -96,9 +96,9 @@ class _FingerPrintState extends State<FingerPrint> {
             alignment: Alignment.topCenter,
             duration: Duration(milliseconds: 500),
             isIos: true,
-            child: BottomCollectionBoy(
-              index: 0,
-            ),
+            child: Pin(),
+            // BottomCollectionBoy(
+            //   index: 0,),
           ),
         );
       });
@@ -264,6 +264,7 @@ class _FingerPrintState extends State<FingerPrint> {
                                 )),
                               ),
                               onTap: () {
+                                App_Text.dbfinger = "false";
                                 Navigator.push(
                                   context,
                                   PageTransition(
@@ -271,9 +272,7 @@ class _FingerPrintState extends State<FingerPrint> {
                                     alignment: Alignment.topCenter,
                                     duration: Duration(milliseconds: 500),
                                     isIos: true,
-                                    child: BottomCollectionBoy(
-                                      index: 0,
-                                    ),
+                                    child: Pin(),
                                   ),
                                 );
                               },
@@ -297,32 +296,9 @@ class _FingerPrintState extends State<FingerPrint> {
                               onTap: () async {
                                 _authenticate();
                                 fingerprint = true;
+                                App_Text.dbfinger = "true";
 
                                 print("Finger print=======$fingerprint");
-                                if (App_Text.dbfinger == "false") {
-                                  App_Text.dbfinger = "true";
-                                }
-
-                                var javabook = Json(
-                                    App_Text.id,
-                                    App_Text.dbname,
-                                    App_Text.dbrole,
-                                    App_Text.dbstatus,
-                                    App_Text.dbmessage,
-                                    App_Text.dbmobile,
-                                    App_Text.dbfinger);
-                                await DatabaseHandler.updateJson(javabook);
-                                print(await DatabaseHandler.jsons());
-                                print(App_Text.dbname);
-                                print("Update Again");
-
-                                print("search");
-                                var list = await DatabaseHandler.jsons();
-                                List<Json> lst = list;
-                                print(list);
-
-                                //list[0].id = App_Text.id;
-                                print(App_Text.id);
                               },
                             ),
                           ],

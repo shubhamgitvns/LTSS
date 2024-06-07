@@ -10,8 +10,10 @@ class Json {
   final String message;
   final String mobile;
   final String finger;
+  final String mpin;
+  final String tpin;
 
-  Json( this.id,this.username, this.role, this.status, this.message, this.mobile, this.finger) {}
+  Json( this.id,this.username, this.role, this.status, this.message, this.mobile, this.finger,this.mpin, this.tpin) {}
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,6 +24,8 @@ class Json {
       'message': message,
       'mobile': mobile,
       'finger': finger,
+      'mpin': mpin,
+      'tpin': tpin
     };
   }
 
@@ -29,6 +33,6 @@ class Json {
 // each book.
   @override
   String toString() {
-    return 'Json{id:$id, username: $username, role: $role, status: $status, message: $message, mobile: $mobile, finger:$finger}';
+    return 'Json{id:$id, username: $username, role: $role, status: $status, message: $message, mobile: $mobile, finger:$finger, mpin: $mpin, tpin: $tpin}';
   }
 }

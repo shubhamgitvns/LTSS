@@ -10,8 +10,13 @@ class Utilities {
 
     final url = Uri.https("ltss.pocketmoney.net.in", link, {
 
-          "Mobile": App_Text.dbmobile,
-          "Mpin": App_Text.Mpin
+    "Mobile": App_Text.dbmobile,
+    "Mpin": App_Text.Mpin,
+    "pin": App_Text.Mpin,
+    'newpin': App_Text.new_Mpin,
+      // 'Mobile':App_Text.number.text
+
+
 
     } as Map<String, dynamic>?);
     try {

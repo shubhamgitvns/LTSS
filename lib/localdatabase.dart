@@ -22,7 +22,7 @@ class DatabaseHandler {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute(
-          'CREATE TABLE jsons(id INTEGER PRIMARY KEY, username TEXT, role TEXT, status TEXT, message TEXT,mobile TEXT, finger TEXT)',
+          'CREATE TABLE jsons(id INTEGER PRIMARY KEY, username TEXT, role TEXT, status TEXT, message TEXT,mobile TEXT, finger TEXT, mpin TEXT, tpin TEXT)',
         );
       },
       // Set the version. This executes the onCreate function and provides a
@@ -67,6 +67,8 @@ class DatabaseHandler {
           maps[i]['message'],
           maps[i]['mobile'],
           maps[i]['finger'],
+          maps[i]['mpin'],
+          maps[i]['tpin'],
       );
     });
   }

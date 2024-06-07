@@ -7,9 +7,13 @@ import 'localdatabase.dart';
 
 void main() async {
   await DatabaseHandler.initialize();
+  print(App_Text.dbmobile);
+
   print("search");
   var list= await DatabaseHandler.jsons();
    List<Json> lst=list;
+   // App_Text.dbmobile = list[0].mobile;
+   print(App_Text.dbmobile);
    print(list);
    //App_Text.dbmobile = list[0].mobile;
 
@@ -22,6 +26,8 @@ if(list.isEmpty){
       App_Text.dbmessage,
   App_Text.dbmobile,
   App_Text.dbfinger,
+    App_Text.dbmpin,
+    App_Text.dbtpin
   );
   await DatabaseHandler.insertJson(javabook);
   print(await DatabaseHandler.jsons());

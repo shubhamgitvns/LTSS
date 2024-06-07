@@ -1,17 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
 import 'package:recharge_setu/user_verification/pin_page.dart';
 
 import '../jsonclass.dart';
 import '../localdatabase.dart';
 
-import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -27,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 1), () async {
       print("enter the timer");
       if (!mounted) return; // Check if widget is still mounted
       var list = await DatabaseHandler.jsons();
@@ -36,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (list[0].status == "success") {
         print("enter the pin");
         App_Text.dbmobile = list[0].mobile;
+        App_Text.dbfinger = list[0].finger;
         Navigator.pushReplacement (
           context,
           MaterialPageRoute(builder: (context) => Pin()),

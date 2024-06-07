@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
 import 'package:recharge_setu/app_text.dart';
+import 'package:recharge_setu/ui_page/home_page/csc/csc_beneficiary.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/current_securitypin.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
+import '../jsonclass.dart';
 import '../localdatabase.dart';
 import '../ui_page/bottom_navigation.dart';
 
@@ -22,11 +24,17 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   get value => null;
-
+  String name="", role="";
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: () async {
+        var list = await DatabaseHandler.jsons();
+        List<Json> lst = list;
+        App_Text.role = list[0].role;
+        App_Text.name = list[0].username;
+
         if(App_Text.role == "DISTRIBUTOR") {
           Navigator.push(
             context,
@@ -414,47 +422,47 @@ class _ProfileState extends State<Profile> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red),
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.red.shade50,
-                                image: const DecorationImage(
-                                    image: AssetImage("images/lock.png"),
-                                    fit: BoxFit.scaleDown)),
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
-                          const Text(
-                            'Change Password',
-                            style: TextStyle(color: Colors.red, fontSize: 15),
-                          ),
-                          const SizedBox(
-                            width: 100,
-                          ),
-                          InkWell(
-                            child: const Text(
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.red.shade50,
+                                  image: const DecorationImage(
+                                      image: AssetImage("images/lock.png"),
+                                      fit: BoxFit.scaleDown)),
+                            ),
+                            const SizedBox(
+                              width: 50,
+                            ),
+                            const Text(
+                              'Change Password',
+                              style: TextStyle(color: Colors.red, fontSize: 15),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            const Text(
                               ">",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.topToBottom,
+                              isIos: true,
+                              child: const Current_password(),
                             ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.topToBottom,
-                                  isIos: true,
-                                  child: const Current_password(),
-                                ),
-                              );
-                            },
-                          )
-                        ],
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(

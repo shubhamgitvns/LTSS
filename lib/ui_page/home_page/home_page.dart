@@ -30,19 +30,20 @@ class _HomeState extends State<Home> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Alert'),
-                content: const Text("Do you want Exit?"),
+                title: Center(child: Icon(Icons.check_box,color: Colors.red.shade200,size: 50,)),
+                content: const Text("Do you want Exit?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
                 actions: [
                   InkWell(
                     child: Container(
                       height: 50,
-                      width: 50,
+                      width: 60,
                       color: Colors.red,
                       child: const Center(child: Text("Yes",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
                     ),
                     onTap: (){
                       if(Platform.isAndroid){
                         SystemNavigator.pop();
+                        exit(1);
                       }else{
                         exit(0);
                       }
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
                   InkWell(
                     child: Container(
                       height: 50,
-                      width: 50,
+                      width: 60,
                       color: Colors.red,
                       child: const Center(child: Text("No",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
                     ),

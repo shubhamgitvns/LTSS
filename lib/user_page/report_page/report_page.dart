@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
+import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_recharge.dart';
 import 'package:recharge_setu/user_page/report_page/complaint_Report/complaint_report.dart';
 import 'package:recharge_setu/user_page/report_page/dth_report/dth_report.dart';
@@ -30,19 +31,21 @@ class _ReportState extends State<Report> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Alert'),
-                content: const Text("Do you want Exit?"),
+                title: Icon(Icons.check_box,color: Colors.red.shade200,size: 50,),
+                content: const Text("Do you want Exit?",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                 actions: [
                   InkWell(
                     child: Container(
                       height: 50,
-                      width: 50,
+                      width: 60,
                       color: Colors.red,
                       child: const Center(child: Text("Yes",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
                     ),
                     onTap: (){
                       if(Platform.isAndroid){
                         SystemNavigator.pop();
+                        // Navigator.push(context, Home());
+                        exit(1);
                       }else{
                         exit(0);
                       }
@@ -52,7 +55,7 @@ class _ReportState extends State<Report> {
                   InkWell(
                     child: Container(
                       height: 50,
-                      width: 50,
+                      width: 60,
                       color: Colors.red,
                       child: const Center(child: Text("No",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),)),
                     ),

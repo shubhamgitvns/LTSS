@@ -7,7 +7,12 @@ class App_Text {
   static TextEditingController conformpin = TextEditingController();
   static TextEditingController idcontroler = TextEditingController();
   static TextEditingController number = TextEditingController();
+  static TextEditingController Tpin = TextEditingController();
+
   static String Mpin="";
+  static String Current_Mpin="";
+  static String new_Mpin="";
+  static String conf_Mpin="";
   static String name="";
   static String role="";
   static String message="";
@@ -18,7 +23,9 @@ class App_Text {
   static String dbstatus="status";
   static String dbmessage="message";
   static String dbmobile="mobile";
-  static String dbfinger="false";
+  static String dbfinger="finger";
+  static String dbmpin="000000";
+  static String dbtpin="000000";
   static int id= 1;
 
   static bool login = false;

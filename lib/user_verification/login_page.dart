@@ -48,6 +48,7 @@ class _LoginState extends State<Login> {
       onWillPop: () async {
        if(Platform.isAndroid){
          SystemNavigator.pop();
+         exit(1);
        }else{
          exit(0);
        }
@@ -227,6 +228,7 @@ class _LoginState extends State<Login> {
                         ),
                         onTap: () async {
                           App_Text.dbmobile= App_Text.number.text;
+                          //App_Text.dbfinger ="false";
                             print("new number======================="+App_Text.dbmobile);
 
                           if (_formKey.currentState!.validate() && isChecked && App_Text.number.text.isNotEmpty) {
@@ -237,6 +239,7 @@ class _LoginState extends State<Login> {
                                 type: PageTransitionType.rightToLeft,
                                 isIos: true,
                                 child:  Pin(),
+                               // FingerPrint(),
                               ),
                             );
                             return null;

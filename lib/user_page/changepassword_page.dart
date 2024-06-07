@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pinput/pinput.dart';
+import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
+import 'package:recharge_setu/ui_page/bottom_navigation.dart';
+import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
 
+import '../Utilities.dart';
 import '../app_text.dart';
 class Change_password extends StatefulWidget {
   const Change_password({super.key});
@@ -18,9 +23,19 @@ class _Change_passwordState extends State<Change_password> {
     controllers.forEach((controller) => controller.dispose());
     super.dispose();
   }
-
+String message = "";
+String status = "";
   @override
   Widget build(BuildContext context) {
+    final defaltPinTheme = PinTheme(
+        width: 50,
+        height: 60,
+        textStyle: const TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.red)));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -31,6 +46,7 @@ class _Change_passwordState extends State<Change_password> {
 
           Container(
             child: Stack(
+              alignment: Alignment.center,
               children: [
                 Container(
                   height: 580,
@@ -82,13 +98,19 @@ class _Change_passwordState extends State<Change_password> {
                         ),
                         const SizedBox(height: 10,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            TextBox(controller: controllers[0]),
-                            TextBox(controller: controllers[1]),
-                            TextBox(controller: controllers[2]),
-                            TextBox(controller: controllers[3]),
-
+                            Pinput(
+                                length: 6,
+                                defaultPinTheme: defaltPinTheme,
+                                focusedPinTheme: defaltPinTheme.copyWith(
+                                    decoration: defaltPinTheme.decoration!
+                                        .copyWith(
+                                        border:
+                                        Border.all(color: Colors.red))),
+                                onCompleted: (pin) {
+                                  App_Text.new_Mpin = pin;
+                                  print("new Mpin===>" + App_Text.new_Mpin);
+                                }),
                           ],
                         ),
                         const SizedBox(height: 20,),
@@ -101,12 +123,19 @@ class _Change_passwordState extends State<Change_password> {
 
                         const SizedBox(height: 10,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            TextBox(controller: controllers[4]),
-                            TextBox(controller: controllers[5]),
-                            TextBox(controller: controllers[6]),
-                            TextBox(controller: controllers[7]),
+                            Pinput(
+                            length: 6,
+                            defaultPinTheme: defaltPinTheme,
+                            focusedPinTheme: defaltPinTheme.copyWith(
+                                decoration: defaltPinTheme.decoration!
+                                    .copyWith(
+                                    border:
+                                    Border.all(color: Colors.red))),
+                            onCompleted: (pin) {
+                              App_Text.conf_Mpin = pin;
+                              print("conf pin===>" + App_Text.conf_Mpin);
+                            }),
                           ],
                         ),
 
@@ -120,19 +149,125 @@ class _Change_passwordState extends State<Change_password> {
                             color: Colors.red,
                             child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                           ),
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.leftToRight,
-                                isIos: true,
-                                child: const Profile(),
-                              ),
-                            );
+                          onTap: () async {
+                            if(App_Text.new_Mpin.isEmpty && App_Text.conf_Mpin.isEmpty){
+                              setState(() {
+                                message = "not equal";
+                                print(message);
+                              });
+                            }
+
+                            if(App_Text.new_Mpin == App_Text.conf_Mpin) {
+                              print(App_Text.new_Mpin);
+                              print(App_Text.Mpin);
+                              print(App_Text.dbmobile);
+                              try {
+
+
+                                dynamic pin_data =
+                                    await Utilities.Downloaddata("/Users/ChangeMPIN");
+                                print("${pin_data["status"]}");
+                                setState(() {
+                                  status = "${pin_data["status"]}";
+                                });
+
+
+                              } catch (ex) {
+                                print(ex);
+                              }
+                            }else{
+                              setState(() {
+
+                                message ="not equal";
+                                print(message);
+                              });
+                            }
 
                           },
                         ),
 
+                      ],
+                    ),
+                  ),
+                ),
+                if(message == "not equal")
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 150),
+                  child: Container(
+                    height: 180,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.error_outline,color: Colors.red,size: 70,),
+                        const Text(
+                          "Conform Password Does Not Match",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        const SizedBox(height: 20,),
+                        InkWell(
+                          child: Container(
+                            height: 40,
+                            width: 80,
+                            color: Colors.red,
+                            child: const Center(child: Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
+                          ),
+                          onTap: (){
+                            setState(() {
+                              message="";
+                              // message_s = false;
+                            });
+
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                if(status == "success")
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 150),
+                  child: Container(
+                    height: 180,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.check_box,color: Colors.red.shade300,size: 70,),
+                        const Text(
+                          "MPIN Updated",
+                          style: TextStyle(color: Colors.green),
+                        ),
+                        const SizedBox(height: 20,),
+                        InkWell(
+                          child: Container(
+                            height: 40,
+                            width: 80,
+                            color: Colors.red,
+                            child:  Center(child: InkWell(child: Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
+                            ),
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.leftToRight,
+                                    isIos: true,
+                                    child: Retailer_Bottomnavigation(index: 0,),
+                                  ),
+                                );
+                              },
+                            ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -149,38 +284,3 @@ class _Change_passwordState extends State<Change_password> {
 
 
 
-class TextBox extends StatelessWidget {
-  final TextEditingController controller;
-
-  const TextBox({Key? key, required this.controller}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(5), // Optional: Add border radius
-      ),
-      child: TextField(
-        controller: controller,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-        maxLength: 1,
-        decoration: InputDecoration(
-          counterText: "",
-          border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red), // Red focus border
-            borderRadius: BorderRadius.circular(5), // Optional: Add border radius
-          ),
-        ),
-      ),
-    );
-  }
-}

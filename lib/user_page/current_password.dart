@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/user_page/changepassword_page.dart';
 
 import '../app_text.dart';
@@ -14,12 +15,25 @@ class Current_password extends StatefulWidget {
 
 class _Current_passwordState extends State<Current_password> {
   List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
+
   void dispose() {
     controllers.forEach((controller) => controller.dispose());
     super.dispose();
   }
+  String message = "";
+  bool information = true;
   @override
   Widget build(BuildContext context) {
+    final defaltPinTheme = PinTheme(
+        width: 50,
+        height: 60,
+        textStyle: const TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.red)));
+
     return  Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -72,12 +86,26 @@ class _Current_passwordState extends State<Current_password> {
                         ),
                         const SizedBox(height: 10,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            TextBox(controller: controllers[0]),
-                            TextBox(controller: controllers[1]),
-                            TextBox(controller: controllers[2]),
-                            TextBox(controller: controllers[3]),
+                            Pinput(
+                                length: 6,
+                                defaultPinTheme: defaltPinTheme,
+                                focusedPinTheme: defaltPinTheme.copyWith(
+                                    decoration: defaltPinTheme.decoration!
+                                        .copyWith(
+                                        border:
+                                        Border.all(color: Colors.red))),
+                                onCompleted: (pin) {
+                                  App_Text.Current_Mpin = pin;
+                                  print("pin===>" + App_Text.Mpin);
+                                }),
+                          ],
+                        ),
+                        const SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Text(message,style: TextStyle(color: Colors.red),)
                           ],
                         ),
 
@@ -92,14 +120,31 @@ class _Current_passwordState extends State<Current_password> {
                             child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                           ),
                           onTap: (){
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                isIos: true,
-                                child: const Change_password(),
-                              ),
-                            );
+                            print(App_Text.Mpin);
+                            if(App_Text.Current_Mpin.isEmpty){
+                              setState(() {
+                                information = false;
+                              });
+                            }
+                            if(App_Text.Current_Mpin == App_Text.dbmpin) {
+                              setState(() {
+                                message="";
+                              });
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  isIos: true,
+                                  child: const Change_password(),
+                                ),
+                              );
+                            }else{
+                              setState(() {
+                                information = false;
+                                message = "Please Enter Correct Password";
+                              });
+                              print(message);
+                            }
 
                           },
                         ),
@@ -119,39 +164,3 @@ class _Current_passwordState extends State<Current_password> {
 }
 
 
-
-class TextBox extends StatelessWidget {
-  final TextEditingController controller;
-
-  const TextBox({Key? key, required this.controller}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(5), // Optional: Add border radius
-      ),
-      child: TextField(
-        controller: controller,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-        maxLength: 1,
-        decoration: InputDecoration(
-          counterText: "",
-          border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red), // Red focus border
-            borderRadius: BorderRadius.circular(5), // Optional: Add border radius
-          ),
-        ),
-      ),
-    );
-  }
-}

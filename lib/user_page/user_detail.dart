@@ -4,13 +4,16 @@ import 'package:recharge_setu/app_text.dart';
 class User_Detail extends StatefulWidget {
   const User_Detail({super.key});
 
+
   @override
   State<User_Detail> createState() => _User_DetailState();
 }
 
 class _User_DetailState extends State<User_Detail> {
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

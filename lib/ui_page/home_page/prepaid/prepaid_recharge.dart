@@ -1,9 +1,14 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/best_offer.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/view_plans.dart';
+
+import '../../../Utilities.dart';
+import '../../../jsonclass.dart';
+import '../../../localdatabase.dart';
 
 const List<String> list = <String>[
   'Select',
@@ -318,89 +323,137 @@ class _Prepaid_RechargeState extends State<Prepaid_Recharge> {
 
             Padding(
               padding: const EdgeInsets.only(top: 70),
-              child: Container(
-                  width: 300,
-                  height: 400,
-                  decoration: Support_container.box,
-                  child:  Column(
-                    children: [
-                      const SizedBox(height: 20,),
-                      const SizedBox(
-                          height:50,
-                  child: Image(image: AssetImage("images/airtel_dth.png"))),
-                      const Text(
-                        "₹ 19",
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text("Airtel"),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text("823456819",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                          width: 200,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Pin Code",
-                              hintStyle: TextStyle(color: Colors.red),
-                            ),
-                          )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          InkWell(
-                            child: const Text(
-                              "Cancel",
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                            onTap: (){
-                              setState(() {
-                                recharge=false;
-                              });
-
-                            },
-                          ),
-                          const Text(
-                            "Continue",
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                child: Container(
+                    width: 300,
+                     height: 500,
+                    decoration: Support_container.box,
+                    child:  Column(
+                      children: [
+                        const SizedBox(height: 20,),
+                        const SizedBox(
+                            height:50,
+                    child: Image(image: AssetImage("images/airtel_dth.png"))),
+                        const Text(
+                          "₹ 19",
+                          style:
+                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("Airtel"),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text("823456819",
                             style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                         SizedBox(
+                            width: 200,
+                            child: TextField(
+                              controller: App_Text.Tpin,
+                              decoration: InputDecoration(
+                                hintText: "Pin Code",
+                                hintStyle: TextStyle(color: Colors.red),
+                              ),
+                            )),
+                        const SizedBox(height: 10,),
+                         Padding(
+                          padding: EdgeInsets.only(right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                  child: Text("Forgot T-Pin",style: TextStyle(color: Colors.red,fontWeight: FontWeight.w500),),
+                                onTap: () async{
+                                  try {
+                                    dynamic pin_data =
+                                        await Utilities.Downloaddata("/Users/ForgotTPIN");
+                                    setState(() {
+                                     // message = ("${pin_data["message"]}");
+
+                                    });
+                                    //print(message);
+                                  } catch (ex) {
+                                    print(ex);
+                                  }
+                                },
+                              )
+                            ],
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                          width: 250,
-                          child: Text(
-                            "Note: kindly check once again all information before doing transactions.",
-                            style: TextStyle(color: Colors.red),
-                          )),
-                      const SizedBox(
-                          width: 250,
-                          child: Text(
-                            "otherwise after transaction recharge amount will not recive",
-                            style: TextStyle(color: Colors.red),
-                          )),
-                    ],
-                  )),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InkWell(
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              onTap: (){
+                                setState(() {
+                                  recharge=false;
+                                });
+
+                              },
+                            ),
+                            InkWell(
+                              child: const Text(
+                                "Continue",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              onTap: () async {
+                                print(App_Text.Tpin.text);
+                                App_Text.dbtpin = App_Text.Tpin.text;
+                                var javabook = Json(
+                                    App_Text.id, App_Text.dbname, App_Text.dbrole,
+                                    App_Text.dbstatus, App_Text.dbmessage,App_Text.dbmobile,App_Text.dbfinger, App_Text.dbmpin,App_Text.dbtpin);
+                                await DatabaseHandler.updateJson(javabook);
+                                print(await DatabaseHandler.jsons());
+                                print(App_Text.dbname);
+                                print("Update");
+
+                                print("search");
+                                var list = await DatabaseHandler.jsons();
+                                List<Json> lst = list;
+                                print(list);
+
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const SizedBox(
+                            width: 250,
+                            child: Text(
+                              "Note: kindly check once again all information before doing transactions.",
+                              style: TextStyle(color: Colors.red),
+                            )),
+                        const SizedBox(
+                            width: 250,
+                            child: Text(
+                              "otherwise after transaction recharge amount will not recive",
+                              style: TextStyle(color: Colors.red),
+                            )),
+                      ],
+                    )),
+              ),
             )
         ]),
       ),
