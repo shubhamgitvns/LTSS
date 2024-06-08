@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
-import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
-import 'package:recharge_setu/ui_page/bottom_navigation.dart';
-import 'package:recharge_setu/ui_page/home_page/home_page.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
-
 import '../Utilities.dart';
 import '../app_text.dart';
+
 class Change_password extends StatefulWidget {
   const Change_password({super.key});
 
@@ -25,6 +22,7 @@ class _Change_passwordState extends State<Change_password> {
   }
 String message = "";
 String status = "";
+bool click = false;
   @override
   Widget build(BuildContext context) {
     final defaltPinTheme = PinTheme(
@@ -142,6 +140,7 @@ String status = "";
                         const SizedBox(
                           height: 70,
                         ),
+                        if(click == false)
                         InkWell(
                           child: Container(
                             height: 50,
@@ -150,6 +149,10 @@ String status = "";
                             child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                           ),
                           onTap: () async {
+                            setState(() {
+                              click =true;
+                            });
+
                             if(App_Text.new_Mpin.isEmpty && App_Text.conf_Mpin.isEmpty){
                               setState(() {
                                 message = "not equal";
@@ -157,13 +160,10 @@ String status = "";
                               });
                             }
 
-                            if(App_Text.new_Mpin == App_Text.conf_Mpin) {
-                              print(App_Text.new_Mpin);
-                              print(App_Text.Mpin);
-                              print(App_Text.dbmobile);
+                            if(App_Text.new_Mpin == App_Text.conf_Mpin &&
+                                App_Text.new_Mpin.isNotEmpty && App_Text.conf_Mpin.isNotEmpty) {
+
                               try {
-
-
                                 dynamic pin_data =
                                     await Utilities.Downloaddata("/Users/ChangeMPIN");
                                 print("${pin_data["status"]}");
@@ -219,7 +219,7 @@ String status = "";
                           onTap: (){
                             setState(() {
                               message="";
-                              // message_s = false;
+                              click = false;
                             });
 
                           },
@@ -228,7 +228,7 @@ String status = "";
                     ),
                   ),
                 ),
-                if(status == "success")
+                if(status == "success" && click)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 150),
                   child: Container(
@@ -252,15 +252,21 @@ String status = "";
                             height: 40,
                             width: 80,
                             color: Colors.red,
-                            child:  Center(child: InkWell(child: Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
+                            child:  Center(child: InkWell(child: const Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
                             ),
                               onTap: (){
+                              setState(() {
+
+                                App_Text.Mpin = App_Text.new_Mpin;
+                                print(App_Text.Mpin);
+                                click = false;
+                              });
                                 Navigator.push(
                                   context,
                                   PageTransition(
                                     type: PageTransitionType.leftToRight,
                                     isIos: true,
-                                    child: Retailer_Bottomnavigation(index: 0,),
+                                    child: const Profile(),
                                   ),
                                 );
                               },

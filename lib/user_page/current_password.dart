@@ -21,7 +21,6 @@ class _Current_passwordState extends State<Current_password> {
     super.dispose();
   }
   String message = "";
-  bool information = true;
   @override
   Widget build(BuildContext context) {
     final defaltPinTheme = PinTheme(
@@ -105,7 +104,7 @@ class _Current_passwordState extends State<Current_password> {
                         const SizedBox(height: 10,),
                         Row(
                           children: [
-                            Text(message,style: TextStyle(color: Colors.red),)
+                            Text(message,style: const TextStyle(color: Colors.red),)
                           ],
                         ),
 
@@ -121,12 +120,8 @@ class _Current_passwordState extends State<Current_password> {
                           ),
                           onTap: (){
                             print(App_Text.Mpin);
-                            if(App_Text.Current_Mpin.isEmpty){
-                              setState(() {
-                                information = false;
-                              });
-                            }
-                            if(App_Text.Current_Mpin == App_Text.dbmpin) {
+
+                            if(App_Text.Current_Mpin == App_Text.Mpin) {
                               setState(() {
                                 message="";
                               });
@@ -140,7 +135,7 @@ class _Current_passwordState extends State<Current_password> {
                               );
                             }else{
                               setState(() {
-                                information = false;
+
                                 message = "Please Enter Correct Password";
                               });
                               print(message);

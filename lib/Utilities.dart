@@ -14,6 +14,7 @@ class Utilities {
     "Mpin": App_Text.Mpin,
     "pin": App_Text.Mpin,
     'newpin': App_Text.new_Mpin,
+
       // 'Mobile':App_Text.number.text
 
 

@@ -10,9 +10,12 @@ class App_Text {
   static TextEditingController Tpin = TextEditingController();
 
   static String Mpin="";
+  static String Current_Tpin="";
   static String Current_Mpin="";
   static String new_Mpin="";
   static String conf_Mpin="";
+  static String new_Tpin="";
+  static String conf_Tpin="";
   static String name="";
   static String role="";
   static String message="";

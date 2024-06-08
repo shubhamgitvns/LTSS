@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/user_page/change_securitypin.dart';
 
 import '../app_text.dart';
@@ -21,7 +22,18 @@ class _Current_Security_PinState extends State<Current_Security_Pin> {
 
   @override
   Widget build(BuildContext context) {
+    final defaltPinTheme = PinTheme(
+        width: 80,
+        height: 80,
+        textStyle: const TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.red)));
+
     return  Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           const SizedBox(
@@ -69,17 +81,25 @@ class _Current_Security_PinState extends State<Current_Security_Pin> {
                         ),
                         const Row(
                           children: [
-                            Text("Enter Current Pin",style: TextStyle(color: Colors.red)),
+                            Text("Enter Current T-Pin",style: TextStyle(color: Colors.red)),
                           ],
                         ),
                         const SizedBox(height: 10,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            TextBox(controller: controllers[0]),
-                            TextBox(controller: controllers[1]),
-                            TextBox(controller: controllers[2]),
-                            TextBox(controller: controllers[3]),
+                            Pinput(
+                                length: 4,
+                                defaultPinTheme: defaltPinTheme,
+                                focusedPinTheme: defaltPinTheme.copyWith(
+                                    decoration: defaltPinTheme.decoration!
+                                        .copyWith(
+                                        border:
+                                        Border.all(color: Colors.red))),
+                                onCompleted: (pin) {
+                                  App_Text.Current_Tpin = pin;
+                                  print(App_Text.Current_Tpin);
+                                }),
                           ],
                         ),
 
@@ -94,14 +114,16 @@ class _Current_Security_PinState extends State<Current_Security_Pin> {
                             child: const Center(child: Text("Change",style: TextStyle(color: Colors.white,fontSize: 20),)),
                           ),
                           onTap: (){
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                isIos: true,
-                                child: const Chandge_Security_Pin(),
-                              ),
-                            );
+                            if(App_Text.Current_Tpin.isNotEmpty) {
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  isIos: true,
+                                  child: const Chandge_Security_Pin(),
+                                ),
+                              );
+                            }
 
                           },
                         ),

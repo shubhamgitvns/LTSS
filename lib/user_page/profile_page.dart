@@ -614,48 +614,49 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.red),
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.red.shade50,
-                                image: const DecorationImage(
-                                    image:AssetImage("images/key.png"),
-                                    fit: BoxFit.scaleDown)),
-                          ),
-                          const Text(
-                            'Change Security Access Pin',
-                            style: TextStyle(color: Colors.red, fontSize: 15),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: InkWell(
-                              child: const Text(
+                    InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.red.shade50,
+                                  image: const DecorationImage(
+                                      image:AssetImage("images/key.png"),
+                                      fit: BoxFit.scaleDown)),
+                            ),
+                            const Text(
+                              'Change Security Access Pin',
+                              style: TextStyle(color: Colors.red, fontSize: 15),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 5),
+                              child: Text(
                                 ">",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    isIos: true,
-                                    child: const Current_Security_Pin(),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            isIos: true,
+                            child: const Current_Security_Pin(),
+                          ),
+                        );
+
+                      },
                     ),
                   ],
                 ),

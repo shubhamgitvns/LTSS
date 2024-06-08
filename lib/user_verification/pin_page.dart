@@ -35,7 +35,9 @@ class _PinState extends State<Pin> {
   bool loder = false;
   bool forgot = false;
   bool content = true;
+  bool message_box = false;
   String message ="";
+  String status ="";
   String label =" Enter Mobile Number";
 
   @override
@@ -244,7 +246,7 @@ class _PinState extends State<Pin> {
         ),
 
         loader: () => Future.delayed(
-         Duration(seconds: 5),
+         Duration(seconds: 6),
              () => "Hello world",
 
         ),
@@ -325,15 +327,11 @@ class _PinState extends State<Pin> {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-                          Text(message,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
 
                           const SizedBox(
                             height: 80,
                           ),
+     //****************** Login button******************//
                           InkWell(
                             child: Container(
                               height: 50,
@@ -348,11 +346,18 @@ class _PinState extends State<Pin> {
                             onTap: () async {
                               loder = true;
 
-                              if(App_Text.message != "success" && content) {
-                                print("loder");
+//******************** If data not come throw api then during time run this loader ******************//
+                              if(App_Text.message != "login success" && content) {
                                 controller.load();
                               }
+
                               if(content) {
+                                print("content========>");
+                                print(content);
+                                print(App_Text.Mpin);
+                                print(App_Text.dbmobile);
+                                // App_Text.dbmobile = App_Text.number.text;
+                                // App_Text.dbmpin = App_Text.Mpin;
                                 try {
                                   dynamic text =
                                   await Utilities.Downloaddata("/Users/Login");
@@ -369,11 +374,12 @@ class _PinState extends State<Pin> {
                                 App_Text.dbstatus = App_Text.status;
                                 App_Text.dbmessage = App_Text.message;
                                 App_Text.dbmpin = App_Text.Mpin;
+                                print(App_Text.dbmpin);
                                 // App_Text.dbfinger = "true";
+
                               }
 
                               if(App_Text.dbstatus == "status") {
-                                print("Hii");
                                 App_Text.dbmobile = App_Text.number.text;
                                 App_Text.dbfinger = "false";
                               }
@@ -395,8 +401,6 @@ class _PinState extends State<Pin> {
                                 var list = await DatabaseHandler.jsons();
                                 List<Json> lst = list;
                                 print(list);
-
-                                //list[0].id = App_Text.id;
                                 print(App_Text.id);
                               }
 
@@ -445,6 +449,7 @@ class _PinState extends State<Pin> {
                                 "Don't have account?",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
+                              //*************forgot password code*********************//
                               InkWell(
                                 child: const Text(
                                   " Forgot Pin",
@@ -457,6 +462,7 @@ class _PinState extends State<Pin> {
                                   App_Text.dbmobile = App_Text.number.text;
                                   setState(() {
                                     forgot = true;
+                                    //content var is any other buttons and features//
                                     content = false;
                                   });
 
@@ -469,7 +475,7 @@ class _PinState extends State<Pin> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              InkWell(child: Icon(Icons.arrow_back,color: Colors.red,size: 40,),
+                              InkWell(child: const Icon(Icons.arrow_back,color: Colors.red,size: 40,),
                                 onTap: (){
                                 if(content) {
                                   Navigator.push(
@@ -492,7 +498,7 @@ class _PinState extends State<Pin> {
                       ),
                     ),
                 // _authenticate();
-
+//*************** If entered pin or password is wrong than this code id run and message_s var is true else false********//
                     if(message_s)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 150),
@@ -530,11 +536,12 @@ class _PinState extends State<Pin> {
                           ),
                         ),
                       ),
+//************* If the user click forget password text button than this code is run ***************//
                       if(forgot)
                       BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
+                          padding: const EdgeInsets.only(bottom: 100),
                           child: Container(
                              height: 200,
                             width: 280,
@@ -627,16 +634,11 @@ class _PinState extends State<Pin> {
                                         child: const Center(child: Text("Yes",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
                                       ),
                                       onTap: () async {
+                                        if(status != "success"){
+                                          controller.load();
+                                        }
                                         final url = Uri.https("ltss.pocketmoney.net.in", "/Users/ForgotMPIN", {
-
                                           "Mobile": App_Text.number.text,
-                                          // "Mpin": App_Text.Mpin,
-                                          // "pin": App_Text.Mpin,
-                                          // 'newpin': App_Text.new_Mpin,
-                                          // 'Mobile':App_Text.number.text
-
-
-
                                         } as Map<String, dynamic>?);
                                         try {
                                           final response = await http.post(url);
@@ -647,8 +649,11 @@ class _PinState extends State<Pin> {
                                           // print(jsonResponse);
                                           setState(() {
                                             message = jsonResponse["message"];
+                                            status = jsonResponse["status"];
+                                            App_Text.dbmobile = App_Text.number.text;
                                             forgot = false;
                                             content =true;
+                                            message_box =true;
                                           });
                                           return jsonResponse;
                                         } catch (e) {
@@ -680,6 +685,54 @@ class _PinState extends State<Pin> {
                                       ),
                                     ),
                                   ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    if(message.isNotEmpty && message_box)
+                      BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 100),
+                          child: Container(
+                            height: 200,
+                            width: 280,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.red),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("Message",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.w600),),
+                                const SizedBox(height: 10,),
+                                 Text(
+                                  message,
+                                  style: const TextStyle(color: Colors.green,fontWeight: FontWeight.w500,fontSize: 17),
+                                ),
+
+                                const SizedBox(height: 30,),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    child: Container(
+                                      height: 40,
+                                      width: 80,
+                                      color: Colors.red,
+                                      child: const Center(child: Text("OK",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
+                                    ),
+                                    onTap: (){
+                                      setState(() {
+                                        forgot = false;
+                                        content= true;
+                                        message_box=false;
+
+                                      });
+
+                                    },
+                                  ),
                                 )
                               ],
                             ),
