@@ -180,8 +180,8 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                           if (App_Text.new_Tpin.isEmpty && App_Text.conf_Tpin.isEmpty) {
                             setState(() {
                               message = "not equal";
-                              App_Text.new_Tpin = "";
-                              App_Text.conf_Tpin = "";
+                              // App_Text.new_Tpin = "";
+                              // App_Text.conf_Tpin = "";
                               print(message);
                             });
                           }
@@ -255,8 +255,8 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                           onTap: (){
                             setState(() {
                               message="";
-                              App_Text.new_Tpin ="";
-                              App_Text.conf_Tpin ="";
+                              // App_Text.new_Tpin ="";
+                              // App_Text.conf_Tpin ="";
                               click = false;
                             });
 

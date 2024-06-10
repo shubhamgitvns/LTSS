@@ -107,58 +107,50 @@ class _User_DetailState extends State<User_Detail> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
+             Padding(
+              padding: const EdgeInsets.only(left: 20),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Retailer",
-                        style: TextStyle(
+                        App_Text.role,
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Maa Mobile",
-                        style: TextStyle(
+                        " ${App_Text.shopname}",
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Bhandari Compound narpoli bhiwandi",
-                        style: TextStyle(
+                        "${App_Text.shopaddress}",
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Thane maharastra 431202",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
+
+
                 ],
               ),
             ),
@@ -179,111 +171,139 @@ class _User_DetailState extends State<User_Detail> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
+             Padding(
+              padding: const EdgeInsets.only(left: 20),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("User Name:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "Manoj Kumar",
-                        style: TextStyle(
+                        App_Text.name,
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("Mobile NO:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "876040421",
-                        style: TextStyle(
+                        App_Text.dbmobile,
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("Gmail:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "info@gmail.com",
-                        style: TextStyle(
+                  App_Text.email,
+
+                        style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                             color: Colors.blue),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
-                      Text(
-                        "Address",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
+                      const SizedBox(
+                        width:100,
+                        child: Text("Address:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
+                      SizedBox(
+                        width:250,
+                        child: Text(
+                          App_Text.address,
+
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("PIN Code:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "4213202",
-                        style: TextStyle(
+                        App_Text.pincode,
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("Aadhaar No: ",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "Adhar",
-                        style: TextStyle(
+                        App_Text.adharno,
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:100,
+                        child: Text("Pan:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "Pin",
-                        style: TextStyle(
+                        App_Text.pan,
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "28-08-1994",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                 ],
               ),
             ),
@@ -304,57 +324,89 @@ class _User_DetailState extends State<User_Detail> {
                 ],
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(left: 20),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width:120,
+                        child: Text("Bank Name: ",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        App_Text.bankname,
+
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                   Row(
+                    children: [
+                      const SizedBox(
+                        width:120,
+                        child: Text("Account No:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        App_Text.Acno,
+
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width:120,
+                        child: Text("IFSC:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
+                      Text(
+                        App_Text.IFSC,
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Bank of India",
-                        style: TextStyle(
+                        "Branch: ${App_Text.branchname}",
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   Row(
                     children: [
                       Text(
-                        "A/C= 339900087567893",
-                        style: TextStyle(
+                        "Account Name: ${App_Text.Acname}",
+
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "IFSC= BK1D0987V",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "BHIWANDI",
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
-                      )
-                    ],
                   ),
                 ],
               ),

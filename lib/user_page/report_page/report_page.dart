@@ -1,11 +1,11 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/ui_page/home_page/home_page.dart';
-import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_recharge.dart';
 import 'package:recharge_setu/user_page/report_page/complaint_Report/complaint_report.dart';
 import 'package:recharge_setu/user_page/report_page/dth_report/dth_report.dart';
 import 'package:recharge_setu/user_page/report_page/fund_transfer_Report.dart';
@@ -14,6 +14,7 @@ import 'package:recharge_setu/user_page/report_page/prepaid_report/prepaid_repor
 import 'package:recharge_setu/user_page/report_page/user_daybook_report.dart';
 import 'package:recharge_setu/user_page/report_page/wallet_summury.dart';
 
+import '../../Utilities.dart';
 import '../../ui_page/home_page/retailer_page.dart';
 class Report extends StatefulWidget {
   const Report({super.key});
@@ -607,7 +608,16 @@ class _ReportState extends State<Report> {
                         ],
                       ),
                     ),
-                    onTap: () {
+                    onTap: () async {
+                      try {
+                        dynamic data =
+                        await Utilities.Downloaddata("/Users/RetailersList");
+                       // App_Text.status = ("${text["status"]}");
+                        print("${data["name"]}");
+                      } catch (ex) {
+                        print(ex);
+                      }
+
                       Navigator.push(
                         context,
                         PageTransition(

@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 bool create =false;
+
+fetchPhotos() {
+  // TODO: implement fetchPhotos
+  // throw UnimplementedError();
+}
 class App_Text {
-  static TextEditingController username = TextEditingController();
-  static TextEditingController email = TextEditingController();
+  // static TextEditingController username = TextEditingController();
+  // static TextEditingController email = TextEditingController();
   static TextEditingController conformpin = TextEditingController();
   static TextEditingController idcontroler = TextEditingController();
   static TextEditingController number = TextEditingController();
@@ -16,10 +21,38 @@ class App_Text {
   static String conf_Mpin="";
   static String new_Tpin="";
   static String conf_Tpin="";
-  static String name="";
   static String role="";
   static String message="";
   static String status="";
+
+  //User Information details variables //
+  static String name="";
+  static String email="";
+  static String address="";
+  static String adharno="";
+  static String adharname="";
+  static String pincode="";
+  static String pan="";
+  static String fullname="";
+  static String dob="";
+  static String photo="";
+  static String T_pin="";
+  static String failercount="";
+  static String distributerid="";
+  static String distributermaster="";
+  static int userid=0;
+
+  //User shop details var///
+  static String shopname="";
+  static String shopaddress="";
+
+  // user bank detail//
+  static String bankname="";
+  static String branchname="";
+  static String Acno="";
+  static String Acname="";
+  static String IFSC="";
+
 
   static String dbname="myname";
   static String dbrole="role";

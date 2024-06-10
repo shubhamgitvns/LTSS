@@ -1,15 +1,14 @@
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
 import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/ui_page/home_page/csc/csc_beneficiary.dart';
 import 'package:recharge_setu/user_page/current_password.dart';
 import 'package:recharge_setu/user_page/current_securitypin.dart';
 import 'package:recharge_setu/user_page/user_detail.dart';
 import 'package:recharge_setu/user_verification/login_page.dart';
+import '../Utilities.dart';
 import '../jsonclass.dart';
 import '../localdatabase.dart';
 import '../ui_page/bottom_navigation.dart';
@@ -172,7 +171,31 @@ class _ProfileState extends State<Profile> {
                                                   color: Colors.red),
                                               textAlign: TextAlign.center,
                                             )),
-                                        onTap: () {
+                                        onTap: () async {
+                                          try {
+                                            dynamic User_Detail =
+                                                await Utilities.Downloaddata("/Users/Profiles");
+                                             App_Text.name = ("${User_Detail["FullName"]}");
+                                             // App_Text.userid = ("${User_Detail["FullName"]}") as int;
+                                             App_Text.email = ("${User_Detail["Email"]}");
+                                             App_Text.address = ("${User_Detail["Address"]}");
+                                             App_Text.adharno = ("${User_Detail["AadhaarNumber"]}");
+                                             App_Text.pincode = ("${User_Detail["PINCode"]}");
+                                             App_Text.pan = ("${User_Detail["PAN"]}");
+
+                                             App_Text.shopname = ("${User_Detail["ShopName"]}");
+                                             App_Text.shopaddress = ("${User_Detail["ShopAddress"]}");
+                                             App_Text.Acname = ("${User_Detail["AccountName"]}");
+                                             App_Text.Acno = ("${User_Detail["AccountNumber"]}");
+                                             App_Text.bankname = ("${User_Detail["BankName"]}");
+                                             App_Text.branchname = ("${User_Detail["BranchName"]}");
+                                             App_Text.IFSC = ("${User_Detail["IFSC"]}");
+                                             setState(() {
+                                               print(App_Text.address);
+                                             });
+                                          } catch (ex) {
+                                            print(ex);
+                                          }
                                           Navigator.push(
                                             context,
                                             PageTransition(

@@ -36,3 +36,32 @@ class Json {
     return 'Json{id:$id, username: $username, role: $role, status: $status, message: $message, mobile: $mobile, finger:$finger, mpin: $mpin, tpin: $tpin}';
   }
 }
+
+
+class Person {
+  final String name;
+  final String number;
+
+
+  Person ( { required this.name, required this.number}) {}
+
+  factory Person .fromJson(Map<String, dynamic> json) {
+    return Person (
+      name: json['number'],
+      number: json['name'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name':name,
+      'number': number,
+
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Json{name:$name, number: $number}';
+  }
+}
