@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'jsonclass.dart';
 bool create =false;
 
 fetchPhotos() {
@@ -7,6 +9,8 @@ fetchPhotos() {
   // throw UnimplementedError();
 }
 class App_Text {
+  static List<dynamic> data=[];
+static String connection = "";
   // static TextEditingController username = TextEditingController();
   // static TextEditingController email = TextEditingController();
   static TextEditingController conformpin = TextEditingController();
@@ -53,7 +57,11 @@ class App_Text {
   static String Acname="";
   static String IFSC="";
 
+  //retailer data//
+  static String retailer_name="";
+  static String retailer_number="";
 
+// any other details//
   static String dbname="myname";
   static String dbrole="role";
   static String dbstatus="status";

@@ -40,28 +40,28 @@ class Json {
 
 class Person {
   final String name;
-  final String number;
+  final String mobile;
 
 
-  Person ( { required this.name, required this.number}) {}
+  Person ( { required this.name, required this.mobile}) {}
 
   factory Person .fromJson(Map<String, dynamic> json) {
     return Person (
-      name: json['number'],
-      number: json['name'],
+      name: json['name'],
+      mobile: json['mobile'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'name':name,
-      'number': number,
+      'mobile':mobile ,
 
     };
   }
 
   @override
   String toString() {
-    return 'Json{name:$name, number: $number}';
+    return 'Json{name:$name, mobile: $mobile}';
   }
 }

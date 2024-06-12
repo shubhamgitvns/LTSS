@@ -141,11 +141,14 @@ class _User_DetailState extends State<User_Detail> {
                   ),
                   Row(
                     children: [
-                      Text(
-                        "${App_Text.shopaddress}",
+                      SizedBox(
+                        width: 350,
+                        child: Text(
+                          App_Text.shopaddress,
 
-                        style: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
                       )
                     ],
                   ),
@@ -386,8 +389,13 @@ class _User_DetailState extends State<User_Detail> {
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width:120,
+                        child: Text("Branch:",   style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w600)),
+                      ),
                       Text(
-                        "Branch: ${App_Text.branchname}",
+                        App_Text.branchname,
 
                         style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600),
@@ -395,19 +403,6 @@ class _User_DetailState extends State<User_Detail> {
                     ],
                   ),
 
-                  Row(
-                    children: [
-                      Text(
-                        "Account Name: ${App_Text.Acname}",
-
-                        style: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                 ],
               ),
             )

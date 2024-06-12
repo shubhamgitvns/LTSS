@@ -690,38 +690,6 @@ class _HomeState extends State<Home> {
                         );
                       },
                     ),
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 60,
-                              child: Image(
-                                image: AssetImage("images/person.png"),
-                              ),
-                            ),
-                            Text(
-                              "Retailer",
-                            ),
-                            Text("List")
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const Retailer(),
-                          ),
-                        );
-                      },
-                    ),
                     Container(
                       height: 120,
                       width: 90,

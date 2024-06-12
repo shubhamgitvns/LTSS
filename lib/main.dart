@@ -8,6 +8,8 @@ import 'localdatabase.dart';
 void main() async {
   await DatabaseHandler.initialize();
   print(App_Text.dbmobile);
+  print(App_Text.dbmobile);
+  print(App_Text.Mpin);
 
   print("search");
   var list= await DatabaseHandler.jsons();
