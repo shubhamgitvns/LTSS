@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/card/card.dart';
 import 'package:recharge_setu/ui_page/home_page/csc/csc.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/dmt.dart';
@@ -11,8 +12,11 @@ import 'package:recharge_setu/ui_page/home_page/electricity/electicity.dart';
 import 'package:recharge_setu/ui_page/home_page/google_pay.dart';
 import 'package:recharge_setu/ui_page/home_page/payout/payout.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_form.dart';
-import 'package:recharge_setu/ui_page/home_page/retailer_page.dart';
 import 'package:recharge_setu/ui_page/home_page/upi/upi.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
+import '../../app_text.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,6 +26,74 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String _connectionStatus = 'Unknown';
+  String connection ="";
+  final Connectivity _connectivity = Connectivity();
+  bool content =true;
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      var connectivityResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(connectivityResult);
+    } on PlatformException catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: ${e.message}';
+      });
+    } catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: $e';
+      });
+    }
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      if (result == ConnectivityResult.none) {
+        _connectionStatus = 'No internet connection';
+        setState(() {
+          App_Text.connection = "none";
+          print(App_Text.connection);
+          content = false;
+
+        });
+        print(connection);
+      } else if (result == ConnectivityResult.mobile) {
+        _connectionStatus = 'Connected to mobile data';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+
+      } else if (result == ConnectivityResult.wifi) {
+        _connectionStatus = 'Connected to Wi-Fi';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+      } else {
+        _connectionStatus = 'Unknown connection status';
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -108,256 +180,363 @@ class _HomeState extends State<Home> {
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 200,
-                  decoration: BoxDecoration(
-                    // color: Colors.blue.shade50,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.red,
-                        offset: Offset(
-                          2.0,
-                          2.0,
-                        ),
-                        blurRadius: 5.0,
-                        spreadRadius: 1.0,
-                      ), //BoxShadow
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(0.0, 0.0),
-                        blurRadius: 0.0,
-                        spreadRadius: 1.0,
-                      ), //BoxShadow
-                    ],
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 10,
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        // color: Colors.blue.shade50,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.red,
+                            offset: Offset(
+                              2.0,
+                              2.0,
                             ),
-                            Row(
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                        ],
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "₹ 350.50",
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Available in account",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                  height: 150,
+                                  child:
+                                  Image(image: AssetImage('images/pocket.png'))),
+                              // Text("Earning",style: TextStyle(color: Colors.red),)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 90,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              color: Colors.pink.shade100,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "₹1000.00",
+                                style: TextStyle(
+                                    color: Colors.red, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Total Service used ",
+                                style: TextStyle(color: Colors.red, fontSize: 12),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 90,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              color: Colors.green.shade100,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "₹359.60",
+                                style: TextStyle(
+                                    color: Colors.green, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Cashback",
+                                style: TextStyle(color: Colors.green),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 90,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              color: Colors.pink.shade50,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "₹359.60",
+                                style: TextStyle(
+                                    color: Colors.green, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Stock Report",
+                                style: TextStyle(color: Colors.green),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          "Recharge Payments",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        InkWell(
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/mobile_th.png"),
+                                  ),
+                                ),
                                 Text(
-                                  "₹ 350.50",
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 35,
-                                      fontWeight: FontWeight.bold),
+                                  "Prepaid",
                                 ),
                               ],
                             ),
-                            Row(
+                          ),
+                          onTap: () {
+                            if(content) {
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.leftToRight,
+                                  isIos: true,
+                                  child: const Prepaid_Form(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 120,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/dth.png"),
+                                  ),
+                                ),
                                 Text(
-                                  "Available in account",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                )
+                                  "DTH",
+                                ),
                               ],
-                            )
-                          ],
+                            ),
+                          ),
+                          onTap: () {
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const DTH_Recharge(),
+        ),
+      );
+    }
+                          },
                         ),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
+                        Container(
+                          height: 120,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(image: AssetImage("images/mobile.png")),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Postpaid",
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                              height: 150,
-                              child:
-                                  Image(image: AssetImage('images/pocket.png'))),
-                          // Text("Earning",style: TextStyle(color: Colors.red),)
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 90,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colors.pink.shade100,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "₹1000.00",
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Total Service used ",
-                            style: TextStyle(color: Colors.red, fontSize: 12),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 90,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colors.green.shade100,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "₹359.60",
-                            style: TextStyle(
-                                color: Colors.green, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Cashback",
-                            style: TextStyle(color: Colors.green),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 90,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colors.pink.shade50,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "₹359.60",
-                            style: TextStyle(
-                                color: Colors.green, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Stock Report",
-                            style: TextStyle(color: Colors.green),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Recharge Payments",
-                      style: TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-                    InkWell(
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/mobile_th.png"),
+                        ),
+                        InkWell(
+                            child: Container(
+                              height: 120,
+                              width: 90,
+                              color: Colors.grey.shade50,
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                    child: Image(
+                                      image: AssetImage("images/G-play.png"),
+                                    ),
+                                  ),
+                                  Text(
+                                    "G Pay",
+                                  ),
+                                ],
                               ),
                             ),
-                            Text(
-                              "Prepaid",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const Prepaid_Form(),
-                          ),
-                        );
-                      },
+                            onTap: () {
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const Google_Pay(),
+        ),
+      );
+    }
+                            }),
+                      ],
                     ),
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/dth.png"),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          "Bill Payments",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/ic_electricity.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "Electricity",
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const Electricity_Operator(),
+        ),
+      );
+    }
+                          },
+                        ),
+                        Container(
+                          height: 100,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                child: Image(
+                                  image: AssetImage("images/water.png"),
+                                ),
                               ),
-                            ),
-                            Text(
-                              "DTH",
-                            ),
-                          ],
+                              Text(
+                                "Water",
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const DTH_Recharge(),
-                          ),
-                        );
-                      },
-                    ),
-                    Container(
-                      height: 120,
-                      width: 90,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(image: AssetImage("images/mobile.png")),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Postpaid",
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                        child: Container(
+                        Container(
                           height: 120,
                           width: 90,
                           color: Colors.grey.shade50,
@@ -367,352 +546,295 @@ class _HomeState extends State<Home> {
                               SizedBox(
                                 height: 50,
                                 child: Image(
-                                  image: AssetImage("images/G-play.png"),
+                                  image: AssetImage("images/gasl.png"),
                                 ),
                               ),
                               Text(
-                                "G Pay",
+                                "Gas",
                               ),
                             ],
                           ),
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.leftToRight,
-                              isIos: true,
-                              child: const Google_Pay(),
+                        Container(
+                          height: 120,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                child: Image(
+                                  image: AssetImage("images/Group .png"),
+                                ),
+                              ),
+                              Text(
+                                "Insurance",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          "Other Payments",
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                child: Image(
+                                  image: AssetImage("images/e.png"),
+                                ),
+                              ),
+                              Text(
+                                "AEPS",
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 100,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/dmt.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "DMT",
+                                ),
+                              ],
                             ),
-                          );
-                        }),
+                          ),
+                          onTap: () {
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const DMT(),
+        ),
+      );
+    }
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 120,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child:  const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/payout.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "Payout",
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: (){
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const
+          Payout(),
+        ),
+      );
+    }
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 120,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/dmt.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "CSC",
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: (){
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const
+          Csc(),
+        ),
+      );
+    }
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          child: Container(
+                            height: 120,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/upi.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "UPI",
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: (){
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const
+          UPI(),
+        ),
+      );
+    }
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            height: 120,
+                            width: 90,
+                            color: Colors.grey.shade50,
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  child: Image(
+                                    image: AssetImage("images/card.png"),
+                                  ),
+                                ),
+                                Text(
+                                  "Card",
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: (){
+    if(content) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          isIos: true,
+          child: const
+          Card_Page(),
+        ),
+      );
+    }
+                          },
+                        ),
+                        Container(
+                          height: 120,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 50,
+                                child: Image(
+                                  image: AssetImage("images/landline.png"),
+                                ),
+                              ),
+                              Text(
+                                "Landline",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Bill Payments",
-                      style: TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/ic_electricity.png"),
-                              ),
-                            ),
-                            Text(
-                              "Electricity",
-                            ),
-                          ],
+                if(App_Text.connection == "none")
+                BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: Container(
+                    height: 180,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error_outline,color: Colors.red,size: 70,),
+                        Text("OOps!",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(
+                          width: 130,
+                          child: Text(
+                            "Please Check Your Internet connection",
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const Electricity_Operator(),
-                          ),
-                        );
-                      },
+
+                      ],
                     ),
-                    Container(
-                      height: 100,
-                      width: 90,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Image(
-                              image: AssetImage("images/water.png"),
-                            ),
-                          ),
-                          Text(
-                            "Water",
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 120,
-                      width: 90,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Image(
-                              image: AssetImage("images/gasl.png"),
-                            ),
-                          ),
-                          Text(
-                            "Gas",
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 120,
-                      width: 90,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Image(
-                              image: AssetImage("images/Group .png"),
-                            ),
-                          ),
-                          Text(
-                            "Insurance",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Other Payments",
-                      style: TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Image(
-                              image: AssetImage("images/e.png"),
-                            ),
-                          ),
-                          Text(
-                            "AEPS",
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: 100,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/dmt.png"),
-                              ),
-                            ),
-                            Text(
-                              "DMT",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const DMT(),
-                          ),
-                        );
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child:  const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/payout.png"),
-                              ),
-                            ),
-                            Text(
-                              "Payout",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const
-                            Payout(),
-                          ),
-                        );
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/dmt.png"),
-                              ),
-                            ),
-                            Text(
-                              "CSC",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const
-                            Csc(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/upi.png"),
-                              ),
-                            ),
-                            Text(
-                              "UPI",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const
-                            UPI(),
-                          ),
-                        );
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: 120,
-                        width: 90,
-                        color: Colors.grey.shade50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                              child: Image(
-                                image: AssetImage("images/card.png"),
-                              ),
-                            ),
-                            Text(
-                              "Card",
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.leftToRight,
-                            isIos: true,
-                            child: const
-                            Card_Page(),
-                          ),
-                        );
-                      },
-                    ),
-                    Container(
-                      height: 120,
-                      width: 90,
-                      color: Colors.grey.shade50,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Image(
-                              image: AssetImage("images/landline.png"),
-                            ),
-                          ),
-                          Text(
-                            "Landline",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
-            ),
+            )
           ),
         ),
       ),

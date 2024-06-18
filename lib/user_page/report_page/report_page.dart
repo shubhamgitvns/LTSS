@@ -1,7 +1,6 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/jsonclass.dart';
+import 'package:recharge_setu/user_page/fund_request/fund_request.dart';
 import 'package:recharge_setu/user_page/report_page/complaint_Report/complaint_report.dart';
 import 'package:recharge_setu/user_page/report_page/dth_report/dth_report.dart';
 import 'package:recharge_setu/user_page/report_page/fund_transfer_Report.dart';
@@ -20,6 +20,8 @@ import 'package:recharge_setu/user_page/report_page/wallet_summury.dart';
 import '../../Utilities.dart';
 import '../../app_text.dart';
 import '../../ui_page/home_page/retailer_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 class Report extends StatefulWidget {
   const Report({super.key});
 
@@ -29,6 +31,74 @@ class Report extends StatefulWidget {
 
 class _ReportState extends State<Report> {
   bool content = true;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String _connectionStatus = 'Unknown';
+  String connection ="";
+  final Connectivity _connectivity = Connectivity();
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      var connectivityResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(connectivityResult);
+    } on PlatformException catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: ${e.message}';
+      });
+    } catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: $e';
+      });
+    }
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      if (result == ConnectivityResult.none) {
+        _connectionStatus = 'No internet connection';
+        setState(() {
+          App_Text.connection = "none";
+          print(App_Text.connection);
+          //content = false;
+
+        });
+        print(connection);
+      } else if (result == ConnectivityResult.mobile) {
+        _connectionStatus = 'Connected to mobile data';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+
+      } else if (result == ConnectivityResult.wifi) {
+        _connectionStatus = 'Connected to Wi-Fi';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+      } else {
+        _connectionStatus = 'Unknown connection status';
+      }
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -296,7 +366,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -350,7 +420,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -416,7 +486,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -453,7 +523,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -502,7 +572,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -527,7 +597,7 @@ class _ReportState extends State<Report> {
                                 height:40,
                                 child:Image(
                                   image: AssetImage(
-                                      "images/fund.png"),
+                                      "images/dmt.png"),
                                 ), ),
                               SizedBox(height: 5,),
                               Text(
@@ -546,7 +616,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -589,7 +659,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: (){
-                          if(content == true) {
+                          if(App_Text.connection !='none') {
                             Navigator.push(
                               context,
                               PageTransition(
@@ -656,19 +726,54 @@ class _ReportState extends State<Report> {
                               print(ex);
                             }
                           }
+                          if(App_Text.connection !='none') {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.leftToRight,
+                                isIos: true,
+                                child: const Retailer_List(),
+                              ),
+                            );
+
+                            setState(() {
+                              print("no lode");
+                              content = true;
+                            });
+                          }
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          height: 120,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                child: Image(
+                                  image: AssetImage("images/fund.png"),
+                                ),
+                              ),
+                              Text(
+                                "Fund",
+                              ),
+                              Text("Request")
+                            ],
+                          ),
+                        ),
+                        onTap: ()  {
                           Navigator.push(
                             context,
                             PageTransition(
                               type: PageTransitionType.leftToRight,
                               isIos: true,
-                              child: const Retailer_List(),
+                              child: const Fund_Request(),
                             ),
                           );
-                          setState(() {
-                            print("no lode");
-                            content = true;
-                          });
-                        },
+                          },
                       ),
                     ],
                   )
@@ -677,31 +782,56 @@ class _ReportState extends State<Report> {
               if(content == false)
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                child: Container(
+                  height: 150,
+                   width: 200,
+                   decoration: BoxDecoration(
+                       color: Colors.white,
+                     borderRadius: BorderRadius.circular(15),
+                     border: Border.all(color: Colors.red.shade100)
+                   ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                        LoadingAnimationWidget.inkDrop(
+                          color: Colors.red,
+                          size: 40,
+                        ),
+                      const SizedBox(width: 20,),
+                      Text("Loading",style: TextStyle(color: Colors.red.shade200,fontSize: 15,fontWeight: FontWeight.w600),)
+                    ],
+                  ),
+                ),
+              ),
+              if(App_Text.connection == "none")
+                BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   child: Container(
-                    height: 150,
-                     width: 200,
-                     decoration: BoxDecoration(
-                         color: Colors.white,
-                       borderRadius: BorderRadius.circular(15),
-                       border: Border.all(color: Colors.red.shade100)
-                     ),
-                    child: Row(
+                    height: 180,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
-                          LoadingAnimationWidget.inkDrop(
-                            color: Colors.red,
-                            size: 40,
+                        Icon(Icons.error_outline,color: Colors.red,size: 70,),
+                        Text("OOps!",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
+                        SizedBox(
+                          width: 130,
+                          child: Text(
+                            "Please Check Your Internet connection",
+                            style: TextStyle(color: Colors.red),
                           ),
-                        const SizedBox(width: 20,),
-                        Text("Loading",style: TextStyle(color: Colors.red.shade200,fontSize: 15,fontWeight: FontWeight.w600),)
+                        ),
+
                       ],
                     ),
                   ),
                 ),
-              )
+
             ],
           )
         ),

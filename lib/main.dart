@@ -7,6 +7,7 @@ import 'localdatabase.dart';
 
 void main() async {
   await DatabaseHandler.initialize();
+  print(App_Text.connection);
   print(App_Text.dbmobile);
   print(App_Text.dbmobile);
   print(App_Text.Mpin);

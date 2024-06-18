@@ -1,11 +1,14 @@
 
-import 'dart:convert';
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
-import 'package:recharge_setu/jsonclass.dart';
 import 'fundtransfer.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 
 
 class Retailer_List extends StatefulWidget {
@@ -16,6 +19,75 @@ class Retailer_List extends StatefulWidget {
 }
 
 class _Retailer_ListState extends State<Retailer_List> {
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String _connectionStatus = 'Unknown';
+  String connection ="";
+  final Connectivity _connectivity = Connectivity();
+  bool content =true;
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      var connectivityResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(connectivityResult);
+    } on PlatformException catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: ${e.message}';
+      });
+    } catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: $e';
+      });
+    }
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      if (result == ConnectivityResult.none) {
+        _connectionStatus = 'No internet connection';
+        setState(() {
+          App_Text.connection = "none";
+          print(App_Text.connection);
+          content = false;
+
+        });
+        print(connection);
+      } else if (result == ConnectivityResult.mobile) {
+        _connectionStatus = 'Connected to mobile data';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+
+      } else if (result == ConnectivityResult.wifi) {
+        _connectionStatus = 'Connected to Wi-Fi';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+      } else {
+        _connectionStatus = 'Unknown connection status';
+      }
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +103,39 @@ class _Retailer_ListState extends State<Retailer_List> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: List_Page(),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          List_Page(),
+          if(App_Text.connection == 'none')
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(
+              height: 180,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.red),
+                  borderRadius: BorderRadius.circular(15)),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline,color: Colors.red,size: 70,),
+                  Text("OOps!",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
+                  SizedBox(
+                    width: 130,
+                    child: Text(
+                      "Please Check Your Internet connection",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -50,6 +154,7 @@ class _List_PageState extends State<List_Page> {
   bool light = true;
   bool text = true;
   int n=0;
+
   @override
   Widget build(BuildContext context) {
     // n = length of retailer data array//
@@ -59,7 +164,7 @@ class _List_PageState extends State<List_Page> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title:Padding(
-          padding: const EdgeInsets.all(1),
+          padding: const EdgeInsets.only(top: 7),
           child: Container(
             height: 50,
             color: Colors.white,
@@ -126,9 +231,12 @@ class _List_PageState extends State<List_Page> {
                             child: Column(
                               children: [
                                 Center(
-                                  child: Text(
-                                    App_Text.data[index].name,
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      App_Text.data[index].name,
+                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -159,7 +267,8 @@ class _List_PageState extends State<List_Page> {
                                             style: TextStyle(color: Colors.white),
                                           ))),
                                   onTap: (){
-                                    Navigator.push(
+                                    if(App_Text.connection !='none') {
+                                      Navigator.push(
                                       context,
                                       PageTransition(
                                         type: PageTransitionType.leftToRight,
@@ -167,6 +276,7 @@ class _List_PageState extends State<List_Page> {
                                         child: const Fund_Transfer(),
                                       ),
                                     );
+                                    }
                                   },
                                 )
                               ],
@@ -182,7 +292,7 @@ class _List_PageState extends State<List_Page> {
                           )
                         ],
                       )
-      
+
                     ],
                   ),
                 ),

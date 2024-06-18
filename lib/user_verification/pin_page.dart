@@ -1,5 +1,6 @@
 import 'dart:ui';
-
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
@@ -10,11 +11,9 @@ import '../Utilities.dart';
 import '../app_text.dart';
 import '../jsonclass.dart';
 import '../localdatabase.dart';
-import 'forgotpin_page.dart';
 import 'package:flutter_loader/flutter_loader.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -29,6 +28,11 @@ class _PinState extends State<Pin> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _formKey = GlobalKey<FormState>();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String _connectionStatus = 'Unknown';
+  String connection ="";
+  final Connectivity _connectivity = Connectivity();
+
 
   late FocusNode myFocusNode;
   bool message_s = false;
@@ -44,6 +48,10 @@ class _PinState extends State<Pin> {
   void initState() {
     super.initState();
     myFocusNode = FocusNode();
+    super.initState();
+    _checkInternetConnection();
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
     //************ finger print calling function **********************//
     // auth.isDeviceSupported().then(
     //       (bool isSupported) async {
@@ -72,10 +80,51 @@ class _PinState extends State<Pin> {
   void dispose() {
     // Clean up the focus node when the Form is disposed.
     myFocusNode.dispose();
-
-
+    _connectivitySubscription.cancel();
     super.dispose();
   }
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      var connectivityResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(connectivityResult);
+    } on PlatformException catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: ${e.message}';
+      });
+    } catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: $e';
+      });
+    }
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      if (result == ConnectivityResult.none) {
+        _connectionStatus = 'No internet connection';
+        setState(() {
+          App_Text.connection = "none";
+
+        });
+        print(connection);
+      } else if (result == ConnectivityResult.mobile) {
+        _connectionStatus = 'Connected to mobile data';
+        App_Text.connection = "data is on";
+
+      } else if (result == ConnectivityResult.wifi) {
+        _connectionStatus = 'Connected to Wi-Fi';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+      } else {
+        _connectionStatus = 'Unknown connection status';
+      }
+    });
+  }
+
+
   //************ finger print function Code **********************//
   // final LocalAuthentication auth = LocalAuthentication();
   // _SupportState _supportState = _SupportState.unknown;
@@ -311,20 +360,18 @@ class _PinState extends State<Pin> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Container(
-                                child: Pinput(
-                                    length: 6,
-                                    defaultPinTheme: defaltPinTheme,
-                                    focusedPinTheme: defaltPinTheme.copyWith(
-                                        decoration: defaltPinTheme.decoration!
-                                            .copyWith(
-                                            border:
-                                            Border.all(color: Colors.red))),
-                                    onCompleted: (pin) {
-                                      App_Text.Mpin = pin;
-                                      print("pin===>" + App_Text.Mpin);
-                                    }),
-                              ),
+                              Pinput(
+                                  length: 6,
+                                  defaultPinTheme: defaltPinTheme,
+                                  focusedPinTheme: defaltPinTheme.copyWith(
+                                      decoration: defaltPinTheme.decoration!
+                                          .copyWith(
+                                          border:
+                                          Border.all(color: Colors.red))),
+                                  onCompleted: (pin) {
+                                    App_Text.Mpin = pin;
+                                    print("pin===>" + App_Text.Mpin);
+                                  }),
                             ],
                           ),
 
@@ -345,13 +392,14 @@ class _PinState extends State<Pin> {
                             ),
                             onTap: () async {
                               loder = true;
+                              print(App_Text.connection);
 
 //******************** If data not come throw api then during time run this loader ******************//
-                              if(App_Text.message != "login success" && content) {
+                              if(App_Text.message != "login success" && content && App_Text.connection!='none') {
                                 controller.load();
                               }
 
-                              if(content) {
+                              if(content && App_Text.connection!='none') {
                                 print("content========>");
                                 print(content);
                                 print(App_Text.Mpin);
@@ -477,7 +525,7 @@ class _PinState extends State<Pin> {
                             children: [
                               InkWell(child: const Icon(Icons.arrow_back,color: Colors.red,size: 40,),
                                 onTap: (){
-                                if(content) {
+                                if(content && App_Text.connection!='none') {
                                   Navigator.push(
                                     context,
                                     PageTransition(
@@ -536,6 +584,34 @@ class _PinState extends State<Pin> {
                           ),
                         ),
                       ),
+//*************** Internet connection is lost show this message*********************////
+if(App_Text.connection == "none")
+  BackdropFilter(
+    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+    child: Container(
+      height: 180,
+      width: 250,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.red),
+          borderRadius: BorderRadius.circular(15)),
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.error_outline,color: Colors.red,size: 70,),
+          Text("OOps!",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
+          SizedBox(
+            width: 130,
+            child: Text(
+              "Please Check Your Internet connection",
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+
+        ],
+      ),
+    ),
+  ),
 //************* If the user click forget password text button than this code is run ***************//
                       if(forgot)
                       BackdropFilter(

@@ -7,11 +7,7 @@ import 'package:recharge_setu/user_verification/pin_page.dart';
 
 import '../jsonclass.dart';
 import '../localdatabase.dart';
-
-import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -61,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(builder: (context) => InternetConnectivityScreen()),
         );
       }
+
       if(list[0].status !="success") {
         Navigator.pushReplacement(
           context,
@@ -95,12 +92,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       if (result == ConnectivityResult.none) {
         _connectionStatus = 'No internet connection';
-        App_Text.connection = "none";
+        setState(() {
+          App_Text.connection = "none";
+
+        });
         print(connection);
       } else if (result == ConnectivityResult.mobile) {
         _connectionStatus = 'Connected to mobile data';
+         App_Text.connection = "data is on";
+
       } else if (result == ConnectivityResult.wifi) {
         _connectionStatus = 'Connected to Wi-Fi';
+
       } else {
         _connectionStatus = 'Unknown connection status';
       }

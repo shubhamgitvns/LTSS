@@ -37,11 +37,9 @@ class Json {
   }
 }
 
-
 class Person {
   final String name;
   final String mobile;
-
 
   Person ( { required this.name, required this.mobile}) {}
 
