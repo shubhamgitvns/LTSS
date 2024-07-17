@@ -5,9 +5,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:video_player/video_player.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
+import 'app_text.dart';
+
 //
 // void main() {
 //   runApp(const MyApp());
@@ -36,6 +41,78 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<XFile>? _mediaFileList;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String _connectionStatus = 'Unknown';
+  String connection ="";
+  final Connectivity _connectivity = Connectivity();
+  bool content =true;
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    _connectivitySubscription.cancel();
+    _disposeVideoController();
+    maxWidthController.dispose();
+    maxHeightController.dispose();
+    qualityController.dispose();
+    super.dispose();
+  }
+
+
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      var connectivityResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(connectivityResult);
+    } on PlatformException catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: ${e.message}';
+      });
+    } catch (e) {
+      setState(() {
+        _connectionStatus = 'Failed to get connectivity: $e';
+      });
+    }
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      if (result == ConnectivityResult.none) {
+        _connectionStatus = 'No internet connection';
+        setState(() {
+          App_Text.connection = "none";
+          print(App_Text.connection);
+          content = false;
+
+        });
+        print(connection);
+      } else if (result == ConnectivityResult.mobile) {
+        _connectionStatus = 'Connected to mobile data';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+
+      } else if (result == ConnectivityResult.wifi) {
+        _connectionStatus = 'Connected to Wi-Fi';
+        App_Text.connection = "data is on";
+        setState(() {
+          content =true;
+        });
+      } else {
+        _connectionStatus = 'Unknown connection status';
+      }
+    });
+  }
+
+
 
   void _setImageFileListFromFile(XFile? value) {
     _mediaFileList = value == null ? null : <XFile>[value];
@@ -172,14 +249,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.deactivate();
   }
 
-  @override
-  void dispose() {
-    _disposeVideoController();
-    maxWidthController.dispose();
-    maxHeightController.dispose();
-    qualityController.dispose();
-    super.dispose();
-  }
 
   Future<void> _disposeVideoController() async {
     if (_toBeDisposed != null) {
@@ -346,13 +415,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Center(child: Text("Gallery",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),)),
               ),
               onTap: (){
-
-                isVideo = false;
-                _onImageButtonPressed(
-                  ImageSource.gallery,
-                  context: context,
-                  isMultiImage: true,
-                );
+                if(App_Text.connection!="none") {
+                  isVideo = false;
+                  _onImageButtonPressed(
+                    ImageSource.gallery,
+                    context: context,
+                    isMultiImage: true,
+                  );
+                }
 
               },
             )

@@ -334,32 +334,32 @@ class _ProfileState extends State<Profile> {
                                   ],
                                 ),
                                 const Divider(),
-                                const Row(
+                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Income Wallet",
                                           style: TextStyle(
                                               color: Colors.green,
                                               fontSize: 25,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Text(
-                                          "₹ 359",
-                                          style: TextStyle(
+                                          "₹  ${App_Text.Income_Balance}",
+                                          style: const TextStyle(
                                               color: Colors.red,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20),
                                         ),
                                       ],
                                     ),
-                                    Column(
+                                    const Column(
                                       children: [
                                         SizedBox(
                                             height: 80,

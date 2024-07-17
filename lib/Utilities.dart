@@ -18,7 +18,20 @@ class Utilities {
     "Mpin": App_Text.Mpin,
     "pin": App_Text.Mpin,
     'newpin': App_Text.new_Mpin,
-      // 'Mobile':App_Text.number.text
+      "PaymentMode": App_Text.Payment_mode,
+      "Amount": App_Text.amount.text,
+      "Bank": App_Text.bank,
+      "BankRefNum": App_Text.ref_number.text,
+      "Remarks": App_Text.remark.text,
+      "AccountHolder": App_Text.account_holder.text,
+
+      //*********** fund transfer*************//
+      "distMobile": App_Text.dbmobile,
+      "retMobile": App_Text.ret_Mobile,
+      'amount':App_Text.fund_tr_amount.text,
+      'remarks':App_Text.fund_tr_remark.text,
+      'tpin':App_Text.fund_tr_Tpin.text,
+
     } as Map<String, dynamic>?);
     try {
       final response = await http.post(url);

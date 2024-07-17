@@ -5,10 +5,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/jsonclass.dart';
+import 'package:recharge_setu/photo_eploder.dart';
 import 'package:recharge_setu/user_page/fund_request/fund_request.dart';
+import 'package:recharge_setu/user_page/fund_request/fund_request_report.dart';
 import 'package:recharge_setu/user_page/report_page/complaint_Report/complaint_report.dart';
 import 'package:recharge_setu/user_page/report_page/dth_report/dth_report.dart';
 import 'package:recharge_setu/user_page/report_page/fund_transfer_Report.dart';
@@ -19,6 +23,7 @@ import 'package:recharge_setu/user_page/report_page/wallet_summury.dart';
 
 import '../../Utilities.dart';
 import '../../app_text.dart';
+import '../../controller.dart';
 import '../../ui_page/home_page/retailer_page.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -30,6 +35,8 @@ class Report extends StatefulWidget {
 }
 
 class _ReportState extends State<Report> {
+  final CounterController counterController = Get.put(CounterController());
+
   bool content = true;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   String _connectionStatus = 'Unknown';
@@ -213,30 +220,34 @@ class _ReportState extends State<Report> {
                         ), //BoxShadow
                       ],
                     ),
-                    child: const Row(
+                    child:  Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
                                 children: [
-                                  Text(
-                                    "₹ 350.50",
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                   // "₹ ${App_Text.Main_Balance}",
+                                    Obx(() => Text(
+                                      '₹ ${counterController.balance}',
+                                      style: const TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+
+
+
                                 ],
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   Text(
                                     "Available in account",
@@ -250,7 +261,7 @@ class _ReportState extends State<Report> {
                             ],
                           ),
                         ),
-                        Column(
+                        const Column(
                           children: [
                             SizedBox(
                               height: 20,
@@ -271,26 +282,31 @@ class _ReportState extends State<Report> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: 90,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            color: Colors.pink.shade100,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "₹1000.00",
-                              style: TextStyle(
-                                  color: Colors.red, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Total Service used ",
-                              style: TextStyle(color: Colors.red, fontSize: 12),
-                            )
-                          ],
+                      InkWell(
+                        child: Container(
+                          height: 90,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              color: Colors.pink.shade100,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "₹1000.00",
+                                style: TextStyle(
+                                    color: Colors.red, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Total Service used ",
+                                style: TextStyle(color: Colors.red, fontSize: 12),
+                              )
+                            ],
+                          ),
                         ),
+                        onTap: (){
+                          counterController.increment();
+                        },
                       ),
                       Container(
                         height: 90,
@@ -676,6 +692,7 @@ class _ReportState extends State<Report> {
                   ),
                   const SizedBox(height: 20,),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
                         child: Container(
@@ -765,6 +782,7 @@ class _ReportState extends State<Report> {
                           ),
                         ),
                         onTap: ()  {
+                          if(App_Text.connection !="none"){
                           Navigator.push(
                             context,
                             PageTransition(
@@ -773,6 +791,43 @@ class _ReportState extends State<Report> {
                               child: const Fund_Request(),
                             ),
                           );
+
+
+                          }
+                        }
+                      ),
+                      InkWell(
+                        child: Container(
+                          height: 120,
+                          width: 90,
+                          color: Colors.grey.shade50,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 35,
+                                child: Image(
+                                  image: AssetImage("images/fund_report.png"),
+                                ),
+                              ),
+                              Text(
+                                "Fund",
+                              ),
+                              Text("Report")
+                            ],
+                          ),
+                        ),
+                        onTap: ()  {
+                          if(App_Text.connection!="none") {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.leftToRight,
+                                isIos: true,
+                                child: const FundOrderReport(),
+                              ),
+                            );
+                          }
                           },
                       ),
                     ],

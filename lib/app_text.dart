@@ -56,10 +56,27 @@ static String connection = "";
   static String Acno="";
   static String Acname="";
   static String IFSC="";
+  static String Main_Balance="";
+  static String Income_Balance="";
 
   //retailer data//
   static String retailer_name="";
   static String retailer_number="";
+
+  //Fund Request var
+  static String Payment_mode = "";
+  static TextEditingController amount = TextEditingController();
+  static String bank = "";
+  static TextEditingController ref_number = TextEditingController();
+  static TextEditingController remark = TextEditingController();
+  static TextEditingController account_holder = TextEditingController();
+
+  //Fund Transfer var//
+  static String ret_Mobile="";
+  static TextEditingController fund_tr_remark = TextEditingController();
+  static TextEditingController fund_tr_amount = TextEditingController();
+  static TextEditingController fund_tr_Tpin = TextEditingController();
+
 
 // any other details//
   static String dbname="myname";

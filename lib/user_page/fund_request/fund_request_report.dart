@@ -10,12 +10,7 @@ const List<String> list_B = <String>[
   'ACCEPTED',
   'REJECTED'
 ];
-const List<String> list_C = <String>[
-  'Wallet',
-  'Simple',
-  'Normal',
-  'Hard'
-];
+
 
 class FundOrderReport extends StatefulWidget {
   const FundOrderReport({super.key});
@@ -847,34 +842,7 @@ class _FilterState extends State<Filter> {
               const SizedBox(
                 height: 20,
               ),
-              const Row(
-                children: [
-                  Text(
-                    "Wallet Type",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  Container(
-                      height: 50,
-                      width: 350,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.red),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Wallet_Type(),
-                      )),
-                ],
-              ),
-              const SizedBox(height: 20,),
+
               const Row(
                 children: [
                   Text(
@@ -1050,48 +1018,3 @@ class _DropdownButton_BState extends State<DropdownButton_B> {
   }
 }
 
-
-
-class Wallet_Type extends StatefulWidget {
-  const Wallet_Type({super.key});
-
-  @override
-  State<Wallet_Type> createState() => _Wallet_TypeState();
-}
-
-class _Wallet_TypeState extends State<Wallet_Type> {
-  String dropdownValue = list_C.first;
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Padding(
-        padding: EdgeInsets.only(left: 220),
-        child: Icon(
-          Icons.arrow_drop_down,
-          color: Colors.red,
-          size: 30,
-        ),
-      ),
-      elevation: 16,
-      style: const TextStyle(
-          color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
-      underline: Container(
-        height: 0,
-        //color: Colors.white,
-      ),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
-      },
-      items: list_C.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  }
-}

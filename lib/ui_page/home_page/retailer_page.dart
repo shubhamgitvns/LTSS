@@ -268,6 +268,9 @@ class _List_PageState extends State<List_Page> {
                                           ))),
                                   onTap: (){
                                     if(App_Text.connection !='none') {
+                                      App_Text.ret_Mobile=App_Text.data[index].mobile;
+
+                                      print(App_Text.ret_Mobile);
                                       Navigator.push(
                                       context,
                                       PageTransition(

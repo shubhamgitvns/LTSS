@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/ui_page/bottom_navigation.dart';
@@ -9,6 +10,7 @@ import 'package:recharge_setu/user_verification/login_page.dart';
 import '../Retailer/retailer_bottomnavigation.dart';
 import '../Utilities.dart';
 import '../app_text.dart';
+import '../controller.dart';
 import '../jsonclass.dart';
 import '../localdatabase.dart';
 import 'package:flutter_loader/flutter_loader.dart';
@@ -29,6 +31,8 @@ class _PinState extends State<Pin> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _formKey = GlobalKey<FormState>();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late final CounterController counterController = Get.put(CounterController());
+
   String _connectionStatus = 'Unknown';
   String connection ="";
   final Connectivity _connectivity = Connectivity();
@@ -404,8 +408,7 @@ class _PinState extends State<Pin> {
                                 print(content);
                                 print(App_Text.Mpin);
                                 print(App_Text.dbmobile);
-                                // App_Text.dbmobile = App_Text.number.text;
-                                // App_Text.dbmpin = App_Text.Mpin;
+                                //*************Login Api*******************
                                 try {
                                   dynamic text =
                                   await Utilities.Downloaddata("/Users/Login");
@@ -413,6 +416,20 @@ class _PinState extends State<Pin> {
                                   App_Text.role = ("${text["role"]}");
                                   App_Text.message = ("${text["message"]}");
                                   App_Text.status = ("${text["status"]}");
+                                } catch (ex) {
+                                  print(ex);
+                                }
+                                //*************** Wallet Api********************
+                                try {
+                                  dynamic text =
+                                  await Utilities.Downloaddata("/Wallet/GetBalance");
+                                  setState(() {
+                                    App_Text.Main_Balance = ("${text["MAIN"]}");
+                                    App_Text.Income_Balance = ("${text["INCOME"]}");
+                                  });
+                                  print("main balance");
+                                  print(counterController.balance);
+                                  counterController.increment();
                                 } catch (ex) {
                                   print(ex);
                                 }

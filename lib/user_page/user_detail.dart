@@ -394,11 +394,14 @@ class _User_DetailState extends State<User_Detail> {
                         child: Text("Branch:",   style: TextStyle(
                             fontSize: 17, fontWeight: FontWeight.w600)),
                       ),
-                      Text(
-                        App_Text.branchname,
+                      SizedBox(
+                        width: 180,
+                        child: Text(
+                          App_Text.branchname,
 
-                        style: const TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.w600),
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
                       )
                     ],
                   ),

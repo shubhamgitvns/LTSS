@@ -233,6 +233,8 @@ class _LoginState extends State<Login> {
 
                           if (_formKey.currentState!.validate() && isChecked && App_Text.number.text.isNotEmpty) {
                             print("success");
+                            //Wallet Api
+
                             Navigator.push(
                               context,
                               PageTransition(
