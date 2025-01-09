@@ -3,7 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:recharge_setu/app_text.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/register.dart';
 import 'package:recharge_setu/ui_page/home_page/dmt/send_money.dart';
-import '../../../user_verification/forgotpin_page.dart';
+
 class DMT extends StatefulWidget {
   const DMT({super.key});
 
@@ -19,7 +19,10 @@ class _DMTState extends State<DMT> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
-        title: Text("DMT",style: Text_Style.App,),
+        title: Text(
+          "DMT",
+          style: Text_Style.App,
+        ),
         actions: const [
           Padding(
             padding: EdgeInsets.all(15.0),
@@ -29,41 +32,73 @@ class _DMTState extends State<DMT> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(image: AssetImage("images/icon_wallet.png")),
-              SizedBox(width: 20,),
-              Text("Wallet Balance",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 25),)
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                "Wallet Balance",
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
+              )
             ],
-          ), 
-          const SizedBox(height: 10,),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("₹359.6",style: TextStyle(color: Colors.grey,fontSize: 18,fontWeight: FontWeight.bold),),
-
+              Text(
+                "₹359.6",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
             ],
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Min. amount ₹100. Max. amount  ₹50,000",style: TextStyle(color: Colors.grey,fontSize: 15,),),
+              Text(
+                "Min. amount ₹100. Max. amount  ₹50,000",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 20,),
-
+          const SizedBox(
+            height: 20,
+          ),
           const Padding(
             padding: EdgeInsets.only(left: 50),
             child: Row(
               children: [
-                Text("Mobile Number",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
+                Text(
+                  "Mobile Number",
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 50),
             child: Row(
@@ -76,8 +111,7 @@ class _DMTState extends State<DMT> {
                       autofocus: true,
                       cursorColor: Colors.red,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
-                          color: Colors.black,fontSize: 18),
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           // borderRadius: BorderRadius.circular(10),
@@ -89,7 +123,7 @@ class _DMTState extends State<DMT> {
 
                         //********Focus border like hover******************8
                         focusedBorder: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(10),
+                            // borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: Colors.red)),
                         hintText: "Mobile Number",
                         hintStyle: TextStyle(color: Colors.red),
@@ -100,7 +134,6 @@ class _DMTState extends State<DMT> {
               ],
             ),
           ),
-
           const SizedBox(
             height: 100,
           ),
@@ -111,10 +144,9 @@ class _DMTState extends State<DMT> {
               color: Colors.red,
               child: const Center(
                   child: Text(
-                    "Validate",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 20),
-                  )),
+                "Validate",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              )),
             ),
             onTap: () {
               Navigator.push(
@@ -145,7 +177,7 @@ class _DMTState extends State<DMT> {
                       decoration: TextDecoration.underline,
                       decorationColor: Colors.red),
                 ),
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     PageTransition(
@@ -158,8 +190,6 @@ class _DMTState extends State<DMT> {
               ),
             ],
           )
-
-
         ],
       ),
     );

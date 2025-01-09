@@ -1,15 +1,11 @@
-
-
 import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:video_player/video_player.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'app_text.dart';
 
@@ -41,78 +37,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<XFile>? _mediaFileList;
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   String _connectionStatus = 'Unknown';
-  String connection ="";
-  final Connectivity _connectivity = Connectivity();
-  bool content =true;
+  String connection = "";
+  bool content = true;
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
-    _connectivitySubscription.cancel();
     _disposeVideoController();
     maxWidthController.dispose();
     maxHeightController.dispose();
     qualityController.dispose();
     super.dispose();
   }
-
-
-
-  Future<void> _checkInternetConnection() async {
-    try {
-      var connectivityResult = await _connectivity.checkConnectivity();
-      _updateConnectionStatus(connectivityResult);
-    } on PlatformException catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: ${e.message}';
-      });
-    } catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: $e';
-      });
-    }
-  }
-
-  void _updateConnectionStatus(ConnectivityResult result) {
-    setState(() {
-      if (result == ConnectivityResult.none) {
-        _connectionStatus = 'No internet connection';
-        setState(() {
-          App_Text.connection = "none";
-          print(App_Text.connection);
-          content = false;
-
-        });
-        print(connection);
-      } else if (result == ConnectivityResult.mobile) {
-        _connectionStatus = 'Connected to mobile data';
-        App_Text.connection = "data is on";
-        setState(() {
-          content =true;
-        });
-
-      } else if (result == ConnectivityResult.wifi) {
-        _connectionStatus = 'Connected to Wi-Fi';
-        App_Text.connection = "data is on";
-        setState(() {
-          content =true;
-        });
-      } else {
-        _connectionStatus = 'Unknown connection status';
-      }
-    });
-  }
-
-
 
   void _setImageFileListFromFile(XFile? value) {
     _mediaFileList = value == null ? null : <XFile>[value];
@@ -156,11 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _onImageButtonPressed(
-      ImageSource source, {
-        required BuildContext context,
-        bool isMultiImage = false,
-        bool isMedia = false,
-      }) async {
+    ImageSource source, {
+    required BuildContext context,
+    bool isMultiImage = false,
+    bool isMedia = false,
+  }) async {
     if (_controller != null) {
       await _controller!.setVolume(0.0);
     }
@@ -175,17 +116,17 @@ class _MyHomePageState extends State<MyHomePage> {
           try {
             final List<XFile> pickedFileList = isMedia
                 ? await _picker.pickMultipleMedia(
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-              imageQuality: quality,
-              limit: limit,
-            )
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                    imageQuality: quality,
+                    limit: limit,
+                  )
                 : await _picker.pickMultiImage(
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-              imageQuality: quality,
-              limit: limit,
-            );
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                    imageQuality: quality,
+                    limit: limit,
+                  );
             setState(() {
               _mediaFileList = pickedFileList;
             });
@@ -249,7 +190,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.deactivate();
   }
 
-
   Future<void> _disposeVideoController() async {
     if (_toBeDisposed != null) {
       await _toBeDisposed!.dispose();
@@ -295,16 +235,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: kIsWeb
                   ? Image.network(_mediaFileList![index].path)
                   : (mime == null || mime.startsWith('image/')
-                  ? Image.file(
-                File(_mediaFileList![index].path),
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return const Center(
-                      child:
-                      Text('This image type is not supported'));
-                },
-              )
-                  : _buildInlineVideoPlayer(index)),
+                      ? Image.file(
+                          File(_mediaFileList![index].path),
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return const Center(
+                                child:
+                                    Text('This image type is not supported'));
+                          },
+                        )
+                      : _buildInlineVideoPlayer(index)),
             );
           },
           itemCount: _mediaFileList!.length,
@@ -317,14 +257,16 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     } else {
       return const Icon(
-        Icons.image,color: Colors.grey,size: 50,
+        Icons.image,
+        color: Colors.grey,
+        size: 50,
       );
     }
   }
 
   Widget _buildInlineVideoPlayer(int index) {
     final VideoPlayerController controller =
-    VideoPlayerController.file(File(_mediaFileList![index].path));
+        VideoPlayerController.file(File(_mediaFileList![index].path));
     const double volume = kIsWeb ? 0.0 : 1.0;
     controller.setVolume(volume);
     controller.initialize();
@@ -367,7 +309,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: SizedBox(
         height: 200,
         child: Row(
@@ -376,35 +318,37 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               width: 150,
               child: Center(
-                child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-                    ? FutureBuilder<void>(
-                  future: retrieveLostData(),
-                  builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                        return const Text(
-                          'You have not yet picked an image.',
-                          textAlign: TextAlign.center,
-                        );
-                      case ConnectionState.done:
-                        return _handlePreview();
-                      case ConnectionState.active:
-                        if (snapshot.hasError) {
-                          return Text(
-                            'Pick image/video error: ${snapshot.error}}',
-                            textAlign: TextAlign.center,
-                          );
-                        } else {
-                          return const Text(
-                            'You have not yet picked an image.',
-                            textAlign: TextAlign.center,
-                          );
-                        }
-                    }
-                  },
-                )
-                    : _handlePreview(),
+                child:
+                    !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                        ? FutureBuilder<void>(
+                            future: retrieveLostData(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<void> snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                case ConnectionState.waiting:
+                                  return const Text(
+                                    'You have not yet picked an image.',
+                                    textAlign: TextAlign.center,
+                                  );
+                                case ConnectionState.done:
+                                  return _handlePreview();
+                                case ConnectionState.active:
+                                  if (snapshot.hasError) {
+                                    return Text(
+                                      'Pick image/video error: ${snapshot.error}}',
+                                      textAlign: TextAlign.center,
+                                    );
+                                  } else {
+                                    return const Text(
+                                      'You have not yet picked an image.',
+                                      textAlign: TextAlign.center,
+                                    );
+                                  }
+                              }
+                            },
+                          )
+                        : _handlePreview(),
               ),
             ),
             InkWell(
@@ -412,10 +356,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 50,
                 width: 150,
                 color: Colors.red,
-                child: Center(child: Text("Gallery",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),)),
+                child: Center(
+                    child: Text(
+                  "Gallery",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )),
               ),
-              onTap: (){
-                if(App_Text.connection!="none") {
+              onTap: () {
+                if (App_Text.connection != "none") {
                   isVideo = false;
                   _onImageButtonPressed(
                     ImageSource.gallery,
@@ -423,7 +374,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     isMultiImage: true,
                   );
                 }
-
               },
             )
           ],
@@ -454,14 +404,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextField(
                   controller: maxWidthController,
                   keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
+                      const TextInputType.numberWithOptions(decimal: true),
                   decoration: const InputDecoration(
                       hintText: 'Enter maxWidth if desired'),
                 ),
                 TextField(
                   controller: maxHeightController,
                   keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
+                      const TextInputType.numberWithOptions(decimal: true),
                   decoration: const InputDecoration(
                       hintText: 'Enter maxHeight if desired'),
                 ),

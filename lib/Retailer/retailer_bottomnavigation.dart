@@ -1,18 +1,16 @@
-
 import 'package:flutter/material.dart';
-import 'package:recharge_setu/Retailer/retailer_report.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
-import 'package:recharge_setu/user_page/service_page.dart';
 import 'package:recharge_setu/user_page/support_page.dart';
-import '../ui_page/home_page/home_page.dart';
 
+import '../ui_page/home_page/home_page.dart';
 
 class Retailer_Bottomnavigation extends StatefulWidget {
   int index = 0;
   Retailer_Bottomnavigation({Key? key, required this.index}) : super(key: key);
 
   @override
-  State<Retailer_Bottomnavigation> createState() => _Retailer_BottomnavigationState();
+  State<Retailer_Bottomnavigation> createState() =>
+      _Retailer_BottomnavigationState();
 }
 
 class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
@@ -22,10 +20,10 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Service_Page(),
-    const Support(),
-    const Retailer_Report(),
     const Profile(),
+    const Support(),
+    // const Service_Page(),
+    // const Retailer_Report(),
   ];
 
   final bool _isBottomSheetOpen = false;
@@ -51,7 +49,6 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
           setState(() {
             _selectedIndex = index;
             _previousIndex = _selectedIndex;
-
           });
         },
         items: <BottomNavigationBarItem>[
@@ -65,16 +62,18 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image(
-                      image: const AssetImage(
-                          "images/home.png"),
-                      color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
-
+                      image: const AssetImage("images/home.png"),
+                      color: _selectedIndex == 0
+                          ? Colors.red
+                          : Colors.red.shade100,
                     ),
                     Text(
                       "Home",
                       style: TextStyle(
                         fontSize: 10,
-                        color: _selectedIndex == 0 ? Colors.red : Colors.red.shade100,
+                        color: _selectedIndex == 0
+                            ? Colors.red
+                            : Colors.red.shade100,
                       ),
                     ),
                   ],
@@ -83,31 +82,6 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
             ),
             label: '',
           ),
-
-          BottomNavigationBarItem(
-            icon: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.design_services,
-                    color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
-
-                  ),
-                  Text(
-                    "Service",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            label: '',
-          ),
-
           BottomNavigationBarItem(
             icon: Center(
               child: Column(
@@ -115,66 +89,17 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image(
-                    image: const AssetImage(
-                        "images/mobile_th.png"),
-                    color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
-
-                  ),
-                  Text(
-                    "Support",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            label: '',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/report.png"),
-                    color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
-
-                  ),
-                  Text(
-                    "Report",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: _selectedIndex == 3 ? Colors.red : Colors.red.shade100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            label: '',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: const AssetImage(
-                        "images/person.png"),
-                    color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
-
+                    image: const AssetImage("images/person.png"),
+                    color:
+                        _selectedIndex == 1 ? Colors.red : Colors.red.shade100,
                   ),
                   Text(
                     "Profile",
                     style: TextStyle(
                       fontSize: 10,
-                      color: _selectedIndex == 4 ? Colors.red : Colors.red.shade100,
+                      color: _selectedIndex == 1
+                          ? Colors.red
+                          : Colors.red.shade100,
                     ),
                   ),
                 ],
@@ -182,7 +107,31 @@ class _Retailer_BottomnavigationState extends State<Retailer_Bottomnavigation> {
             ),
             label: '',
           ),
-
+          BottomNavigationBarItem(
+            icon: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image(
+                    image: const AssetImage("images/mobile_th.png"),
+                    color:
+                        _selectedIndex == 2 ? Colors.red : Colors.red.shade100,
+                  ),
+                  Text(
+                    "Support",
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: _selectedIndex == 2
+                          ? Colors.red
+                          : Colors.red.shade100,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            label: '',
+          ),
         ],
       ),
 

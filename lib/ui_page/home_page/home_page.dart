@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
@@ -13,7 +14,6 @@ import 'package:recharge_setu/ui_page/home_page/google_pay.dart';
 import 'package:recharge_setu/ui_page/home_page/payout/payout.dart';
 import 'package:recharge_setu/ui_page/home_page/prepaid/prepaid_form.dart';
 import 'package:recharge_setu/ui_page/home_page/upi/upi.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../app_text.dart';
 import '../../user_page/fund_request/fund_request.dart';
@@ -26,67 +26,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   String _connectionStatus = 'Unknown';
   String connection = "";
-  final Connectivity _connectivity = Connectivity();
   bool content = true;
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
-    _connectivitySubscription.cancel();
     super.dispose();
-  }
-
-  Future<void> _checkInternetConnection() async {
-    try {
-      var connectivityResult = await _connectivity.checkConnectivity();
-      _updateConnectionStatus(connectivityResult);
-    } on PlatformException catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: ${e.message}';
-      });
-    } catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: $e';
-      });
-    }
-  }
-
-  void _updateConnectionStatus(ConnectivityResult result) {
-    setState(() {
-      if (result == ConnectivityResult.none) {
-        _connectionStatus = 'No internet connection';
-        setState(() {
-          App_Text.connection = "none";
-          print(App_Text.connection);
-          content = false;
-        });
-        print(connection);
-      } else if (result == ConnectivityResult.mobile) {
-        _connectionStatus = 'Connected to mobile data';
-        App_Text.connection = "data is on";
-        setState(() {
-          content = true;
-        });
-      } else if (result == ConnectivityResult.wifi) {
-        _connectionStatus = 'Connected to Wi-Fi';
-        App_Text.connection = "data is on";
-        setState(() {
-          content = true;
-        });
-      } else {
-        _connectionStatus = 'Unknown connection status';
-      }
-    });
   }
 
   @override
@@ -845,23 +796,18 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                               ),
-                              onTap: ()  {
-                                if(App_Text.connection !="none"){
+                              onTap: () {
+                                if (App_Text.connection != "none") {
                                   Navigator.push(
                                     context,
                                     PageTransition(
                                       type: PageTransitionType.leftToRight,
                                       isIos: true,
-
                                       child: const Fund_Request(),
                                     ),
                                   );
-
-
-
                                 }
-                              }
-                          ),
+                              }),
                         ],
                       ),
                     ],

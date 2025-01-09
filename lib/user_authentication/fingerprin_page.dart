@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/user_verification/pin_page.dart';
-import '../app_text.dart';
-import '../jsonclass.dart';
-import '../localdatabase.dart';
-import '../ui_page/bottom_navigation.dart';
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/user_authentication/pin_page.dart';
+
+import '../app_text.dart';
 
 class FingerPrint extends StatefulWidget {
   const FingerPrint({super.key});

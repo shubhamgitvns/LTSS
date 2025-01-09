@@ -1,16 +1,14 @@
-import 'dart:async';
+import 'dart:convert' as convert;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:recharge_setu/user_page/profile_page.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../app_text.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+
 class Chandge_Security_Pin extends StatefulWidget {
   const Chandge_Security_Pin({super.key});
 
@@ -19,78 +17,23 @@ class Chandge_Security_Pin extends StatefulWidget {
 }
 
 class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   String _connectionStatus = 'Unknown';
-  String connection ="";
-  final Connectivity _connectivity = Connectivity();
-  bool content =true;
+  String connection = "";
+  bool content = true;
   @override
   void initState() {
     super.initState();
-    _checkInternetConnection();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
-    _connectivitySubscription.cancel();
     super.dispose();
   }
 
-
-
-  Future<void> _checkInternetConnection() async {
-    try {
-      var connectivityResult = await _connectivity.checkConnectivity();
-      _updateConnectionStatus(connectivityResult);
-    } on PlatformException catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: ${e.message}';
-      });
-    } catch (e) {
-      setState(() {
-        _connectionStatus = 'Failed to get connectivity: $e';
-      });
-    }
-  }
-
-  void _updateConnectionStatus(ConnectivityResult result) {
-    setState(() {
-      if (result == ConnectivityResult.none) {
-        _connectionStatus = 'No internet connection';
-        setState(() {
-          App_Text.connection = "none";
-          print(App_Text.connection);
-          content = false;
-
-        });
-        print(connection);
-      } else if (result == ConnectivityResult.mobile) {
-        _connectionStatus = 'Connected to mobile data';
-        App_Text.connection = "data is on";
-        setState(() {
-          content =true;
-        });
-
-      } else if (result == ConnectivityResult.wifi) {
-        _connectionStatus = 'Connected to Wi-Fi';
-        App_Text.connection = "data is on";
-        setState(() {
-          content =true;
-        });
-      } else {
-        _connectionStatus = 'Unknown connection status';
-      }
-    });
-  }
-
-
-
   String message = "";
   String status = "";
-  bool click =false;
+  bool click = false;
   @override
   Widget build(BuildContext context) {
     final defaltPinTheme = PinTheme(
@@ -226,75 +169,75 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                       const SizedBox(
                         height: 70,
                       ),
-                      if(click == false)
-                      InkWell(
-                        child: Container(
-                          height: 50,
-                          width: 300,
-                          color: Colors.red,
-                          child: const Center(
-                              child: Text(
-                            "Change",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20),
-                          )),
-                        ),
-                        onTap: () async {
-                          setState(() {
-                            click =true;
-                          });
-                          if (App_Text.new_Tpin.isEmpty && App_Text.conf_Tpin.isEmpty) {
-                            setState(() {
-                              message = "not equal";
-                              // App_Text.new_Tpin = "";
-                              // App_Text.conf_Tpin = "";
-                              print(message);
-                            });
-                          }
-
-                          if (App_Text.new_Tpin == App_Text.conf_Tpin &&
-                              App_Text.new_Tpin.isNotEmpty &&
-                              App_Text.conf_Tpin.isNotEmpty &&
-                          App_Text.connection!='none'
-                          ) {
-                            print(App_Text.Current_Tpin);
-                            final url = Uri.https("ltss.pocketmoney.net.in", "/Users/ChangeTPIN", {
-
-                              "Mobile": App_Text.dbmobile,
-                              'pin':App_Text.Current_Tpin,
-                              'newpin':App_Text.new_Tpin
-                            } as Map<String, dynamic>?);
-                            try {
-                              final response = await http.post(url);
-                              //print("Response $response");
-                              print("status${response.statusCode}");
-                              print("Body${response.body}");
-                              final jsonResponse = convert.jsonDecode(response.body);
+                      if (click == false)
+                        InkWell(
+                            child: Container(
+                              height: 50,
+                              width: 300,
+                              color: Colors.red,
+                              child: const Center(
+                                  child: Text(
+                                "Change",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              )),
+                            ),
+                            onTap: () async {
                               setState(() {
-                                status = jsonResponse["status"];
-                                print("status=========>"+status);
+                                click = true;
                               });
+                              if (App_Text.new_Tpin.isEmpty &&
+                                  App_Text.conf_Tpin.isEmpty) {
+                                setState(() {
+                                  message = "not equal";
+                                  // App_Text.new_Tpin = "";
+                                  // App_Text.conf_Tpin = "";
+                                  print(message);
+                                });
+                              }
 
-                              return jsonResponse;
-                            } catch (e) {
-                              print(e);
-                            }
+                              if (App_Text.new_Tpin == App_Text.conf_Tpin &&
+                                  App_Text.new_Tpin.isNotEmpty &&
+                                  App_Text.conf_Tpin.isNotEmpty &&
+                                  App_Text.connection != 'none') {
+                                print(App_Text.Current_Tpin);
+                                final url = Uri.https(
+                                    "ltss.pocketmoney.net.in",
+                                    "/Users/ChangeTPIN",
+                                    {
+                                      "Mobile": App_Text.dbmobile,
+                                      'pin': App_Text.Current_Tpin,
+                                      'newpin': App_Text.new_Tpin
+                                    } as Map<String, dynamic>?);
+                                try {
+                                  final response = await http.post(url);
+                                  //print("Response $response");
+                                  print("status${response.statusCode}");
+                                  print("Body${response.body}");
+                                  final jsonResponse =
+                                      convert.jsonDecode(response.body);
+                                  setState(() {
+                                    status = jsonResponse["status"];
+                                    print("status=========>" + status);
+                                  });
 
-                          } else {
-                            setState(() {
-                              message = "not equal";
-                              print(message);
-                            });
-
-                          };
-                        }
-                      ),
+                                  return jsonResponse;
+                                } catch (e) {
+                                  print(e);
+                                }
+                              } else {
+                                setState(() {
+                                  message = "not equal";
+                                  print(message);
+                                });
+                              }
+                              ;
+                            }),
                     ],
                   ),
                 ),
               ),
-
-              if(message == "not equal")
+              if (message == "not equal")
                 Container(
                   height: 180,
                   width: 250,
@@ -305,34 +248,45 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.error_outline,color: Colors.red,size: 70,),
+                      const Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 70,
+                      ),
                       const Text(
                         "Conform Password Does Not Match",
                         style: TextStyle(color: Colors.red),
                       ),
-                      const SizedBox(height: 20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       InkWell(
                         child: Container(
                           height: 40,
                           width: 80,
                           color: Colors.red,
-                          child: const Center(child: Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
+                          child: const Center(
+                              child: Text(
+                            "Ok",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
                         ),
-                        onTap: (){
+                        onTap: () {
                           setState(() {
-                            message="";
+                            message = "";
                             // App_Text.new_Tpin ="";
                             // App_Text.conf_Tpin ="";
                             click = false;
                           });
-
                         },
                       )
                     ],
                   ),
                 ),
-
-              if(status == "success" && click)
+              if (status == "success" && click)
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   child: Container(
@@ -345,35 +299,48 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.check_box,color: Colors.red.shade300,size: 70,),
+                        Icon(
+                          Icons.check_box,
+                          color: Colors.red.shade300,
+                          size: 70,
+                        ),
                         const Text(
                           "TPIN Updated",
                           style: TextStyle(color: Colors.green),
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         InkWell(
                           child: Container(
                             height: 40,
                             width: 80,
                             color: Colors.red,
-                            child:  Center(child: InkWell(child: const Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
-                            ),
-                              onTap: (){
-                                setState(() {
-                                  App_Text.Mpin = App_Text.new_Mpin;
-                                  print(App_Text.Mpin);
-                                  click = true;
-                                });
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.leftToRight,
-                                    isIos: true,
-                                    child: const Profile(),
-                                  ),
-                                );
-                              },
-                            ),
+                            child: Center(
+                              child: InkWell(
+                                child: const Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    App_Text.Mpin = App_Text.new_Mpin;
+                                    print(App_Text.Mpin);
+                                    click = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.leftToRight,
+                                      isIos: true,
+                                      child: const Profile(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         )
@@ -381,8 +348,7 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                     ),
                   ),
                 ),
-
-              if(status == "failed" && click)
+              if (status == "failed" && click)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 150),
                   child: Container(
@@ -395,28 +361,40 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.error_outline,color: Colors.red.shade300,size: 70,),
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red.shade300,
+                          size: 70,
+                        ),
                         const Text(
                           "Sorry, T-PIN is wrong",
                           style: TextStyle(color: Colors.red),
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         InkWell(
                           child: Container(
                             height: 40,
                             width: 80,
                             color: Colors.red,
-                            child:  Center(child: InkWell(child: const Text("Ok",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
-                            ),
-                              onTap: (){
-                                setState(() {
-
-                                  App_Text.Mpin = App_Text.new_Mpin;
-                                  click = true;
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
+                            child: Center(
+                              child: InkWell(
+                                child: const Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    App_Text.Mpin = App_Text.new_Mpin;
+                                    click = true;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
                           ),
                         )
@@ -424,7 +402,7 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                     ),
                   ),
                 ),
-              if(App_Text.connection=='none')
+              if (App_Text.connection == 'none')
                 Padding(
                   padding: const EdgeInsets.only(bottom: 150),
                   child: Container(
@@ -437,8 +415,18 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.error_outline,color: Colors.red,size: 70,),
-                        Text("OOps!",style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 70,
+                        ),
+                        Text(
+                          "OOps!",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                         SizedBox(
                           width: 130,
                           child: Text(
@@ -446,7 +434,6 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -458,4 +445,3 @@ class _Chandge_Security_PinState extends State<Chandge_Security_Pin> {
     );
   }
 }
-

@@ -1,14 +1,12 @@
-
-import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
-import 'package:recharge_setu/user_verification/pin_page.dart';
-import '../app_text.dart';
-import '../ui_page/bottom_navigation.dart';
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:recharge_setu/Retailer/retailer_bottomnavigation.dart';
+
+import '../app_textocal_auth.dart';
 
 class Retailer_FingerPrint extends StatefulWidget {
   const Retailer_FingerPrint({super.key});
@@ -25,16 +23,16 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
   bool fingerprint = false;
-  String user="";
+  String user = "";
 
   @override
   void initState() {
     super.initState();
     auth.isDeviceSupported().then(
           (bool isSupported) => setState(() => _supportState = isSupported
-          ? _SupportState.supported
-          : _SupportState.unsupported),
-    );
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
   }
 
   Future<void> _checkBiometrics() async {
@@ -80,7 +78,6 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-
         localizedReason: 'Let OS determine authentication method',
         options: const AuthenticationOptions(
           stickyAuth: true,
@@ -89,7 +86,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
       setState(() {
         fingerprint = true;
         _isAuthenticating = false;
-        user ="step2";
+        user = "step2";
         Navigator.push(
           context,
           PageTransition(
@@ -100,8 +97,6 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
             child: Retailer_Bottomnavigation(index: 0),
           ),
         );
-
-
       });
     } on PlatformException catch (e) {
       print(e);
@@ -117,7 +112,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
     }
 
     setState(
-            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   Future<void> _authenticateWithBiometrics() async {
@@ -129,7 +124,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
       });
       authenticated = await auth.authenticate(
         localizedReason:
-        'Scan your fingerprint (or face or whatever) to authenticate',
+            'Scan your fingerprint (or face or whatever) to authenticate',
         options: const AuthenticationOptions(
           stickyAuth: true,
           biometricOnly: true,
@@ -164,7 +159,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
@@ -218,7 +213,7 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                         const Row(
                           children: [
                             SizedBox(
-                              width:350,
+                              width: 350,
                               child: Text(
                                 "Use your Touch ID for the faster, easier access to your payment or transaction",
                                 style: TextStyle(
@@ -232,21 +227,19 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                         const SizedBox(
                           height: 20,
                         ),
-
                         const Image(image: AssetImage("images/fprint.png")),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                                width:350,
-                                child: Text("All of the Touch ID fingerprints stored on this device can be used to log inot your account")),
+                                width: 350,
+                                child: Text(
+                                    "All of the Touch ID fingerprints stored on this device can be used to log inot your account")),
                           ],
                         ),
-
                         const SizedBox(
                           height: 50,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -257,17 +250,16 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Colors.white,
-                                    border: Border.all(color: Colors.red)
-                                ),
-
+                                    border: Border.all(color: Colors.red)),
                                 child: const Center(
                                     child: Text(
-                                      "Skip this step",
-                                      style: TextStyle(
-                                        color: Colors.red,),
-                                    )),
+                                  "Skip this step",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                )),
                               ),
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   PageTransition(
@@ -275,7 +267,9 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                                     alignment: Alignment.topCenter,
                                     duration: Duration(milliseconds: 500),
                                     isIos: true,
-                                    child: Retailer_Bottomnavigation(index: 0,),
+                                    child: Retailer_Bottomnavigation(
+                                      index: 0,
+                                    ),
                                   ),
                                 );
                               },
@@ -287,28 +281,23 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Colors.red,
-                                    border: Border.all(color: Colors.red)
-                                ),
+                                    border: Border.all(color: Colors.red)),
                                 child: const Center(
                                     child: Text(
-                                      "Turn on Touch ID",
-                                      style: TextStyle(
-                                        color: Colors.white,),
-                                    )),
+                                  "Turn on Touch ID",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                )),
                               ),
-                              onTap: (){
-                               
+                              onTap: () {
                                 _authenticate();
-                                
 
-                                if(_isAuthenticating == false){
+                                if (_isAuthenticating == false) {
                                   setState(() {
                                     print("========================false");
                                   });
-
                                 }
-
-
                               },
                             ),
                           ],
@@ -316,7 +305,6 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
                         const SizedBox(
                           height: 20,
                         ),
-
                       ],
                     ),
                   ),
@@ -329,17 +317,15 @@ class _Retailer_FingerPrintState extends State<Retailer_FingerPrint> {
     );
   }
 }
+
 enum _SupportState {
   unknown,
   supported,
   unsupported,
 }
 
-
-
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
 // ignore_for_file: public_member_api_docs, avoid_print
-
